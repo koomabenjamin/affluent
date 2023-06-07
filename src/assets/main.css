@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-input {
+  @apply block p-4 text-base appearance-none focus:outline-none bg-transparent w-full;
+}
+
+.outline input:focus-within ~ label,
+.outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-75 -translate-y-6;
+}
+
+.outline input:focus-within ~ label,
+.outline input:not(:placeholder-shown) ~ label {
+  @apply transform scale-75 -translate-y-4 z-0 ml-3 px-1 py-0 text-gray-500;
+}
+
+.center {
+  @apply flex items-center justify-center;
+}
+.h1 {
+  @apply text-5xl font-sans font-bold
+}

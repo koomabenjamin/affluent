@@ -43,7 +43,9 @@
       >
         {{props.label}}
       </label>
-      <Icon :icon="props.icon" :width="props.iconSize"/>
+      <div class="absolute top-5 right-2">
+        <Icon :icon="props.icon" :width="props.iconSize"/>
+      </div>
     </div>
 </template>
 

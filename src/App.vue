@@ -8,5 +8,7 @@ import '@/assets/main.css'
 </template>
 
 <style scoped>
-
+.center {
+  @apply flex items-center justify-center
+}
 </style>

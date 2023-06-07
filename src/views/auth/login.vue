@@ -22,14 +22,7 @@ const initAuth = () => {
     flex 
     w-screen 
     h-screen 
-    center 
-    bg-gradient-to-tr 
-    from-yellow-400 
-    via-yellow-500 
-    bg-yellow-600">
-
-    <div class="w-1/2">
-    </div>
+    center">
 
     <form @submit.prevent="login(credentials)" class="
         w-1/3 
@@ -39,8 +32,6 @@ const initAuth = () => {
         items-center 
         space-y-4 
         h-auto p-5 
-        dark:bg-slate-800 
-        dark:text-white 
         bg-white 
         rounded">
 
@@ -81,18 +72,31 @@ const initAuth = () => {
       <p 
         class="
         text-slate-400 w-full text-left my-2 font-semibold text-sm">
-        By logging in, you accept the <span
-          class="text-blue-600 underline text-sm">Terms & Conditions</span>
+        By logging in, you accept the 
+        <span
+          class="text-blue-600 underline text-sm">
+          Terms & Conditions
+        </span>
       </p>
 
       <div class="w-full flex items-center justify-between">
-        <Button label="Login" class="w-2/3" :loader="authLoader" />
-        <span class="text-blue-600 w-1/3 text-center text-sm">Forgot Password ?</span>
+        <Button 
+          label="Login" 
+          class="w-2/3" 
+          :loader="authLoader" />
+        <span 
+          class="text-blue-600 w-1/3 text-center text-sm">
+          Forgot Password ?
+        </span>
       </div>
 
       <div class="w-full py-1 text-center text-sm">
-        <div class="font-light mb-4">Don't have an account yet ?,
-          <router-link to="/register" class="text-blue-600 font-bold">
+        <div 
+          class="font-light mb-4">
+          Don't have an account yet ?,
+          <router-link 
+            to="/register" 
+            class="text-blue-600 font-bold">
             Create an account.
           </router-link>
         </div>
