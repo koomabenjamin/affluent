@@ -5,6 +5,7 @@
         :disabled="props.disabled"
         placeholder=" "
         :type="props.type"
+        @input="$emit('update:modelValue', $event.target.value)"
         :class="`
           peer
           w-full
@@ -12,7 +13,7 @@
           pt-6 
           font-light 
           bg-white 
-          border-2
+          border
           rounded-md
           outline-none
           transition

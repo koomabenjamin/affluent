@@ -31,7 +31,10 @@ const initAuth = () => {
         flex-col 
         items-center 
         space-y-4 
-        h-auto p-5 
+        h-auto p-5
+        border
+        shadow-md
+        hover:bg-blue-50
         bg-white 
         rounded">
 
@@ -53,7 +56,7 @@ const initAuth = () => {
       </span>
 
       <Input 
-        type="email" 
+        type="email"
         :errors="errorMessages?.email?.[0]" 
         v-model="credentials.email" 
         required 

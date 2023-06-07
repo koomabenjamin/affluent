@@ -3,8 +3,8 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentication from '@/composables/auth';
-import Input from '../shared/Input.vue';
-import Button from '../shared/Button.vue';
+import Input from '../../components/shared/inputs/Input.vue';
+import Button from '../../components/shared/Button.vue';
 
 const { register, errorMessages, mainErrorMessage, authLoader } = useAuthentication();
 
@@ -24,19 +24,63 @@ const credentials = reactive({
 </script>
 
 <template>
-  <div class="flex w-screen h-screen center bg-gradient-to-tr from-yellow-400 via-yellow-500 bg-yellow-600 px-4">
-    <div class="w-1/2"></div>
+
+  <div 
+    class="
+    flex 
+    w-screen 
+    h-screen 
+    center 
+    bg-gradient-to-tr 
+    from-yellow-400 
+    via-yellow-500 
+    bg-yellow-600
+    px-4">
     <form @submit.prevent="register(credentials)"
-      class="w-1/2 mx-auto flex flex-col items-center space-y-3 h-auto px-5 dark:bg-slate-800 dark:text-white bg-white rounded">
-      <p class="h1 text-left w-full my-4">HFMSG</p>
-      <span class="text-slate-500 w-full text-left my-2">Welcome back awesome user, please enter your email and
-        password.</span>
+      class="
+        w-1/2 
+        mx-auto 
+        flex 
+        flex-col 
+        items-center 
+        space-y-3 
+        h-auto 
+        px-5 
+        bg-white 
+        rounded">
+      <p 
+        class="
+          h1 
+          text-left 
+          w-full 
+          my-4">
+        HFMSG
+      </p>
+      <span 
+        class="
+          text-slate-500
+          w-full 
+          text-left 
+          my-2">
+        Welcome back awesome user, please enter your email and
+        password.
+      </span>
       <div class="w-full flex space-x-2">
-        <Input class="w-1/2" type="text" :errors="errorMessages.email" v-model="credentials.first_name" required
-          name="first_name" label="First Name" icon="MailIcon" />
-        <Input class="w-1/2" type="text" :errors="errorMessages.email" v-model="credentials.last_name" required
-          name="last_name" label="Last Name" icon="KeyIcon" />
+
+        <Input 
+          label="First Name"/>
+          
+        <Input 
+          class="w-1/2" 
+          type="text" 
+          :errors="errorMessages.email" 
+          v-model="credentials.last_name" 
+          required
+          name="last_name" label="Last Name" 
+          icon="KeyIcon"/>
+
       </div>
+
       <div class="flex w-full space-x-2">
         <Input type="text" :errors="errorMessages.password" v-model="credentials.username" required name="username"
           label="Username" icon="UserIcon" />
@@ -69,9 +113,6 @@ const credentials = reactive({
         <div class="font-light mb-4 text-sm">Already have an account ?, <router-link to="/login"
             class="text-blue-600 font-bold">Login into your account.</router-link></div>
       </div>
-
-      <Input type="text" hide v-model="credentials.name" :value="`${credentials.first_name} ${credentials.last_name}`"
-        name="name" />
     </form>
   </div>
 </template>

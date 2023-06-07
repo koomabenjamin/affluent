@@ -1,10 +1,13 @@
 <template>
   <button 
     class="
+      h-[60px]
       bg-blue-800 
       border-2
       flex
-      item-center
+      text-white
+      items-center
+      justify-center
       space-x-1
       px-2
       py-1
