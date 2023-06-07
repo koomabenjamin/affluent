@@ -1,0 +1,80 @@
+<template>
+   <div className="w-full relative">
+      <input
+        :id=props.id
+        :disabled="props.disabled"
+        placeholder=" "
+        :type="props.type"
+        :class="`
+          peer
+          w-full
+          p-4
+          pt-6 
+          font-light 
+          bg-white 
+          border-2
+          rounded-md
+          outline-none
+          transition
+          disabled:opacity-70
+          disabled:cursor-not-allowed
+          ${props.price ? 'pl-9' : 'pl-4'}
+          ${props.errors ? 'border-rose-500' : 'border-neutral-300'}
+          ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}
+        `"
+      />
+      <label 
+        :class="`
+          absolute 
+          text-md
+          duration-150 
+          transform 
+          -translate-y-3 
+          top-5 
+          z-10 
+          origin-[0] 
+          ${props.price ? 'left-9' : 'left-4'}
+          peer-placeholder-shown:scale-100 
+          peer-placeholder-shown:translate-y-0 
+          peer-focus:scale-75
+          peer-focus:-translate-y-4
+          ${props.errors ? 'text-rose-500' : 'text-zinc-400'}
+        `"
+      >
+        {{props.label}}
+      </label>
+      <Icon :icon="props.icon" :width="props.iconSize"/>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { Icon, IconifyIcon } from "@iconify/vue";
+
+type Error = {
+  error: string;
+}
+
+export interface InputProps{
+  id?: string;
+  name?: string;
+  label?: string;
+  price?: string;
+  hide?: boolean;
+  icon: string | IconifyIcon;
+  iconSize?: string | number;
+  type?: string;
+  required?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
+  modelValue?: string;
+  errors?: Error[];
+}
+
+const props = defineProps<InputProps>();
+
+const moveLabel = () => console.log('Input focussed...')
+</script>
+
+<style>
+
+</style>
