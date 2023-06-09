@@ -24,9 +24,7 @@ const credentials = reactive({
 </script>
 
 <template>
-
-  <div 
-    class="
+  <div class="
     flex 
     w-screen 
     h-screen 
@@ -36,8 +34,7 @@ const credentials = reactive({
     via-yellow-500 
     bg-yellow-600
     px-4">
-    <form @submit.prevent="register(credentials)"
-      class="
+    <form @submit.prevent="register(credentials)" class="
         w-1/2 
         mx-auto 
         flex 
@@ -48,16 +45,14 @@ const credentials = reactive({
         px-5 
         bg-white 
         rounded">
-      <p 
-        class="
+      <p class="
           h1 
           text-left 
           w-full 
           my-4">
         HFMSG
       </p>
-      <span 
-        class="
+      <span class="
           text-slate-500
           w-full 
           text-left 
@@ -67,17 +62,11 @@ const credentials = reactive({
       </span>
       <div class="w-full flex space-x-2">
 
-        <Input 
-          label="First Name"/>
-          
-        <Input 
-          class="w-1/2" 
-          type="text" 
-          :errors="errorMessages.email" 
-          v-model="credentials.last_name" 
-          required
-          name="last_name" label="Last Name" 
-          icon="KeyIcon"/>
+        <Input label="First Name" />
+
+        <Input type="text" :errors="errorMessages.email" 
+        v-model="credentials.last_name" required
+          name="last_name" label="Last Name" icon="KeyIcon" />
 
       </div>
 
@@ -86,17 +75,18 @@ const credentials = reactive({
           label="Username" icon="UserIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input class="w-1/2" type="email" :errors="errorMessages.email" v-model="credentials.email" required
-          name="email" label="Email" icon="MailIcon" />
-        <Input class="w-1/2" type="number" :errors="errorMessages.password" v-model="credentials.phone_number" required
+        <Input type="email" :errors="errorMessages.email" 
+        v-model="credentials.email" required name="email"
+          label="Email" icon="MailIcon" />
+
+        <Input type="number" :errors="errorMessages.password" v-model="credentials.phone_number" required
           name="phone_number" label="Phone Number" icon="PhoneIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input class="w-1/2" type="password" :errors="errorMessages.password" v-model="credentials.password" required
+        <Input type="password" :errors="errorMessages.password" v-model="credentials.password" required
           name="password" label="Password" icon="KeyIcon" />
-        <Input class="w-1/2" type="password" :errors="errorMessages.password"
-          v-model="credentials.password_confirmation" required name="password" label="Confirm Password"
-          icon="KeyIcon" />
+        <Input type="password" :errors="errorMessages.password" v-model="credentials.password_confirmation"
+          required name="password" label="Confirm Password" icon="KeyIcon" />
       </div>
       <div class="w-full flex space-x-2">
         <Input type="text" :errors="errorMessages.password" v-model="credentials.country" required name="country"
@@ -117,6 +107,4 @@ const credentials = reactive({
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
