@@ -2,8 +2,8 @@
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentication from '@/composables/auth';
-import OtpInputs from '../shared/OtpInput.vue';
-import Button from '../shared/Button.vue';
+import OtpInputs from '../../components/shared/inputs/OptInput.vue';
+import Button from '../../components/shared/Button.vue';
 
 const { twoFactorCodeConfirmation, authLoader } = useAuthentication();
 

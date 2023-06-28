@@ -26,6 +26,66 @@ const router = createRouter({
       name: 'register',
       component: () => import('../views/auth/register.vue')
     },
+    {
+      path: '/newsfeed',
+      name: 'newsfeed',
+      component: () => import('../views/newsfeed/index.vue')
+  },
+  {
+      path: '/members',
+      name: 'members',
+      component: () => import('../views/members/index.vue')
+  },
+  {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('../views/settings/index.vue')
+  },
+  {
+      path: '/profile',
+      name: 'profile',
+      component: () => import('../views/profile/index.vue')
+  },
+  {
+      path: '/groups',
+      name: 'groups',
+      component: () => import('../views/groups/index.vue')
+  },
+  {
+      path: '/collections',
+      name: 'collections',
+      component: () => import('../views/collections/index.vue')
+  },
+  {
+      path: '/loans',
+      name: 'loans',
+      component: () => import('../views/loans/index.vue')
+  },
+  {
+      path: '/reports',
+      name: 'reports',
+      component: () => import('../views/reports/index.vue')
+  },
+  {
+      path: '/wallet',
+      name: 'wallet',
+      component: () => import('../views/wallet/index.vue')
+  },
+  {
+      path: '/developer',
+      name: 'developer',
+      component: () => import('../views/wallet/index.vue')
+  },
+  {
+      path: '/notifications',
+      name: 'notifications',
+      component: () => import('../views/notifications/index.vue')
+  },
+  {
+      path: '/chatroom',
+      name: 'chatroom',
+      component: () => import('../views/chatroom/index.vue')
+  },
   ]
 });
 
