@@ -5,7 +5,7 @@
         :disabled="props.disabled"
         placeholder=" "
         :type="props.type"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="emit('update:modelValue')"
         :class="`
           peer
           w-full
@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { Icon, IconifyIcon } from "@iconify/vue";
+import { Icon, type IconifyIcon } from "@iconify/vue";
 
 type Error = {
   error: string;
@@ -75,7 +75,11 @@ export interface InputProps{
 
 const props = defineProps<InputProps>();
 
-const moveLabel = () => console.log('Input focussed...')
+const emit = defineEmits(['update:modelValue'])
+
+const updateValue = (e: Event) => {
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
+};
 </script>
 
 <style>

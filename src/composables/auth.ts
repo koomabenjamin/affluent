@@ -3,8 +3,8 @@ import { customAxios } from '@/composables/axios';
 import router from '@/router';
 
 export interface UserCredentials {
-    email: string;
-    password: string;
+    email?: string;
+    password?: string;
     firstName?: string;
     lastName?: string;
     middleName?: string;
@@ -13,13 +13,13 @@ export interface UserCredentials {
 
 export default function useAuthentication() {
 
-    const isAuthenticated = ref(false);
+    const isAuthenticated = ref<boolean>(false);
 
-    const errorMessages = ref({});
+    const errorMessages = ref<any>({});
 
-    const mainErrorMessage = ref({});
+    const mainErrorMessage = ref<any>({});
 
-    const authLoader = ref(false);
+    const authLoader = ref<boolean>(false);
 
     const login = (credentials: UserCredentials) => {
 

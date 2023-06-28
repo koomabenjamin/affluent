@@ -290,14 +290,14 @@ import {
   WalletIcon,
   // CheckBadgeIcon,
 } from '@heroicons/vue/24/outline';
-import useAuthentication from '@/composables/auth';
+import useAuthentication from '../../composables/auth';
 import { useRouter } from 'vue-router'
 
 const router = useRouter();
 
 const currentRoute = ref('');
 
-const updateActiveBoard = (route) => {
+const updateActiveBoard = (route: string) => {
   currentRoute.value = route;
   router.push({ path: `/${route}` })
 }

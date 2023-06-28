@@ -355,21 +355,20 @@ import {
 import LeftSideBar from "./LeftSideBar.vue";
 import RightSideBar from "./RightSideBar.vue";
 
-const isOpen = ref(false);
+const isOpen = ref<boolean>(false);
 
-const showChats = ref(true);
+const showChats = ref<boolean>(true);
 
-const isChatModalOpen = ref(false);
+const isChatModalOpen = ref<boolean>(false);
 
 const router = useRouter();
 
-const toggleChatModal = () => {
+const toggleChatModal = (): void => {
   isChatModalOpen.value = !isChatModalOpen.value;
   console.log(isChatModalOpen.value);
 }
 
-const openChat = (chat) => {
-  console.log(chat);
+const openChat = (chat: number): void => {
   showChats.value = false;
 }
 
@@ -388,7 +387,7 @@ const accent = ref('bg-green-400');
 const info = ref('bg-indigo-500');
 
 const logout = () => console.log('logout');
-const updateActiveBoard = (board) => console.log(board);
+const updateActiveBoard = (board: string) => console.log(board);
 
 </script>
 

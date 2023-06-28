@@ -64,36 +64,36 @@ const credentials = reactive({
 
         <Input label="First Name" />
 
-        <Input type="text" :errors="errorMessages.email" 
+        <Input type="text" :errors="errorMessages?.email" 
         v-model="credentials.last_name" required
           name="last_name" label="Last Name" icon="KeyIcon" />
 
       </div>
 
       <div class="flex w-full space-x-2">
-        <Input type="text" :errors="errorMessages.password" v-model="credentials.username" required name="username"
+        <Input type="text" :errors="errorMessages?.password" v-model="credentials.username" required name="username"
           label="Username" icon="UserIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input type="email" :errors="errorMessages.email" 
+        <Input type="email" :errors="errorMessages?.email" 
         v-model="credentials.email" required name="email"
           label="Email" icon="MailIcon" />
 
-        <Input type="number" :errors="errorMessages.password" v-model="credentials.phone_number" required
+        <Input type="number" :errors="errorMessages?.password" v-model="credentials.phone_number" required
           name="phone_number" label="Phone Number" icon="PhoneIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input type="password" :errors="errorMessages.password" v-model="credentials.password" required
+        <Input type="password" :errors="errorMessages?.password" v-model="credentials.password" required
           name="password" label="Password" icon="KeyIcon" />
-        <Input type="password" :errors="errorMessages.password" v-model="credentials.password_confirmation"
+        <Input type="password" :errors="errorMessages?.password" v-model="credentials.password_confirmation"
           required name="password" label="Confirm Password" icon="KeyIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input type="text" :errors="errorMessages.password" v-model="credentials.country" required name="country"
+        <Input type="text" :errors="errorMessages?.password" v-model="credentials.country" required name="country"
           label="Country" icon="LocationMarkerIcon" />
-        <Input type="text" :errors="errorMessages.password" v-model="credentials.state" required name="state"
+        <Input type="text" :errors="errorMessages?.password" v-model="credentials.state" required name="state"
           label="State" icon="LocationMarkerIcon" />
-        <Input type="text" :errors="errorMessages.password" v-model="credentials.city" required name="city" label="City"
+        <Input type="text" :errors="errorMessages?.password" v-model="credentials.city" required name="city" label="City"
           icon="LocationMarkerIcon" />
       </div>
       <p class="text-slate-400 w-full text-left my-2 font-semibold text-sm">By signing up, you accept the <span

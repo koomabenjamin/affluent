@@ -4,8 +4,8 @@ const props = defineProps<{
   fields: number;
 }>();
 
-const data = ref([]);
-const firstInputEl = ref(null);
+const data = ref<any>([]);
+const firstInputEl = ref<any>(null);
 const emit = defineEmits(['update:modelValue']);
 
 watch(
@@ -24,7 +24,7 @@ watch(
   { deep: true }
 );
 
-const handleOtpInput = (e) => {
+const handleOtpInput = (e: any) => {
   if (e.data && e.target.nextElementSibling) {
     e.target.nextElementSibling.focus();
   } else if (e.data == null && e.target.previousElementSibling) {
@@ -32,7 +32,7 @@ const handleOtpInput = (e) => {
   }
 };
 
-const handlePaste = (e) => {
+const handlePaste = (e: any) => {
   const pasteData = e.clipboardData.getData('text');
   let nextEl = firstInputEl.value[0]?.nextElementSibling;
   for (let i = 1; i < pasteData.length; i++) {

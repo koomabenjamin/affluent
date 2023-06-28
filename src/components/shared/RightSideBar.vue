@@ -164,7 +164,19 @@ import {
   CheckBadgeIcon,
 } from "@heroicons/vue/24/outline";
 
-const userSessionDetails = inject('userSessionDetails');
+interface UserSessionCredentials {
+  name?: string,
+  email?: string,
+  account_balance?: number,
+  percentage_growth?: number,
+  overall_account_balance?: number,
+  overall_percentage_growth?: number,
+  user_handle?: string,
+  personal_assets?: object[],
+  group_attained_assets?: object[]
+}
+
+const userSessionDetails : UserSessionCredentials = {}
 
 </script>
 

@@ -4,15 +4,20 @@
       <div class="w-full flex items-center justify-end h-20 text-white">
           <div class="h-10 w-10 rounded-full bg-yellow-400"></div>
           <div class="flex flex-col mx-2">
-              <span class="font-bold text-lg">{{ user.name }}</span>
-              <span class="text-sm -mt-1">{{ user.email }}</span>
+              <span class="font-bold text-lg">{{ user?.name }}</span>
+              <span class="text-sm -mt-1">{{ user?.email }}</span>
           </div>
       </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const user = JSON.parse(sessionStorage.getItem('user'));
+interface User {
+    email?: string,
+    name?: string,
+}
+const sessionUser: string | null = sessionStorage.getItem('user')
+const user: User = JSON.parse(sessionUser ?? '');
 </script>
 
 <style>
