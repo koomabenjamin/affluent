@@ -5,7 +5,7 @@ import useAuthentication from '../../composables/auth';
 import Input from '../../components/shared/inputs/Input.vue';
 import Button from '../../components/shared/Button.vue';
 
-const { login, errorMessages, mainErrorMessage, authLoader } = useAuthentication();
+const { login, errorMessages, authLoader } = useAuthentication();
 
 const credentials = reactive({
   email: '',

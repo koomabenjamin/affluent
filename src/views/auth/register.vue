@@ -6,7 +6,7 @@ import useAuthentication from '@/composables/auth';
 import Input from '../../components/shared/inputs/Input.vue';
 import Button from '../../components/shared/Button.vue';
 
-const { register, errorMessages, mainErrorMessage, authLoader } = useAuthentication();
+const { register, errorMessages, authLoader } = useAuthentication();
 
 const credentials = reactive({
   first_name: '',

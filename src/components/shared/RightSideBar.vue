@@ -74,7 +74,7 @@
     <div class="mt-10 flex flex-col space-y-1">
       <div class="font-sans text-base font-bold">Asset Register:</div>
       <div
-        v-if="userSessionDetails?.personal_assets.length === 0" 
+        v-if="userSessionDetails?.personal_assets?.length === 0" 
         class="flex w-full dark:bg-slate-800 dark:text-white bg-gray-50 rounded-lg mt-2 shadow border dark:border-slate-700">
         <div
           class="
@@ -172,7 +172,7 @@ interface UserSessionCredentials {
   overall_account_balance?: number,
   overall_percentage_growth?: number,
   user_handle?: string,
-  personal_assets?: object[],
+  personal_assets?: undefined | string[] | number[] | symbol[],
   group_attained_assets?: object[]
 }
 

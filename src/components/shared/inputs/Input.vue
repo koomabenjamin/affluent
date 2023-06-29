@@ -58,19 +58,19 @@ type Error = {
 }
 
 export interface InputProps{
-  id?: string;
-  name?: string;
-  label?: string;
-  price?: string;
-  hide?: boolean;
-  icon: string | IconifyIcon;
-  iconSize?: string | number;
-  type?: string;
-  required?: boolean;
-  disabled?: boolean;
-  readonly?: boolean;
-  modelValue?: string;
-  errors?: Error[];
+  id?: string | undefined;
+  name?: string | undefined;
+  label?: string | undefined;
+  price?: string | undefined;
+  hide?: boolean | undefined;
+  icon: string | IconifyIcon | undefined;
+  iconSize?: string | number | undefined;
+  type?: string | undefined;
+  required?: boolean | undefined;
+  disabled?: boolean | undefined;
+  readonly?: boolean | undefined;
+  modelValue?: string | undefined;
+  errors?: Error[] | undefined;
 }
 
 const props = defineProps<InputProps>();
