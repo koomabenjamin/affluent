@@ -1,3 +1,4 @@
+import type { RouteRecordName } from 'vue-router';
 import { createRouter, createWebHistory } from 'vue-router'
 import useAuthentication from '@/composables/auth';
 
@@ -89,20 +90,21 @@ const router = createRouter({
   ]
 });
 
-const routesNotToBeAuthenticated = ['register', 'login', 'reset-password'];
+const routesNotToBeAuthenticated : RouteRecordName[] | null = ['register', 'login', 'reset-password'];
 
 router.beforeEach(async (to, from, next) => {
+  
   const user = sessionStorage.getItem('user')
   const token = sessionStorage.getItem('token')
   const nextPath = to.path;
-  const authenticated : boolean = (user ?? null) && (token ?? null);
+  const authenticated: string | null = (user ?? null) && (token ?? null);
   // console.log(authenticated, '<=== authenticated', isAuthenticated.value, authenticated, to, from, routesNotToBeAuthenticated.includes(to.name));
 
   if (nextPath === '/login') next();
 
-  else if (routesNotToBeAuthenticated.includes(to.name)) next();
+  // else if (routesNotToBeAuthenticated.includes(to.name)) next();
 
-  else if (authenticated === false || authenticated === null) next('/login');
+  else if (authenticated === null) next('/login');
 
   else next()
 })
