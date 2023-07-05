@@ -9,12 +9,12 @@ const { login, errorMessages, authLoader } = useAuthentication();
 
 const credentials = reactive({
   email: '',
-  password: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    middleName: '',
+    userName: '',
 });
-
-const initAuth = () => {
-  let status = login(credentials);
-}
 </script>
 
 <template>

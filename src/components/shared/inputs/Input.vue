@@ -5,7 +5,7 @@
         :disabled="props.disabled"
         placeholder=" "
         :type="props.type"
-        @input="emit('update:modelValue')"
+        @input="updateValue($event)"
         :class="`
           peer
           w-full
