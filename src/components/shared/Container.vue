@@ -1,13 +1,65 @@
 <template>
   <master-page>
     <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 py-5 px-2 overflow-auto no-scroll-bar relative">
+            <!-- Top with user total -->
+            <div class="w-full h-auto flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <div class="font-sans text-lg lg:text-4xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
+          </div>
+          <div :class="{
+            'bg-gradient-to-r from-cyan-500 to-blue-500 text-rose-100': ((userSessionDetails?.percentage_growth ?? 0) < 0),
+            'bg-yellow-400 text-yellow-100': ((userSessionDetails?.percentage_growth ?? 0) === 0),
+            'bg-emerald-500 text-emerald-100': ((userSessionDetails?.percentage_growth ?? 0) > 0),
+          }" class="
+            lg:h-8
+            h-6
+            rounded-full
+            w-auto
+            px-2
+            py-1
+            font-semibold
+            lg:text-base
+            text-xs
+          ">
+            {{ userSessionDetails?.percentage_growth ?? 0 }} %
+          </div>
+          <div :class="{
+            'bg-gradient-to-r from-cyan-500 to-blue-500 text-rose-100': ((userSessionDetails?.percentage_growth ?? 0) < 0),
+            'bg-yellow-400 text-yellow-100': ((userSessionDetails?.percentage_growth ?? 0) === 0),
+            'bg-emerald-500 text-emerald-100': ((userSessionDetails?.percentage_growth ?? 0) > 0),
+          }" class="lg:h-8 h-6 lg:w-8 w-6 rounded-full lg:p-2 p-1">
+            <ArrowDownIcon class="h-4 stroke-2" />
+          </div>
+        </div>
+        <div class="text-sm lg:text-lg">
+          Welcome back,
+          <span class="font-semibold text-sm lg:text-2xl">{{ userSessionDetails?.name ?? 'No user detected'}}</span>
+        </div>
+      </div>
       <slot></slot>
     </div>
   </master-page>
 </template>
 
 <script setup lang="ts">
+import { inject, ref } from "vue";
 import MasterPage from "./MasterPage.vue";
+
+interface UserSessionCredentials {
+  name?: string,
+  email?: string,
+  account_balance?: number,
+  percentage_growth?: number,
+  overall_account_balance?: number,
+  overall_percentage_growth?: number,
+  user_handle?: string,
+  personal_assets?: undefined | string[] | number[] | symbol[],
+  group_attained_assets?: object[]
+}
+
+const userSessionDetails : UserSessionCredentials = {}
+
+
 </script>
 
 <style>
