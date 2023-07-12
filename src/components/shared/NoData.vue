@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-96 flex flex-col items-center justify-center">
+  <div class="w-full h-96 flex flex-col items-center justify-center font-sans text-sm">
     <img alt="no-data" :src="NoDataImg" class="h-48 w-48"/>
     <div>
       No {{ props.label }} available yet.
