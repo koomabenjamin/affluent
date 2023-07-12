@@ -13,11 +13,28 @@
 
 <script setup lang="ts">
 interface User {
+    city?: string,
+    country?: string,
+    created_at?: string | null,
+    deleted_at?: string | null,
     email?: string,
+    first_name?: string,
+    last_name?: string,
     name?: string,
+    permissions?: string[],
+    roles?: object[],
+    phone_number?: string,
+    photo?: string,
+    two_factor_code?: number,
+    two_factor_code_expires_at?: string,
+    updated_at?: string | null,
+    username?: string,
+    id?: number,
 }
-const sessionUser: string | null = sessionStorage.getItem('user')
-const user: User = JSON.parse(sessionUser ?? '');
+const sessionUser: string = sessionStorage.getItem('user') ?? ''
+const user: User = JSON.parse(sessionUser);
+
+console.log(sessionUser, user, '<============= user details')
 </script>
 
 <style>

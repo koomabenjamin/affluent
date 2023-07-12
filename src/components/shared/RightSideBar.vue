@@ -4,10 +4,8 @@
       hidden
       lg:block
       w-1/5
-      h-full
-      dark:bg-slate-800 dark:text-white bg-slate-50
+      h-full bg-slate-50
       border-l
-      dark:border-slate-700
       shadow-inner
       py-5
       px-2
@@ -75,14 +73,14 @@
       <div class="font-sans text-base font-bold">Asset Register:</div>
       <div
         v-if="userSessionDetails?.personal_assets?.length === 0" 
-        class="flex w-full dark:bg-slate-800 dark:text-white bg-gray-50 rounded-lg mt-2 shadow border dark:border-slate-700">
+        class="flex w-full bg-gray-50 rounded-lg mt-2 shadow border">
         <div
           class="
             bg-blue-200
             text-blue-500
             h-12
             w-12
-            rounded-ldark:
+            rounded-lg
             center
             font-semibold
             text-xs
@@ -102,14 +100,14 @@
       <div
         v-for="asset in userSessionDetails?.personal_assets"
         :key="asset" 
-        class="flex w-full dark:bg-slate-800 dark:text-white bg-gray-50 rounded-lg mt-2 shadow border dark:border-slate-700">
+        class="flex w-full bg-gray-50 rounded-lg mt-2 shadow border">
         <div
           class="
             bg-blue-200
             text-blue-500
             h-12
             w-12
-            rounded-ldark:
+            rounded-lg
             center
             font-semibold
             text-xs

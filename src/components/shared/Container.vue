@@ -1,8 +1,8 @@
 <template>
   <master-page>
     <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 py-5 px-2 overflow-auto no-scroll-bar relative">
-            <!-- Top with user total -->
-            <div class="w-full h-auto flex items-center justify-between">
+      <!-- Top with user total -->
+      <div class="w-full h-auto flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <div class="font-sans text-lg lg:text-4xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
           </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="text-sm lg:text-lg">
           Welcome back,
-          <span class="font-semibold text-sm lg:text-2xl">{{ userSessionDetails?.name ?? 'No user detected'}}</span>
+          <span class="font-semibold text-sm lg:text-2xl">{{ userSessionDetails?.name ?? 'No user detected' }}</span>
         </div>
       </div>
       <slot></slot>
@@ -45,9 +45,24 @@
 import { inject, ref } from "vue";
 import MasterPage from "./MasterPage.vue";
 
-interface UserSessionCredentials {
-  name?: string,
+interface User {
+  city?: string,
+  country?: string,
+  created_at?: string | null,
+  deleted_at?: string | null,
   email?: string,
+  first_name?: string,
+  last_name?: string,
+  name?: string,
+  permissions?: string[],
+  roles?: object[],
+  phone_number?: string,
+  photo?: string,
+  two_factor_code?: number,
+  two_factor_code_expires_at?: string,
+  updated_at?: string | null,
+  username?: string,
+  id?: number,
   account_balance?: number,
   percentage_growth?: number,
   overall_account_balance?: number,
@@ -56,12 +71,9 @@ interface UserSessionCredentials {
   personal_assets?: undefined | string[] | number[] | symbol[],
   group_attained_assets?: object[]
 }
-
-const userSessionDetails : UserSessionCredentials = {}
-
+const sessionUser: string = sessionStorage.getItem('user') ?? ''
+const userSessionDetails: User = JSON.parse(sessionUser);
 
 </script>
 
-<style>
-
-</style>
+<style></style>

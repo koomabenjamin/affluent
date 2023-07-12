@@ -28,7 +28,7 @@ const changeTab = (tab:string) => activeTab.value = tab;
             group
             space-y-2
           " v-for="tab in tabs" :key="tab" @click="changeTab(tab)" :class="{ 'text-blue-500': (tab === activeTab) }">
-            <span class="dark:text-white font-semibold text-sm w-full">{{ tab }}</span>
+            <span class="font-semibold text-sm w-full">{{ tab }}</span>
             <div class="
               h-[3px]
               w-full

@@ -3,10 +3,10 @@
       hidden
       lg:block
       w-1/5
-      h-full
-      dark:bg-slate-800 text-white bg-slate-800
+      h-full 
+      text-white
+       bg-slate-800
       border-r
-      dark:border-slate-700
       shadow
       py-5
       px-2
