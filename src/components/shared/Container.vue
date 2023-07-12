@@ -43,6 +43,7 @@
 
 <script setup lang="ts">
 import { inject, ref } from "vue";
+import { ArrowDownIcon } from "@heroicons/vue/24/outline";
 import MasterPage from "./MasterPage.vue";
 
 interface User {

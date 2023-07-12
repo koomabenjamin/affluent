@@ -1,11 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
+import { BanknotesIcon, UserGroupIcon, UserIcon } from "@heroicons/vue/24/outline";
+import NoData from "@/components/shared/NoData.vue";
 import Container from "../components/shared/Container.vue";
+
+interface GroupSummary {
+  id?: string,
+  name?: string,
+  account_balance?: number,
+  member_count?: number,
+}
 
 const tabs: string[] = ['Summary', 'Groups', 'Members', 'Collections', 'Cashflows', 'Assets', 'News', 'Events', 'Goodwill', 'Business'];
 
 const activeTab = ref<string>('Summary')
+
+const groups = ref<GroupSummary[]>([]);
 
 const changeTab = (tab:string) => activeTab.value = tab;
 </script>
@@ -94,7 +105,7 @@ const changeTab = (tab:string) => activeTab.value = tab;
                 <div class="col-span-2">Asset Worth</div>
                 <div class="">Status</div>
               </div>
-              <div v-for="summary in [1, 2, 3, 4, 5, 6, 7, 8]" :key="summary"
+              <div v-for="summary in groups" :key="summary?.id"
                 class="grid grid-cols-8 gap-2 w-full items-center space-x-2 justify-between border-b border-slate-200 shadow p-2 rounded">
                 <div class="flex space-x-2 flex-shrink-0 col-span-3">
                   <div class="bg-blue-500 h-12 w-12 rounded flex-shrink-0"></div>
@@ -110,6 +121,7 @@ const changeTab = (tab:string) => activeTab.value = tab;
                   <span>Active</span>
                 </div>
               </div>
+              <NoData label="groups"/>
             </div>
           </div>
         </div>
