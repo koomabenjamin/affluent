@@ -5,6 +5,7 @@
         :disabled="props.disabled"
         placeholder=" "
         :type="props.type"
+        autocomplete="off"
         @input="updateValue($event)"
         :class="`
           peer
