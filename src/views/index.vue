@@ -22,7 +22,7 @@ const activeTab = ref<string>('Summary')
 
 const groups = ref<GroupSummary[]>([]);
 
-const changeTab = (tab: string) => activeTab.value = tab;
+const selectedTab = ref<string>(tabs?.[0]);
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const changeTab = (tab: string) => activeTab.value = tab;
       <!-- ['Summary', 'Graphical', 'Members', 'History'] -->
       <div class="w-auto flex space-x-2 cursor-pointer">
 
-        <TabList :tabs="tabs"/>
+        <TabList :tabs="tabs" @tab-selected=""/>
         <!-- <div class="
             w-auto
             px-2
