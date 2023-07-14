@@ -5,6 +5,7 @@ import { BanknotesIcon, UserGroupIcon, UserIcon } from "@heroicons/vue/24/outlin
 import NoData from "@/components/shared/NoData.vue";
 import Container from "../components/shared/Container.vue";
 import SummaryChart from "../components/Metrics/SummaryChart.vue";
+import TabList from "@/components/shared/Tabs/TabList.vue";
 
 interface GroupSummary {
   id?: string,
@@ -32,7 +33,8 @@ const changeTab = (tab: string) => activeTab.value = tab;
       <!-- ['Summary', 'Graphical', 'Members', 'History'] -->
       <div class="w-auto flex space-x-2 cursor-pointer">
 
-        <div class="
+        <TabList :tabs="tabs"/>
+        <!-- <div class="
             w-auto
             px-2
             flex flex-col
@@ -51,7 +53,7 @@ const changeTab = (tab: string) => activeTab.value = tab;
               duration-500
               group-hover:scale-100
             " :class="[(tab === activeTab) ? 'scale-100' : 'scale-0']"></div>
-        </div>
+        </div> -->
 
       </div>
 
