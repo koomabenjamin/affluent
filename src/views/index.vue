@@ -18,8 +18,6 @@ interface GroupSummary {
 
 const tabs: string[] = ['Summary', 'Groups', 'Members', 'Collections', 'Cashflows', 'Assets', 'News', 'Events', 'Goodwill', 'Business'];
 
-const activeTab = ref<string>('Summary')
-
 const groups = ref<GroupSummary[]>([]);
 
 const selectedTab = ref<string>(tabs?.[0]);
@@ -33,31 +31,11 @@ const selectedTab = ref<string>(tabs?.[0]);
       <!-- ['Summary', 'Graphical', 'Members', 'History'] -->
       <div class="w-auto flex space-x-2 cursor-pointer">
 
-        <TabList :tabs="tabs" @tab-selected=""/>
-        <!-- <div class="
-            w-auto
-            px-2
-            flex flex-col
-            justify-start
-            text-left
-            h-10
-            group
-            space-y-2
-          " v-for="tab in tabs" :key="tab" @click="changeTab(tab)" :class="{ 'text-blue-500': (tab === activeTab) }">
-          <span class="font-semibold text-sm w-full">{{ tab }}</span>
-          <div class="
-              h-[3px]
-              w-full
-              bg-blue-500
-              transform
-              duration-500
-              group-hover:scale-100
-            " :class="[(tab === activeTab) ? 'scale-100' : 'scale-0']"></div>
-        </div> -->
+        <TabList :tabs="tabs" v-model="selectedTab"/>
 
       </div>
 
-      <div v-if="activeTab === 'Summary'" class="pt-8">
+      <div v-if="selectedTab === 'Summary'" class="pt-8">
         <!-- graph -->
         <SummaryChart />
         <!-- card -->
@@ -132,16 +110,16 @@ const selectedTab = ref<string>(tabs?.[0]);
         </div>
       </div>
 
-      <div v-if="activeTab === 'Groups'" class="h-full w-full center bg-slate-200 rounded">Groups Coming Soon</div>
-      <div v-if="activeTab === 'Members'" class="h-full w-full center bg-slate-200 rounded">Members Coming Soon</div>
-      <div v-if="activeTab === 'Collections'" class="h-full w-full center bg-slate-200 rounded">Collections Coming Soon
+      <div v-if="selectedTab === 'Groups'" class="h-full w-full center bg-slate-200 rounded">Groups Coming Soon</div>
+      <div v-if="selectedTab === 'Members'" class="h-full w-full center bg-slate-200 rounded">Members Coming Soon</div>
+      <div v-if="selectedTab === 'Collections'" class="h-full w-full center bg-slate-200 rounded">Collections Coming Soon
       </div>
-      <div v-if="activeTab === 'Cashflows'" class="h-full w-full center bg-slate-200 rounded">Cashflows Coming Soon</div>
-      <div v-if="activeTab === 'Assets'" class="h-full w-full center bg-slate-200 rounded">Assets Coming Soon</div>
-      <div v-if="activeTab === 'News'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
-      <div v-if="activeTab === 'Events'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
-      <div v-if="activeTab === 'Godwill'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
-      <div v-if="activeTab === 'Business'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
+      <div v-if="selectedTab === 'Cashflows'" class="h-full w-full center bg-slate-200 rounded">Cashflows Coming Soon</div>
+      <div v-if="selectedTab === 'Assets'" class="h-full w-full center bg-slate-200 rounded">Assets Coming Soon</div>
+      <div v-if="selectedTab === 'News'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
+      <div v-if="selectedTab === 'Events'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
+      <div v-if="selectedTab === 'Godwill'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
+      <div v-if="selectedTab === 'Business'" class="h-full w-full center bg-slate-200 rounded">News Coming Soon</div>
 
     </div>
   </Container>
