@@ -2,19 +2,11 @@
 import { ref } from "vue";
 import { Icon } from "@iconify/vue";
 import { BanknotesIcon, UserGroupIcon, UserIcon } from "@heroicons/vue/24/outline";
-import NoData from "@/components/shared/NoData.vue";
 import Container from "../components/shared/Container.vue";
 import SummaryChart from "../components/Metrics/SummaryChart.vue";
 import TabList from "@/components/shared/Tabs/TabList.vue";
-
-interface GroupSummary {
-  id?: string,
-  name?: string,
-  account_balance?: number,
-  month_collections?: number,
-  member_count?: number,
-  created_at?: number,
-}
+import Card from "@/components/shared/Cards/Card.vue";
+import DataTable from "@/components/shared/DataTable.vue";
 
 const tabs: string[] = ['Summary', 'Groups', 'Members', 'Collections', 'Cashflows', 'Assets', 'News', 'Events', 'Goodwill', 'Business'];
 
@@ -50,63 +42,32 @@ const selectedTab = ref<string>(tabs?.[0]);
               gap-2
             ">
             <!-- TODO: convert the cards below to a shared dynamic component -->
-            <div class="bg-purple-100 h-48 rounded-lg relative p-2 shadow-md">
-              <div
-                class="h-16 w-16 flex flex-col px-3 py-3 rounded-tl-md rounded-br-full bg-purple-600 absolute top-0 left-0">
-                <BanknotesIcon class="h-8 w-8 text-white" />
-              </div>
-              <div class="mt-16 w-full whitespace-nowrap font-semibold font-mono">Collections</div>
-              <div class="w-full whitespace-nowrap mt-5 text-slate-600 uppercase text-sm">Total System Amount:
-              </div>
-              <div class="w-full whitespace-nowrap text-base font-bold">1,500,000,000,000 UGx</div>
-            </div>
-            <div class="bg-blue-100 h-48 rounded-lg relative p-2 shadow-md">
-              <div
-                class="h-16 w-16 flex flex-col px-3 py-3 rounded-tl-md rounded-br-full bg-blue-600 absolute top-0 left-0">
-                <UserGroupIcon class="h-8 w-8 text-white" />
-              </div>
-              <div class="mt-16 w-full whitespace-nowrap font-semibold font-mono">Groups</div>
-              <div class="w-full whitespace-nowrap mt-5 text-slate-600 uppercase text-sm">Total System Amount:
-              </div>
-              <div class="w-full whitespace-nowrap text-base font-bold">2000</div>
-            </div>
-            <div class="bg-green-100 h-48 rounded-lg relative p-2 shadow-md">
-              <div
-                class="h-16 w-16 flex flex-col px-3 py-3 rounded-tl-md rounded-br-full bg-green-500 absolute top-0 left-0">
-                <UserIcon class="h-8 w-8 text-white" />
-              </div>
-              <div class="mt-16 w-full whitespace-nowrap font-semibold font-mono">Members</div>
-              <div class="w-full whitespace-nowrap mt-5 text-slate-600 uppercase text-sm">Total System Amount:
-              </div>
-              <div class="w-full whitespace-nowrap text-base font-bold">100,000</div>
-            </div>
+            <Card
+              heroIcon="BanknotesIcon"
+              label="Collections"
+              description="Total System Amount"
+              amount="1,500,000,000,000 UGx"
+              primaryColor="bg-purple-100"
+              secondaryColor="bg-purple-600"
+            />
+            <Card
+              heroIcon="UserGroupIcon"
+              label="Groups"
+              description="Total System Amount"
+              amount="1,500,000,000,000 UGx"
+              primaryColor="bg-blue-100"
+              secondaryColor="bg-blue-600"
+            />
+            <Card
+              heroIcon="UserIcon"
+              label="Members"
+              description="Total System Amount"
+              amount="1,500,000,000,000 UGx"
+              primaryColor="bg-emerald-100"
+              secondaryColor="bg-emerald-600"
+            />
           </div>
-          <div class="hidden lg:block lg:w-full border border-slate-200 h-[500px] overflow-auto relative">
-            <div
-              class="grid grid-cols-8 gap-2 px-2 py-1 font-bold space-x-2 border-b text-sm w-full sticky top-0 bg-slate-100 h-10 place-content-center">
-              <div class="col-span-3">Group</div>
-              <div class="col-span-2">Saving worth</div>
-              <div class="col-span-2">Asset Worth</div>
-              <div class="">Status</div>
-            </div>
-            <div v-for="summary in groups" :key="summary?.id"
-              class="grid grid-cols-8 gap-2 w-full items-center space-x-2 justify-between border-b border-slate-200 shadow p-2 rounded">
-              <div class="flex space-x-2 flex-shrink-0 col-span-3">
-                <div class="bg-blue-500 h-12 w-12 rounded flex-shrink-0"></div>
-                <div class="flex flex-col justify-center">
-                  <div class="font-bold text-sm">{{ summary.name }}</div>
-                  <div class="text-xs">#00013 Created on: {{ summary.created_at }}</div>
-                </div>
-              </div>
-              <div class="font-semibold text-sm text-blue-500 col-span-2">{{ summary?.month_collections }}</div>
-              <div class="font-semibold text-sm text-blue-500 col-span-2">{{ summary?.account_balance }}</div>
-              <div class="flex space-x-1 items-center text-xs">
-                <div class="h-3 w-3 rounded-full bg-green-500"></div>
-                <span>Active</span>
-              </div>
-            </div>
-            <NoData label="groups" />
-          </div>
+          <DataTable/>
         </div>
       </div>
 
