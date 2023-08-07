@@ -13,74 +13,41 @@
         <div class="fixed inset-0 bg-black bg-opacity-25" />
       </TransitionChild>
 
-      <div class="fixed right-0 inset-0 overflow-y-auto">
+      <div class="fixed inset-0 overflow-y-auto">
         <div
-          class="flex min-h-full items-center justify-end text-center"
+          class="flex min-h-full items-center justify-center text-center"
         >
           <TransitionChild
             as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95"
+            enter="transform transition ease-in-out duration-500 sm:duration-700"
+            enter-from="translate-x-full"
+            enter-to="translate-x-0"
+            leave="transform transition ease-in-out duration-500 sm:duration-700"
+            leave-from="translate-x-0"
+            leave-to="translate-x-full"
           >
-            <Dialog
-              class="
-                w-1/3
+            <DialogPanel
+              class=" w-1/3
                 h-screen
                 transform
                 overflow-hidden
-                rounded-none
-                dark:bg-slate-800 dark:text-white
                 bg-white
                 p-6
                 text-left
                 align-middle
                 shadow-xl
-                transition-all
-              "
+                transition-all"
             >
               <DialogTitle
                 as="h3"
-                class="
-                  text-lg
-                  mb-5
-                  font-medium
-                  leading-6
-                  text-gray-900
-                  flex
-                  w-full
-                  items-center
-                  justify-between
-                "
+                class="text-lg font-medium leading-6 text-gray-900"
               >
-                <div class="flex flex-col">
-                  <span>Group Request</span>
-                  <span class="text-xs text-gray-500"
-                    >Use this form to submit a group request to a sacco that you
-                    are connected to.</span
-                  >
-                </div>
-                <XCircleIcon
-                  class="
-                    text-rose-600
-                    h-8
-                    cursor-pointer
-                    hover:text-white hover:bg-gradient-to-r
-                    from-cyan-500
-                    to-blue-500
-                    hover:rounded-full
-                  "
-                  @click="closeModal()"
-                />
+                Payment successful
               </DialogTitle>
-
+              <slot name="header"></slot>
               <slot name="body"></slot>
               <slot name="footer"></slot>
-
-            </Dialog>
+            </DialogPanel>
           </TransitionChild>
         </div>
       </div>
@@ -95,6 +62,7 @@ import {
   TransitionChild,
   Dialog,
   DialogTitle,
+  DialogPanel
 } from "@headlessui/vue";
 import {
   XCircleIcon,

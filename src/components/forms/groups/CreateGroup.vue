@@ -1,4 +1,5 @@
 <template>
+  
   <SlideInModal :isModalOpen="open">
     <template #body>
       <form @submit.prevent="saveGroup">
@@ -40,12 +41,6 @@
 
 <script setup lang="ts">
 import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
-import {
-  TransitionRoot,
-  TransitionChild,
-  Dialog,
-  DialogTitle,
-} from "@headlessui/vue";
 import { storeToRefs } from "pinia";
 import { customAxios } from "../../../composables/axios";
 import { useGroupStore } from "../../../stores/group-store";
@@ -60,6 +55,10 @@ import {
 } from "@heroicons/vue/24/outline";
 import TextArea from "../../../components/shared/inputs/TextArea.vue";
 import MasterPage from "../../../components/shared/MasterPage.vue";
+import {
+  GroupCreationRequest,
+  GroupCreationResponseError
+} from "../../../types";
 
 export interface CreateGroupModalProps {
   open?: boolean | undefined;
@@ -74,7 +73,7 @@ const { groups, loadingGroups } = storeToRefs(groupStore);
 const filteredGroups = ref([]);
 const groupBeingSaved = ref(false);
 const activeGroupSelection = ref(null);
-const errorMessages = ref({});
+const errorMessages = ref<GroupCreationResponseError>({});
 
 // const isOpen = inject("addNewGroupModal");
 // const selectedGroup = inject("selectedGroup");
@@ -106,18 +105,19 @@ const errorMessages = ref({});
 //   isOpen.value = false;
 // };
 
-const groupRequest = reactive({
+const groupRequest = ref<GroupCreationRequest>({
   name: "",
   description: "",
-  status: "",
   email: "",
-  phone_number: 100020,
+  phone_number: "100020",
   account_number: "",
   initial_account_balance: "",
   contract_start_date: "",
   contract_end_date: "",
   status: 0,
 });
+
+const saveGroup = () => console.log();
 
 // const saveGroup = async () => {
 //   groupBeingSaved.value = true;
