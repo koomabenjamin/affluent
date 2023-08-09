@@ -2,16 +2,26 @@
   <button 
     class="
       h-[60px]
-      bg-blue-800 
+      hover:text-white
+      text-blue-500
+      border-blue-500
+      hover:bg-blue-800 
       border-2
       flex
-      text-white
       items-center
       justify-center
-      space-x-1
-      px-2
-      py-1
-      border-white">
+      rounded-md
+      space-x-1"
+
+    :class="`
+        text-lg
+        ${(dark) ? 'text-white':''}
+        ${(size === 'sm') ? 'px-1 py-0.5':''}
+        ${(size === 'md') ? 'px-4 py-2':''}
+        ${(size === 'lg') ? 'px-6 py-3':''}
+        ${(size === 'block') ? 'w-full py-3':''}
+      `"
+    >
     <div>
       <Icon
         icon="svg-spinners:180-ring-with-bg"
@@ -19,16 +29,7 @@
         width="20"
         v-if="loader" />
     </div>
-    <span
-      :class="`
-        text-lg
-        ${(dark) ? 'text-white':''}
-        ${(size === 'sm') ? 'px-1 py-0.5':''}
-        ${(size === 'md') ? 'px-4 py-2':''}
-        ${(size === 'lg') ? 'px-6 py-3':''}
-      `">
-      {{ label }}
-    </span>
+    <span>{{ label }}</span>
 
   </button>
 </template>

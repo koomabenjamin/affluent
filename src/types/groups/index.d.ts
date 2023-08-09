@@ -3,7 +3,10 @@ export interface CreateGroupModalProps {
 }
 
 export interface GroupCreationResponse {
-  
+  message: string;
+  errors?: object;
+  status?: string;
+  data?: object | any;
 }
 
 export interface GroupCreationResponseError {

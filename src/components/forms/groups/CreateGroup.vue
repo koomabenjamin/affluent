@@ -5,34 +5,34 @@
       <form @submit.prevent="saveGroup">
         <div class="mt-2 grid gap-4 w-full grid-cols-2">
           <div class="col-span-2">
-            <Input icon="heroicons:envelope" type="text" v-model="groupRequest.name" label="Group Name" :error="errorMessages?.name" required />
+            <Input icon="heroicons:envelope" type="text" v-model="groupCreationRequest.name" label="Group Name" :error="errorMessages?.name" required />
           </div>
           <div class="col-span-2">
-            <TextArea type="text" v-model="groupRequest.description" label="Description" />
+            <TextArea type="text" v-model="groupCreationRequest.description" label="Description" />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="email" v-model="groupRequest.email" label="Email" :error="errorMessages?.email" required />
+            <Input icon="heroicons:envelope" type="email" v-model="groupCreationRequest.email" label="Email" :error="errorMessages?.email" required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="number" v-model="groupRequest.account_number" label="Account Number" />
+            <Input icon="heroicons:envelope" type="number" v-model="groupCreationRequest.account_number" label="Account Number" />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="number" v-model="groupRequest.initial_account_balance" label="Initial Account Balance"
+            <Input icon="heroicons:envelope" type="number" v-model="groupCreationRequest.initial_account_balance" label="Initial Account Balance"
               required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="text" v-model="groupRequest.phone_number" label="Phone Number" required />
+            <Input icon="heroicons:envelope" type="text" v-model="groupCreationRequest.phone_number" label="Phone Number" required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="date" v-model="groupRequest.contract_start_date" label="Contract Start Date" required />
+            <Input icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_start_date" label="Contract Start Date" required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="date" v-model="groupRequest.contract_end_date" label="Contract End Date" required />
+            <Input icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_end_date" label="Contract End Date" required />
           </div>
         </div>
 
-        <div class="mt-4">
-          <Button label="Confirm" :loader="groupBeingSaved" />
+        <div class="mt-4 w-full">
+          <Button label="Confirm" :loader="groupBeingSaved" size="block" />
         </div>
       </form>
     </template>
@@ -57,6 +57,7 @@ import TextArea from "../../../components/shared/inputs/TextArea.vue";
 import MasterPage from "../../../components/shared/MasterPage.vue";
 import {
   GroupCreationRequest,
+  GroupCreationResponse,
   GroupCreationResponseError
 } from "../../../types";
 
@@ -105,7 +106,7 @@ const errorMessages = ref<GroupCreationResponseError>({});
 //   isOpen.value = false;
 // };
 
-const groupRequest = ref<GroupCreationRequest>({
+const groupCreationRequest = ref<GroupCreationRequest>({
   name: "",
   description: "",
   email: "",
@@ -117,26 +118,24 @@ const groupRequest = ref<GroupCreationRequest>({
   status: 0,
 });
 
-const saveGroup = () => console.log();
+const saveGroup = async () => {
+  groupBeingSaved.value = true;
+  try {
 
-// const saveGroup = async () => {
-//   groupBeingSaved.value = true;
-//   try {
+    const response:GroupCreationResponse = await customAxios.post('/groups', groupCreationRequest.value);
+    console.log(response);
+  } catch (error) {
+    const errors:GroupCreationResponse = error?.response?.data?.errors;
+    console.log(errors, error);
+    Object.assign(errorMessages.value, errors);
+  } finally {
 
-//     const response = await customAxios.post('/groups', groupRequest);
-//     console.log(response);
-//   } catch (error) {
-//     const errors = error?.response?.data?.errors;
-//     console.log(errors, error);
-//     Object.assign(errorMessages.value, errors);
-//   } finally {
-
-//     loadingGroups.value = false;
-//     groupStore.fetchGroups();
-//     groupBeingSaved.value = false;
-//     // closeModal();
-//   }
-// };
+    loadingGroups.value = false;
+    groupStore.fetchGroups();
+    groupBeingSaved.value = false;
+    // closeModal();
+  }
+};
 // const fetchMembers = async () => {
 //   const { data, status } = await customAxios.get("/users");
 //   members.value = data.data;
@@ -144,7 +143,7 @@ const saveGroup = () => console.log();
 // onBeforeMount(() => {
 //   const userFromSession = sessionStorage.getItem("user");
 //   user.value = JSON.parse(userFromSession ?? {});
-//   groupRequest.user_id = user.value.id;
+//   groupCreationRequest.user_id = user.value.id;
 //   fetchMembers();
 //   groupStore.fetchGroups();
 // });
