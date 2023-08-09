@@ -71,9 +71,9 @@ const user = ref(null);
 const groupStore = useGroupStore();
 const { groups, loadingGroups } = storeToRefs(groupStore);
 // const filteredGroups = computed(() => groups.value);
-const filteredGroups = ref([]);
+// const filteredGroups = ref([]);
 const groupBeingSaved = ref(false);
-const activeGroupSelection = ref(null);
+// const activeGroupSelection = ref(null);
 const errorMessages = ref<GroupCreationResponseError>({});
 
 // const isOpen = inject("addNewGroupModal");

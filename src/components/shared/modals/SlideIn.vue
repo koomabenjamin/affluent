@@ -106,11 +106,9 @@ export interface SlideInModalProps{
   isModalOpen: boolean | undefined;
 }
 
-const isModalOpen = ref<boolean>(true)
-
 const props = defineProps <SlideInModalProps>();
 
-const closeModal = () => (isModalOpen.value = false);
+// const closeModal = () => (isModalOpen.value = false);
 
 </script>
 

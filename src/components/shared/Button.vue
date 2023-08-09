@@ -1,7 +1,6 @@
 <template>
   <button 
     class="
-      h-[60px]
       hover:text-white
       text-blue-500
       border-blue-500
@@ -16,9 +15,9 @@
     :class="`
         text-lg
         ${(dark) ? 'text-white':''}
-        ${(size === 'sm') ? 'px-1 py-0.5':''}
-        ${(size === 'md') ? 'px-4 py-2':''}
-        ${(size === 'lg') ? 'px-6 py-3':''}
+        ${(size === 'sm') ? 'px-1 py-2':''}
+        ${(size === 'md') ? 'px-2 py-2':''}
+        ${(size === 'lg') ? 'px-2 py-2':''}
         ${(size === 'block') ? 'w-full py-3':''}
       `"
     >
@@ -29,7 +28,15 @@
         width="20"
         v-if="loader" />
     </div>
-    <span>{{ label }}</span>
+    <span
+    :class="`
+        text-lg
+        ${(dark) ? 'text-white':''}
+        ${(size === 'sm') ? 'text-xs':''}
+        ${(size === 'md') ? 'text-sm':''}
+        ${(size === 'lg') ? 'text-base':''}
+        ${(size === 'block') ? 'text-xl':''}
+      `">{{ label }}</span>
 
   </button>
 </template>
