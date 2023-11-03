@@ -1,6 +1,6 @@
 <template>
   
-  <SlideInModal :isModalOpen="open">
+  <SlideInModal :isModalOpen="props.open" @close="close">
     <template #body>
       <form @submit.prevent="saveGroup">
         <div class="mt-2 grid gap-4 w-full grid-cols-2">
@@ -66,45 +66,14 @@ export interface CreateGroupModalProps {
 }
 
 const props = defineProps<CreateGroupModalProps>();
+const emit = defineEmits(['close'])
+const close = () => emit('close');
 
 const user = ref(null);
 const groupStore = useGroupStore();
 const { groups, loadingGroups } = storeToRefs(groupStore);
-// const filteredGroups = computed(() => groups.value);
-// const filteredGroups = ref([]);
 const groupBeingSaved = ref(false);
-// const activeGroupSelection = ref(null);
 const errorMessages = ref<GroupCreationResponseError>({});
-
-// const isOpen = inject("addNewGroupModal");
-// const selectedGroup = inject("selectedGroup");
-
-// const closeModal = () => (isOpen.value = false);
-
-// const openModal = () => (isOpen.value = true);
-
-// const savingInProgress = ref(false);
-
-// const selection = reactive({
-//   member_id: [],
-//   member_name: [],
-//   members_selected: [],
-// });
-
-// const addMembers = async () => {
-//   savingInProgress.value = true;
-//   const filterMembers = selection?.members_selected.map((el) => el.id);
-//   const request = {
-//     users: filterMembers.join(","),
-//     groups: selectedGroup.value,
-//   };
-//   const response = await customAxios.post(
-//     "groups/create_join_request",
-//     request
-//   );
-//   savingInProgress.value = false;
-//   isOpen.value = false;
-// };
 
 const groupCreationRequest = ref<GroupCreationRequest>({
   name: "",
@@ -133,23 +102,8 @@ const saveGroup = async () => {
     loadingGroups.value = false;
     groupStore.fetchGroups();
     groupBeingSaved.value = false;
-    // closeModal();
   }
 };
-// const fetchMembers = async () => {
-//   const { data, status } = await customAxios.get("/users");
-//   members.value = data.data;
-// };
-// onBeforeMount(() => {
-//   const userFromSession = sessionStorage.getItem("user");
-//   user.value = JSON.parse(userFromSession ?? {});
-//   groupCreationRequest.user_id = user.value.id;
-//   fetchMembers();
-//   groupStore.fetchGroups();
-// });
-// onMounted(() => {
-//   filteredGroups.value = groups.value;
-// });
 </script>
 
 <style></style>

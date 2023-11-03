@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot appear :show="isModalOpen" as="template">
+  <TransitionRoot appear :show="props.isModalOpen" as="template">
     <Dialog as="div" @close="closeModal" class="relative z-10">
       <TransitionChild
         as="template"
@@ -102,13 +102,14 @@ import {
 export interface SlideInModalProps{
   title?: string | undefined;
   description?: string | undefined;
-  closeModal?: Function;
   isModalOpen: boolean | undefined;
 }
 
-const props = defineProps <SlideInModalProps>();
+const props = defineProps<SlideInModalProps>();
 
-// const closeModal = () => (isModalOpen.value = false);
+const emit = defineEmits(['close'])
+
+const closeModal = () => emit('close');
 
 </script>
 

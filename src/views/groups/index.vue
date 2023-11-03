@@ -1,6 +1,6 @@
 <template>
 
-  <create-group :open="showCreateGroupModal"></create-group>
+  <create-group :open="showCreateGroupModal" @close="closeCreateGroupModal()"></create-group>
 
   <Container>
     <div class="w-full flex items-center justify-between mt-5">
