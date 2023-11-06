@@ -7,7 +7,7 @@
       <Button label="Create New Group" size="md" @click="closeCreateGroupModal()" />
     </div>
 
-    <DataTable :rows="groups" :columns="columns" />
+    <DataTable :rows="groups" :columns="columns" :column-count="columnCount"/>
     
   </Container>
 </template>
@@ -36,6 +36,8 @@ const columns = ref<string[]>(
     'account_number'
   ]
 );
+
+const columnCount = ref<Number>(columns.value.length)
 
 const showCreateGroupModal = ref<boolean>(false);
 const closeCreateGroupModal = () => showCreateGroupModal.value = !showCreateGroupModal.value;
