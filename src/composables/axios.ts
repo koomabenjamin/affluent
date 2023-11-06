@@ -2,10 +2,10 @@ import axios from 'axios';
 import router from '@/router';
 
 export const customAxios = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/',
+    baseURL: 'http://127.0.0.1:8001/api/',
 });
 
-customAxios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(response => {
+customAxios.get('http://127.0.0.1:8001/sanctum/csrf-cookie').then(response => {
     sessionStorage.setItem('crsf-token', response.config.headers['X-XSRF-TOKEN']);
 });
 

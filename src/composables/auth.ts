@@ -97,7 +97,7 @@ export default function useAuthentication() {
         router.push({ name: 'login' });
     }
 
-    provide('isAuthenticated', isAuthenticated);
+    // provide('isAuthenticated', isAuthenticated);
 
     return {
         login,
