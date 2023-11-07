@@ -1,8 +1,8 @@
 <template>
-  <div :class="`mt-2 grid grid-cols-${columnCount} gap-1`">
+  <div :class="`mt-2 grid grid-cols-${columns?.length} gap-1`">
     <div v-for="column in columns" :key="column" class="capitalize text-sm">{{ column.replace(/_/g, " ") }}</div>
   </div>
-  <div v-for="(value, index) in rows" :key="index" :class="`col-span-${columnCount} grid grid-cols-${columnCount} gap-1`">
+  <div v-for="(value, index) in rows" :key="index" :class="`col-span-${columns?.length} grid grid-cols-${columns?.length} gap-1`">
     <div v-for="column in columns" :key="column" class="text-[10px]">
       {{ value[column] }}
     </div>
