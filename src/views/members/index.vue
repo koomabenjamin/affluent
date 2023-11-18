@@ -7,7 +7,13 @@
       <Button label="Create New Member" size="md" @click="closeCreateGroupModal()" />
     </div>
 
-    <DataTable :rows="members" :columns="columns" :column-count="columnCount"/>
+    <DataTable :rows="members" :columns="columns" :column-count="columnCount" actions>
+      <template #actions>
+        <div class="text-xs">edit</div>
+        <!-- <div class="text-xs">view</div> -->
+        <div class="text-xs">delete</div>
+      </template>
+    </DataTable>
     
   </Container>
 </template>
