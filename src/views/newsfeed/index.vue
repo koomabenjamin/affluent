@@ -1,202 +1,166 @@
 <template>
-    <Container>
-    <div class="w-full flex items-center justify-between mt-5"></div></Container>
-  <div class="w-full center" v-if="savingPost">
-    <Icon
-        icon="svg-spinners:180-ring-with-bg"
-        class="text-blue-500"
-        width="20"
-        v-if="savingPost" />
-  </div>
-  <div
-    class="w-full space-y-2 rounded overflow-auto h-full"
-    v-if="(posts?.length ?? 0) > 0"
-  >
-    <div class="h-full overflow-auto">
-      <!-- ******* START OF LIST OF POSTS ****** -->
-      <div
-        class="h-auto dark:bg-slate-800 flex space-x-2 items-center px-20"
-        v-for="(feed, index) in (posts ?? []).sort((a, b) => b + a)"
-        :key="feed"
-      >
-        <div
-          class="flex flex-col w-full p-2 h-auto space-y-1 border hover:bg-slate-100"
-        >
-          <div class="w-full h-auto rounded-lg p-2 text-xs flex space-x-2">
-            <div class="h-12 w-12 rounded-full bg-black"></div>
-            <div class="flex flex-col text-sm">
-              <span class="font-bold">Benjamin Kooma</span>
-              <span class="text-xs font-semibold text-slate-600"
-                >@benjaminKooma</span
-              >
-            </div>
-            <span class="text-sm text-slate-500">Jan 25</span>
-          </div>
-          <div class="flex flex-wrap h-auto ml-16 text-sm">
-            {{ feed.content }}
-          </div>
-          <div class="grid grid-cols-2 gap-0">
-            <div
-              v-for="image in feed.images"
-              :key="image"
-              :class="`bg-blue-600 h-20 border border-white`"
-            >
-              {{ image }}
-            </div>
-          </div>
-          <div
-            class="w-full h-auto rounded-lg p-2 text-xs items-center justify-between pr-5 py-1 flex"
-          >
-            <div class="w-auto -space-x-5 flex">
-              <div
-                class="bg-blue-500 border dark:border-slate-400 h-8 w-8 rounded-full"
-                v-for="tag in feed.tags"
-                :key="tag"
-              ></div>
-            </div>
-            <div class="w-auto flex space-x-2 text-blue-800 font-bold">
-              <div @click="addComment(index)" class="h-5 rounded center">
-                {{ feed.comments.length }}
-                <ChatBubbleOvalLeftIcon class="h-5" />
-              </div>
-              <div
-                @click="reaction(0, index)"
-                class="h-5 w-auto rounded center"
-              >
-                {{ feed.likes }}
-                <HandThumbUpIcon class="h-6" />
-              </div>
-              <div
-                @click="reaction(1, index)"
-                class="h-5 w-auto rounded center"
-              >
-                {{ feed.dislikes }}
-                <HandThumbDownIcon class="h-6" />
-              </div>
-              <div
-                @click="reaction(2, index)"
-                class="h-5 w-auto rounded center"
-              >
-                {{ feed.favourites }}
-                <StarIcon class="h-6" />
-              </div>
-              <div
-                @click="reaction(3, index)"
-                class="h-5 w-auto rounded center"
-              >
-                {{ feed.loves }}
-                <HeartIcon class="h-6" />
-              </div>
-              <div
-                @click="reaction(4, index)"
-                class="h-5 w-auto rounded center"
-              >
-                {{ feed.shares }}
-                <TagIcon class="h-5" />
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex flex-col w-full items-end space-y-2 px-5"
-            v-if="activePost === index"
-          >
-            <textarea
-              name=""
-              id=""
-              rows="2"
-              v-model="comment"
-              class="border w-full shadow p-4 h-24 text-slate-600 text-sm rounded-xl"
-            ></textarea>
+  <Container>
+    <div class="w-full flex flex-col items-center justify-between mt-5">
+      <div class="w-full py-2 -px-4 border-b">
+        <div class="px-10">
+          <textarea name="" id="" rows="3" placeholder="Write out your post..." v-model="content"
+            class="border w-full shadow p-4 h-24 text-slate-600 text-sm rounded-xl ring-1 border-slate-300 focus-within:ring-slate-400"></textarea>
+          <div class="h-10 flex space-x-1 text-sm w-full items-center justify-between">
             <button
-              @click="postComment(index)"
-              class="border bg-blue-800 text-white p-2 rounded text-xs"
-            >
-              Comment
+              class="text-green-600 w-auto px-2 py-1 rounded bg-white shadow center space-x-2 hover:bg-blue-600 hover:text-white duration-150"
+              @click="savePost()">
+              <span>Post</span>
+              <PaperAirplaneIcon class="h-6" />
             </button>
-          </div>
-          <div class="h-auto w-full" v-if="feed.comments.length > 0">
-            <div class="h-8 font-bold">Comments</div>
-            <!-- <div class="space-y-1"> -->
-            <div
-              class="py-2 px-2 border text-sm"
-              v-for="(comment, commentIndex) in feed.comments"
-              :key="comment"
-            >
-              <div class="w-full h-auto rounded-lg p-1 text-xs flex space-x-2">
-                <div class="h-10 w-10 rounded-full bg-black"></div>
-                <div class="flex flex-col text-sm">
-                  <div>
-                    <span class="font-bold">Benjamin Kooma</span>
-                    <span class="text-xs font-semibold text-slate-600">
-                      @benjaminKooma
-                    </span>
-                  </div>
-                  <span>{{ comment.content }}</span>
-                </div>
-              </div>
-              <div
-                class="w-auto flex text-slate-400 font-bold justify-end text-xs"
-              >
-                <!-- <div class="h-6 w-auto px-1 rounded center">
-                    <span class="text-slate-700">{{ feed.comments.length }}</span>
-                    <ChatBubbleOvalLeftIcon class="h-5" />
-                  </div> -->
-                <div
-                  @click="commentReaction(0, index, commentIndex)"
-                  class="h-6 w-auto px-1 rounded center"
-                >
-                  <span class="text-slate-700">{{ comment.likes }}</span>
-                  <HandThumbUpIcon class="h-5" />
-                </div>
-                <div
-                  @click="commentReaction(1, index, commentIndex)"
-                  class="h-6 w-auto px-1 rounded center"
-                >
-                  <span class="text-slate-700">{{ comment.dislikes }}</span>
-                  <HandThumbDownIcon class="h-5" />
-                </div>
-                <div
-                  @click="commentReaction(2, index, commentIndex)"
-                  class="h-6 w-auto px-1 rounded center"
-                >
-                  <span class="text-slate-700">{{ comment.favourites }}</span>
-                  <StarIcon class="h-5" />
-                </div>
-                <div
-                  @click="commentReaction(3, index, commentIndex)"
-                  class="h-6 w-auto px-1 rounded center"
-                >
-                  <span class="text-slate-700">{{ comment.loves }}</span>
-                  <HeartIcon class="h-5" />
-                </div>
-                <div
-                  @click="commentReaction(4, index, commentIndex)"
-                  class="h-6 w-auto px-1 rounded center"
-                >
-                  <span class="text-slate-700">{{ comment.shares }}</span>
-                  <TagIcon class="h-5" />
-                </div>
-              </div>
+            <div class="flex space-x-1 text-blue-500">
+              <button
+                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                <PaperClipIcon class="h-6" />
+              </button>
+              <button
+                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                <CalendarDaysIcon class="h-6" />
+              </button>
+              <button
+                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                <ChartPieIcon class="h-6" />
+              </button>
+              <button
+                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                <FaceSmileIcon class="h-6" />
+              </button>
+              <button
+                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                <GifIcon class="h-6" />
+              </button>
+              <button
+                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                <TagIcon class="h-6" />
+              </button>
             </div>
-            <!-- </div> -->
           </div>
         </div>
       </div>
-      <!-- ******* END OF LIST OF POSTS ****** -->
+      <div class="w-full center" v-if="savingPost">
+        <Icon icon="svg-spinners:180-ring-with-bg" class="text-blue-500" width="20" v-if="savingPost" />
+      </div>
+      <div class="w-full space-y-2 rounded overflow-auto h-full" v-if="(posts?.length ?? 0) > 0">
+        <div class="h-full overflow-auto">
+          <!-- ******* START OF LIST OF POSTS ****** -->
+          <div class="h-auto dark:bg-slate-800 flex space-x-2 items-center px-20"
+            v-for="(feed, index) in (posts ?? []).sort((a, b) => b + a)" :key="feed">
+            <div class="flex flex-col w-full p-2 h-auto space-y-1 border hover:bg-slate-100">
+              <div class="w-full h-auto rounded-lg p-2 text-xs flex space-x-2">
+                <div class="h-12 w-12 rounded-full bg-black"></div>
+                <div class="flex flex-col text-sm">
+                  <span class="font-bold">Benjamin Kooma</span>
+                  <span class="text-xs font-semibold text-slate-600">@benjaminKooma</span>
+                </div>
+                <span class="text-sm text-slate-500">Jan 25</span>
+              </div>
+              <div class="flex flex-wrap h-auto ml-16 text-sm">
+                {{ feed.content }}
+              </div>
+              <div class="grid grid-cols-2 gap-0">
+                <div v-for="image in feed.images" :key="image" :class="`bg-blue-600 h-20 border border-white`">
+                  {{ image }}
+                </div>
+              </div>
+              <div class="w-full h-auto rounded-lg p-2 text-xs items-center justify-between pr-5 py-1 flex">
+                <div class="w-auto -space-x-5 flex">
+                  <div class="bg-blue-500 border dark:border-slate-400 h-8 w-8 rounded-full" v-for="tag in feed.tags"
+                    :key="tag"></div>
+                </div>
+                <div class="w-auto flex space-x-2 text-blue-800 font-bold">
+                  <div @click="addComment(index)" class="h-5 rounded center">
+                    {{ feed.comments.length }}
+                    <ChatBubbleOvalLeftIcon class="h-5" />
+                  </div>
+                  <div @click="reaction(0, index)" class="h-5 w-auto rounded center">
+                    {{ feed.likes }}
+                    <HandThumbUpIcon class="h-6" />
+                  </div>
+                  <div @click="reaction(1, index)" class="h-5 w-auto rounded center">
+                    {{ feed.dislikes }}
+                    <HandThumbDownIcon class="h-6" />
+                  </div>
+                  <div @click="reaction(2, index)" class="h-5 w-auto rounded center">
+                    {{ feed.favourites }}
+                    <StarIcon class="h-6" />
+                  </div>
+                  <div @click="reaction(3, index)" class="h-5 w-auto rounded center">
+                    {{ feed.loves }}
+                    <HeartIcon class="h-6" />
+                  </div>
+                  <div @click="reaction(4, index)" class="h-5 w-auto rounded center">
+                    {{ feed.shares }}
+                    <TagIcon class="h-5" />
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col w-full items-end space-y-2 px-5" v-if="activePost === index">
+                <textarea name="" id="" rows="2" v-model="comment"
+                  class="border w-full shadow p-4 h-24 text-slate-600 text-sm rounded-xl"></textarea>
+                <button @click="postComment(index)" class="border bg-blue-800 text-white p-2 rounded text-xs">
+                  Comment
+                </button>
+              </div>
+              <div class="h-auto w-full" v-if="feed.comments.length > 0">
+                <div class="h-8 font-bold">Comments</div>
+                <!-- <div class="space-y-1"> -->
+                <div class="py-2 px-2 border text-sm" v-for="(comment, commentIndex) in feed.comments" :key="comment">
+                  <div class="w-full h-auto rounded-lg p-1 text-xs flex space-x-2">
+                    <div class="h-10 w-10 rounded-full bg-black"></div>
+                    <div class="flex flex-col text-sm">
+                      <div>
+                        <span class="font-bold">Benjamin Kooma</span>
+                        <span class="text-xs font-semibold text-slate-600">
+                          @benjaminKooma
+                        </span>
+                      </div>
+                      <span>{{ comment.content }}</span>
+                    </div>
+                  </div>
+                  <div class="w-auto flex text-slate-400 font-bold justify-end text-xs">
+                    <!-- <div class="h-6 w-auto px-1 rounded center">
+                        <span class="text-slate-700">{{ feed.comments.length }}</span>
+                        <ChatBubbleOvalLeftIcon class="h-5" />
+                      </div> -->
+                    <div @click="commentReaction(0, index, commentIndex)" class="h-6 w-auto px-1 rounded center">
+                      <span class="text-slate-700">{{ comment.likes }}</span>
+                      <HandThumbUpIcon class="h-5" />
+                    </div>
+                    <div @click="commentReaction(1, index, commentIndex)" class="h-6 w-auto px-1 rounded center">
+                      <span class="text-slate-700">{{ comment.dislikes }}</span>
+                      <HandThumbDownIcon class="h-5" />
+                    </div>
+                    <div @click="commentReaction(2, index, commentIndex)" class="h-6 w-auto px-1 rounded center">
+                      <span class="text-slate-700">{{ comment.favourites }}</span>
+                      <StarIcon class="h-5" />
+                    </div>
+                    <div @click="commentReaction(3, index, commentIndex)" class="h-6 w-auto px-1 rounded center">
+                      <span class="text-slate-700">{{ comment.loves }}</span>
+                      <HeartIcon class="h-5" />
+                    </div>
+                    <div @click="commentReaction(4, index, commentIndex)" class="h-6 w-auto px-1 rounded center">
+                      <span class="text-slate-700">{{ comment.shares }}</span>
+                      <TagIcon class="h-5" />
+                    </div>
+                  </div>
+                </div>
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+          <!-- ******* END OF LIST OF POSTS ****** -->
+        </div>
+      </div>
+      <div v-if="(posts?.length ?? 0) === 0" class="w-full flex items-center flex-col space-y-4 mt-20">
+        <img src="../../assets/svg/no_data.svg" alt="no-data" height="250" width="250" />
+        <span class="text-sm text-slate-600">No posts availble yet...</span>
+      </div>
     </div>
-  </div>
-  <div
-    v-if="(posts?.length ?? 0) === 0"
-    class="w-full flex items-center flex-col space-y-4 mt-20"
-  >
-    <img
-      src="../../assets/svg/no_data.svg"
-      alt="no-data"
-      height="250"
-      width="250"
-    />
-    <span class="text-sm text-slate-600">No posts availble yet...</span>
-  </div>
+  </Container>
 </template>
 
 <script setup>
@@ -221,7 +185,7 @@ import {
   HeartIcon,
   StarIcon,
 } from "@heroicons/vue/24/outline";
-import {} from "@heroicons/vue/20/solid";
+import { } from "@heroicons/vue/20/solid";
 import SummaryChart from "@/components/Metrics/SummaryChart.vue";
 import { usePostStore } from "@/stores/post-store";
 import { storeToRefs } from "pinia";
@@ -235,6 +199,39 @@ const comment = ref("");
 const activePost = ref(null);
 const savingPost = ref(false);
 
+// const content = ref("");
+// const comment = ref("");
+// const savingPost = ref(false);
+
+// const commentButtonActive = ref(false);
+
+// const addComment = () =>
+//   (commentButtonActive.value = !commentButtonActive.value);
+
+const _posts = ref([]);
+
+const savePost = () => {
+  if (content.value) {
+    savingPost.value = true;
+    const postContent = new String(`${content.value}`);
+    setTimeout(() => {
+      postStore.posts.push({
+        content: postContent.toString(),
+        likes: 0,
+        shares: 0,
+        tags: 0,
+        dislikes: 0,
+        loves: 0,
+        favourites: 0,
+        comments: [],
+        images: [],
+      });
+      savingPost.value = false;
+    }, 1000);
+    content.value = "";
+  }
+};
+
 const commentButtonActive = ref(false);
 
 const REACTION_TYPES = {
@@ -242,7 +239,7 @@ const REACTION_TYPES = {
   DISLIKES: 1,
   LOVES: 2,
   FAVORITES: 3,
-  SHARES: 4 
+  SHARES: 4
 }
 
 /**
@@ -256,23 +253,23 @@ const addComment = (activePostIndex) => {
 
 // const posts = ref([]);
 
-const savePost = () => {
-  savingPost.value = true;
-  setTimeout(() => {
-    posts.value.push({
-      content: content.value,
-      likes: 0,
-      shares: 0,
-      tags: 0,
-      dislikes: 0,
-      loves: 0,
-      favourites: 0,
-      comments: [],
-      images: [],
-    });
-    savingPost.value = false;
-  }, 1000);
-};
+// const savePost = () => {
+//   savingPost.value = true;
+//   setTimeout(() => {
+//     posts.value.push({
+//       content: content.value,
+//       likes: 0,
+//       shares: 0,
+//       tags: 0,
+//       dislikes: 0,
+//       loves: 0,
+//       favourites: 0,
+//       comments: [],
+//       images: [],
+//     });
+//     savingPost.value = false;
+//   }, 1000);
+// };
 
 const reaction = (type, index) => {
   // const indexOfPost = posts.value.indexOf(index);
