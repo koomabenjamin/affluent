@@ -2,6 +2,7 @@
   <table class="w-full mt-4">
     <thead>
       <tr>
+        <th></th>
         <th v-for="column in columns" :key="column" class="capitalize text-left text-sm h-10">{{ column.replace(/_/g, " ") }}</th>
         <th class="text-left" v-if="actions">
           <!--SLOT FOR CUSTOM ACTIONS FOR ANY COMPONENT THAT USES THE DATATABLE-->
@@ -10,6 +11,7 @@
       </tr>
     </thead>
     <tr v-for="(value, index) in rows" :key="index" class="bg-slate-50 border-b">
+      <td class="text-xs">{{ getRowId(index.toString()) }}.</td>
       <td v-for="column in columns" :key="column" class="text-xs pl-2 pr-2 py-4">
         {{ value[column] }}
       </td>
@@ -38,6 +40,8 @@ export interface DataTableProps {
 }
 
 const props = defineProps<DataTableProps>();
+
+const getRowId = (id: string) => parseInt(id) + 1;
 
 const columnCount = computed(() => props.columns?.length);
 </script>
