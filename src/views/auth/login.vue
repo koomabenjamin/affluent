@@ -62,7 +62,9 @@ const credentials = reactive({
         required 
         name="email"
         label="Email" 
-        icon="heroicons:envelope" />
+        icon="heroicons:envelope"
+        :icon-size="25"
+      />
 
       <Input 
         type="password" 
@@ -70,7 +72,9 @@ const credentials = reactive({
         required 
         name="password"
         label="Password" 
-        icon="heroicons:key" />
+        icon="heroicons:key"
+        :icon-size="25"
+      />
 
       <p 
         class="

@@ -46,7 +46,7 @@
         {{props.label}}
       </label>
       <div class="absolute top-5 right-2">
-        <Icon icon="twemoji:airplane" :width="props.iconSize"/>
+        <Icon :icon="props.icon" :width="props.iconSize"/>
       </div>
     </div>
 </template>
@@ -64,7 +64,7 @@ export interface InputProps{
   label?: string | undefined;
   price?: string | undefined;
   hide?: boolean | undefined;
-  icon: string | IconifyIcon | undefined;
+  icon: string | IconifyIcon;
   iconSize?: string | number | undefined;
   type?: string | undefined;
   required?: boolean | undefined;
