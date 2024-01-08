@@ -9,7 +9,7 @@
         </th>
       </tr>
     </thead>
-    <tr v-for="(value, index) in rows" :key="index" class="bg-slate-50">
+    <tr v-for="(value, index) in rows" :key="index" class="bg-slate-50 border-b">
       <td v-for="column in columns" :key="column" class="text-xs pl-2 pr-2 py-4">
         {{ value[column] }}
       </td>
