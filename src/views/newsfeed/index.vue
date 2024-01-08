@@ -156,7 +156,7 @@
         </div>
       </div>
       <div v-if="(posts?.length ?? 0) === 0" class="w-full flex items-center flex-col space-y-4 mt-20">
-        <img src="../../assets/svg/no_data.svg" alt="no-data" height="250" width="250" />
+        <img src="../../assets//svg/no-data.svg" alt="no-data" height="250" width="250" />
         <span class="text-sm text-slate-600">No posts availble yet...</span>
       </div>
     </div>
