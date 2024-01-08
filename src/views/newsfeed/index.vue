@@ -47,7 +47,7 @@
       <div class="w-full space-y-2 rounded overflow-auto h-full" v-if="(posts?.length ?? 0) > 0">
         <div class="h-full overflow-auto">
           <!-- ******* START OF LIST OF POSTS ****** -->
-          <div class="h-auto dark:bg-slate-800 flex space-x-2 items-center px-20"
+          <div class="h-auto flex space-x-2 items-center px-20"
             v-for="(feed, index) in (posts ?? []).sort((a, b) => b + a)" :key="feed">
             <div class="flex flex-col w-full p-2 h-auto space-y-1 border hover:bg-slate-100">
               <div class="w-full h-auto rounded-lg p-2 text-xs flex space-x-2">
@@ -68,7 +68,7 @@
               </div>
               <div class="w-full h-auto rounded-lg p-2 text-xs items-center justify-between pr-5 py-1 flex">
                 <div class="w-auto -space-x-5 flex">
-                  <div class="bg-blue-500 border dark:border-slate-400 h-8 w-8 rounded-full" v-for="tag in feed.tags"
+                  <div class="bg-blue-500 border h-8 w-8 rounded-full" v-for="tag in feed.tags"
                     :key="tag"></div>
                 </div>
                 <div class="w-auto flex space-x-2 text-blue-800 font-bold">
