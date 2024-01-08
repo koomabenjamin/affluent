@@ -85,24 +85,25 @@ const credentials = reactive({
       <div class="w-full flex items-center justify-between">
         <Button 
           label="Login" 
-          class="w-2/3" 
+          class="w-2/3"
+          size="block"
           :loader="authLoader" />
-        <span 
-          class="text-blue-600 w-1/3 text-center text-sm">
-          Forgot Password ?
-        </span>
       </div>
 
-      <div class="w-full py-1 text-center text-sm">
+      <div class="w-full py-1 text-center text-sm flex items-center justify-between">
         <div 
-          class="font-light mb-4">
-          Don't have an account yet ?,
+          class="font-light">
+          Don't have an account ?,
           <router-link 
             to="/register" 
             class="text-blue-600 font-bold">
             Create an account.
           </router-link>
         </div>
+        <span 
+          class="text-red-600 text-sm">
+          Forgot Password ?
+      </span>
       </div>
 
     </form>

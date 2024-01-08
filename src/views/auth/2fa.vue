@@ -28,7 +28,7 @@ const opt = ref('')
       <p class="text-slate-400 w-full text-left my-2 font-semibold text-sm">By logging in, you accept the <span
           class="text-blue-600 underline text-sm">Terms & Conditions</span></p>
       <div class="w-full flex items-center justify-between">
-        <Button label="Confirm" class="w-2/3" :loader="authLoader" />
+        <Button label="Confirm" class="w-2/3" :loader="authLoader" size="block"/>
         <span class="text-blue-600 w-1/3 text-center text-sm">Resend code ?</span>
       </div>
       <div class="w-full py-1 text-center text-sm">

@@ -2,7 +2,6 @@
   <button 
     class="
       hover:text-white
-      text-blue-500
       border-blue-500
       hover:bg-blue-800 
       border-2
@@ -19,6 +18,8 @@
         ${(size === 'md') ? 'px-2 py-2':''}
         ${(size === 'lg') ? 'px-2 py-2':''}
         ${(size === 'block') ? 'w-full py-3':''}
+
+        ${(loader) ? 'bg-blue-800 text-white': 'text-blue-500'}
       `"
     >
     <div>
