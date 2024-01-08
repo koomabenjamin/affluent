@@ -1,9 +1,12 @@
 <template>
-  <table class="w-full">
+  <table class="w-full mt-4">
     <thead>
       <tr>
-        <th v-for="column in columns" :key="column" class="capitalize text-left">{{ column.replace(/_/g, " ") }}</th>
-        <th class="text-left" v-if="actions">Actions</th>
+        <th v-for="column in columns" :key="column" class="capitalize text-left text-sm h-10">{{ column.replace(/_/g, " ") }}</th>
+        <th class="text-left" v-if="actions">
+          <!--SLOT FOR CUSTOM ACTIONS FOR ANY COMPONENT THAT USES THE DATATABLE-->
+          <slot name="actions"></slot>
+        </th>
       </tr>
     </thead>
     <tr v-for="(value, index) in rows" :key="index" class="h-10 bg-slate-50">
