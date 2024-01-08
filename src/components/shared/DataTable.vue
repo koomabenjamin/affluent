@@ -9,8 +9,8 @@
         </th>
       </tr>
     </thead>
-    <tr v-for="(value, index) in rows" :key="index" class="h-10 bg-slate-50">
-      <td v-for="column in columns" :key="column" class="text-xs">
+    <tr v-for="(value, index) in rows" :key="index" class="bg-slate-50">
+      <td v-for="column in columns" :key="column" class="text-xs pl-2 pr-2 py-4">
         {{ value[column] }}
       </td>
       <td v-if="actions">
@@ -19,7 +19,7 @@
     </tr>
     <tfoot>
       <tr>
-        <th v-for="column in columns" :key="column" class="capitalize text-xs text-left">{{ column.replace(/_/g, " ") }}</th>
+        <th v-for="column in columns" :key="column" class="capitalize text-sm text-left h-10">{{ column.replace(/_/g, " ") }}</th>
       </tr>
     </tfoot>
   </table>
