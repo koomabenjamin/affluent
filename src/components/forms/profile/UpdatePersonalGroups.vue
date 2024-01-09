@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <Button label="Update Information" @click="confirmSelectedGroups()"/>
+    <Button label="Update Information" @click="confirmSelectedGroups()" size="block"/>
   </div>
 </template>
 

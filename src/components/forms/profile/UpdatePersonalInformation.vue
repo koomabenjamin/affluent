@@ -33,7 +33,7 @@
         <Input type="text" label="NOK Email" v-model="user.nok_email" />
       </div>
     </div>
-    <Button label="Update Information" />
+    <Button label="Update Information" size="block" />
   </div>
 </template>
 
