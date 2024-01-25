@@ -1,6 +1,6 @@
 <template>
   <master-page>
-    <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 py-5 px-2 overflow-auto no-scroll-bar relative">
+    <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 py-5 px-2 overflow-auto no-scroll-bar relative h-full">
       <!-- Top with user total -->
       <div class="w-full h-auto flex items-center justify-between">
         <div class="flex items-center space-x-2">

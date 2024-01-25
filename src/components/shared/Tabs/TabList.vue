@@ -1,11 +1,13 @@
 <template>
-  <Tab 
-    v-for="tab in props.tabs" 
-    :key="tab" 
-    :label="tab" 
-    @changeTab="updateTab(tab)"
-    :active-tab="active"
-  />
+  <div class="w-auto flex items-center overflow-auto divide-x">
+    <Tab
+      v-for="tab in props.tabs"
+      :key="tab"
+      :label="tab"
+      @changeTab="updateTab(tab)"
+      :active-tab="active"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>

@@ -18,14 +18,9 @@ const selectedTab = ref<string>(tabs?.[0]);
 <template>
   <Container>
     <!-- main system content  -->
-    <div class="mt-10 w-full h-full">
+    <div class="mt-5 w-full h-full">
       <!-- left hand tabs -->
-      <!-- ['Summary', 'Graphical', 'Members', 'History'] -->
-      <div class="w-auto flex space-x-2 cursor-pointer">
-
-        <TabList :tabs="tabs" v-model="selectedTab"/>
-
-      </div>
+      <TabList :tabs="tabs" v-model="selectedTab"/>
 
       <div v-if="selectedTab === 'Summary'" class="pt-8">
         <!-- graph -->

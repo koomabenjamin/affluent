@@ -3,12 +3,12 @@
             w-auto
             px-2
             flex flex-col
-            justify-start
+            justify-center
             text-left
             h-10
             group
-            space-y-2" @click="$emit('changeTab', props.label)" 
-            :class="{ 'text-blue-500': (props.label === props.activeTab) }">
+            space-y-2" @click="$emit('changeTab', props.label)"
+    :class="{ 'text-blue-500': (props.label === props.activeTab) }">
     <span class="font-semibold text-sm w-full">{{ props.label }}</span>
     <div class="
               h-[3px]
