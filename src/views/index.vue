@@ -10,8 +10,6 @@ import DataTable from "@/components/shared/DataTable.vue";
 
 const tabs: string[] = ['Summary', 'Groups', 'Members', 'Collections', 'Cashflows', 'Assets', 'News', 'Events', 'Goodwill', 'Business'];
 
-const groups = ref<GroupSummary[]>([]);
-
 const selectedTab = ref<string>(tabs?.[0]);
 </script>
 

@@ -7,7 +7,7 @@
       <Button label="Create New Member" size="md" @click="closeCreateGroupModal()" />
     </div>
 
-    <DataTable :rows="members" :columns="columns" :column-count="columnCount" actions>
+    <DataTable :rows="members" :columns="columns" :column-count="4" actions>
       <template #actions>
         <div class="text-xs">edit</div>
         <!-- <div class="text-xs">view</div> -->
@@ -21,7 +21,6 @@
 <script setup lang="ts">
 import { ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia";
-import { customAxios } from "../../../composables/axios";
 import { useMemberStore } from "@/stores/member-store";
 
 import Container from "../../components/shared/Container.vue";

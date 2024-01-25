@@ -55,11 +55,38 @@ import {
 } from "@heroicons/vue/24/outline";
 import TextArea from "../../../components/shared/inputs/TextArea.vue";
 import MasterPage from "../../../components/shared/MasterPage.vue";
-import {
-  GroupCreationRequest,
-  GroupCreationResponse,
-  GroupCreationResponseError
-} from "../../../types";
+
+export interface Response {
+  response?: object;
+}
+
+export interface CreateGroupModalProps {
+  open?: boolean | undefined;
+}
+
+export interface GroupCreationResponse {
+  message: string;
+  errors?: object;
+  status?: string;
+  data?: object | any;
+}
+
+export interface GroupCreationResponseError {
+  email?: string,
+  name?: string,
+}
+
+export interface GroupCreationRequest {
+  name: string;
+  description: string;
+  email: string;
+  phone_number: string,
+  account_number: string;
+  initial_account_balance: string;
+  contract_start_date: string;
+  contract_end_date: string;
+  status: number;
+}
 
 export interface CreateGroupModalProps {
   open?: boolean | undefined;
@@ -94,7 +121,7 @@ const saveGroup = async () => {
     const response:GroupCreationResponse = await customAxios.post('/groups', groupCreationRequest.value);
     console.log(response);
   } catch (error) {
-    const errors:GroupCreationResponse = error?.response?.data?.errors;
+    const errors  = {}; //error?.response?.data?.errors;
     console.log(errors, error);
     Object.assign(errorMessages.value, errors);
   } finally {

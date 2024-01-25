@@ -7,7 +7,7 @@
       <Button label="Create New Group" size="md" @click="closeCreateGroupModal()" />
     </div>
 
-    <DataTable :rows="groups" :columns="columns" :column-count="columnCount"/>
+    <DataTable :rows="groups" :columns="columns" :column-count="6"/>
     
   </Container>
 </template>
@@ -15,7 +15,6 @@
 <script setup lang="ts">
 import { ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia";
-import { customAxios } from "../../../composables/axios";
 import { useGroupStore } from "@/stores/group-store";
 
 import Container from "../../components/shared/Container.vue";

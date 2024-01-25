@@ -33,7 +33,7 @@
         <NewspaperIcon class="w-12 stroke-1" />
         <span class="text-xs">Dashboard</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('groups')" v-if="1 === 0">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('groups')" v-if="false">
         <UserGroupIcon class="w-12 stroke-1" />
         <span class="text-xs">Groups</span>
       </div>
@@ -156,7 +156,7 @@
                     <ChevronRightIcon class="h-5 w-5" />
                   </button>
                   <button @click="updateActiveBoard('groups')"
-                  v-if="1 === 0"
+                  v-if="false"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'groups' }" class="
           flex
           w-full

@@ -1,6 +1,6 @@
 <template>
   <div class="w-full relative border">
-    <input :value="optionId" @input="$emit('update:optionId', $event.target.value)" hidden />
+    <input :value="optionId" @input="handleOptionIdInput($event)" hidden />
     <!-- Selected options -->
     <div class="h-auto w-full flex flex-wrap overflow-auto p-0.5">
       <!-- <slot :options="selectedOptions"></slot> -->
@@ -28,12 +28,12 @@
             hover:text-white hover:bg-red-600
             text-red-600
           ">
-          <component class="h-4 w-4" :is="OutlineIcons['XIcon']"></component>
+          <component class="h-4 w-4" :is="OutlineIcons['XCircleIcon']"></component>
         </div>
         <div class="text-xs stroke-2">{{ option.name }}</div>
       </div>
     </div>
-    <div class="relative w-full h-10 mt-1" v-show="!hide">
+    <div class="relative w-full h-10 mt-1">
       <input class="
           block
           px-2.5
@@ -47,8 +47,8 @@
           appearance-none
           focus:outline-none focus:ring-0
           peer
-        " :label="props.label" @input="$emit('update:optionName', $event.target.value)" :name="props.name"
-        :id="props.id" autocomplete="off" :placeholder="props.placeholder" />
+        " :label="props.label" @input="handleOptionNameInput($event)" :name="props.name" :id="props.id"
+        autocomplete="off" :placeholder="props.placeholder" />
       <label class="
           absolute
           text-sm text-gray-500
@@ -97,7 +97,7 @@
         " v-for="option in displayedOptions" :key="option.id" @click="selectOption(option)">
         <span class="text-sm text-blue-600">{{ option.name }}</span>
         <span class="text-xs text-gray-400"
-          v-if="typeof option.description !== 'undegined'">{{ option.description }}</span>
+          v-if="typeof option?.description !== 'undefined'">{{ option.description }}</span>
       </div>
     </div>
     <div v-if="!optionsDropdown" class="
@@ -123,6 +123,12 @@ import { ref, watch, onMounted } from "vue";
 import * as OutlineIcons from "@heroicons/vue/24/outline";
 import Input from "./inputs/Input.vue";
 
+export interface OptionsInterface {
+  id?: string | undefined | number;
+  name?: string | undefined;
+  description?: string | undefined | number;
+}
+
 const emit = defineEmits([
   "update:optionId",
   "update:optionName",
@@ -131,11 +137,11 @@ const emit = defineEmits([
 
 const optionsDropdown = ref(false);
 
-const displayedOptions = ref([]);
+const displayedOptions = ref<any[]>([]);
 
-const selectedOptions = ref([]);
+const selectedOptions = ref<OptionsInterface[]>([]);
 
-const selectOption = (option) => {
+const selectOption = (option: OptionsInterface) => {
   optionsDropdown.value = false;
   if (!selectedOptions.value.includes(option))
     selectedOptions.value.push(option);
@@ -143,6 +149,13 @@ const selectOption = (option) => {
   emit("update:optionName", option.name);
   emit("update:optionsSelected", selectedOptions.value);
 };
+
+const handleOptionIdInput = (e: Event) => {
+  emit("update:optionId", (e.target as HTMLInputElement).value);
+}
+const handleOptionNameInput = (e: Event) => {
+  emit("update:optionName", (e.target as HTMLInputElement).value);
+}
 
 const props = defineProps({
   id: {
@@ -166,12 +179,6 @@ const props = defineProps({
   label: {
     type: String,
   },
-  optionId: {
-    type: [String, Number, Array],
-  },
-  optionName: {
-    type: [String, Number, Array],
-  },
   modelValue: {
     type: [String, Number, Array],
     default: "",
@@ -187,15 +194,17 @@ const props = defineProps({
 watch(
   () => props.optionName,
   (optionName) => {
-    displayedOptions.value = props.options.filter((item) =>
-      item.name.toLowerCase().includes(optionName)
-    );
+    if (typeof props?.options !== 'undefined') {
+      displayedOptions.value = props.options.filter((item: OptionsInterface) =>
+        item?.name?.toLowerCase().includes(optionName ?? '')
+      );
+    }
     if (optionsDropdown.value === false) optionsDropdown.value = true;
   }
 );
 
 onMounted(() => {
-  displayedOptions.value = props.options;
+  // if (typeof props?.options !== 'undefined') displayedOptions.value = props.options;
 });
 </script>
   

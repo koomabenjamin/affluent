@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <th></th>
-          <th v-for="column in columns" :key="column" class="capitalize text-left text-sm h-10">{{ column.replace(/_/g, " ") }}</th>
+          <th v-for="column in columns" :key="column" class="capitalize text-left text-sm h-10">{{ removeSpecialCharacter(column) }}</th>
           <th class="text-left" v-if="actions">
             <!--SLOT FOR CUSTOM ACTIONS FOR ANY COMPONENT THAT USES THE DATATABLE-->
             <slot name="actions"></slot>
@@ -20,10 +20,10 @@
           <slot name="actions"></slot>
         </td>
       </tr>
-      <tfoot v-if="rows?.length > 10">
+      <tfoot v-if="(rows?.length ?? 0) > 10">
         <tr>
           <th></th>
-          <th v-for="column in columns" :key="column" class="capitalize text-sm text-left h-10">{{ column.replace(/_/g, " ") }}</th>
+          <th v-for="column in columns" :key="column" class="capitalize text-sm text-left h-10">{{ removeSpecialCharacter(column) }}</th>
         </tr>
       </tfoot>
     </table>
@@ -36,17 +36,21 @@ import { computed } from 'vue';
 import NoData from './NoData.vue';
 
 export interface DataTableProps {
-  rows?: any[];
+  rows?: any[] | undefined;
   columns?: string[] | number[] | object;
   columnCount?: number;
   actions?: boolean;
 }
 
+const removeSpecialCharacter = (name: string): string => {
+  return name.replace(/_/g, " ")
+} 
+
 const props = defineProps<DataTableProps>();
 
 const getRowId = (id: string) => parseInt(id) + 1;
 
-const columnCount = computed(() => props.columns?.length);
+// const columnCount = computed(() => props.columns?.length);
 </script>
 
 <style></style>

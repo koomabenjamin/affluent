@@ -1,7 +1,7 @@
 <template>
   <SlideInModal :isModalOpen="props.open" @close="close">
     <template #body>
-        <form @submit.prevent="register(credentials)" class="flex flex-col space-y-2">
+        <form class="flex flex-col space-y-2">
           <div class="mt-2 grid gap-4 w-full grid-cols-2">
                 <div>
                   <Input
@@ -9,6 +9,8 @@
                     :error="loanResponseError.loan_amount"
                     v-model="loanRequest.loan_amount"
                     label="Loan Amount"
+                    icon="heroicons:envelope"
+                    :icon-size="25"
                   />
                 </div>
                 <div>
@@ -17,6 +19,8 @@
                     :error="loanResponseError.repayment_period"
                     v-model="loanRequest.repayment_period"
                     label="Repayment Period"
+                    icon="heroicons:envelope"
+                    :icon-size="25"
                   />
                 </div>
                 <div>
@@ -25,6 +29,8 @@
                     :error="loanResponseError.issue_date"
                     v-model="loanRequest.issue_date"
                     label="Expected Due-date"
+                    icon="heroicons:envelope"
+                    :icon-size="25"
                   />
                 </div>
                 <div>
@@ -33,6 +39,8 @@
                     :error="loanResponseError.interest_rate"
                     v-model="loanRequest.interest_rate"
                     label="Interest Rate (%)"
+                    icon="heroicons:envelope"
+                    :icon-size="25"
                   />
                 </div>
                 <!-- <div> -->
@@ -40,18 +48,21 @@
                     v-model:option-id="loanRequest.collateral"
                     v-model:option-name="loanRequest.collateralValue"
                     label="Collateral"
-                    :options="collateralOptions"
+                    :options="[]"
                     :id="`collateral-select`"
                   />
                   <Input 
                     :error="loanResponseError.collateral"
                     v-model="loanRequest.collateral" 
-                    label="Collateral" />
+                    label="Collateral"
+                    icon="heroicons:envelope"
+                    :icon-size="25"
+                  />
                 <!-- </div> -->
               </div>
 
               <div class="mt-4">
-                <Button label="Confirm" :loader="loanBeingSaved" />
+                <Button label="Confirm" :loader="groupBeingSaved" />
               </div>
         </form>
     </template>
@@ -74,13 +85,36 @@ import {
 } from "@heroicons/vue/24/outline";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import MasterPage from "../../shared/MasterPage.vue";
-import {
-  GroupCreationRequest,
-  GroupCreationResponse,
-  GroupCreationResponseError
-} from "@/types";
 
 import useAuthentication from "@/composables/auth";
+
+export interface CreateGroupModalProps {
+  open?: boolean | undefined;
+}
+
+export interface GroupCreationResponse {
+  message: string;
+  errors?: object;
+  status?: string;
+  data?: object | any;
+}
+
+export interface GroupCreationResponseError {
+  email?: string,
+  name?: string,
+}
+
+export interface GroupCreationRequest {
+  name: string;
+  description: string;
+  email: string;
+  phone_number: string,
+  account_number: string;
+  initial_account_balance: string;
+  contract_start_date: string;
+  contract_end_date: string;
+  status: number;
+}
 
 const { register, errorMessages, authLoader } = useAuthentication();
 
@@ -125,20 +159,20 @@ const loanResponseError = reactive({
 });
 
 const saveLoan = async () => {
-  loanBeingSaved.value = true;
+  // loanBeingSaved.value = true;
   try {
     
     const response = await customAxios.post("/loans/store_member_loan", loanRequest);
  
   } catch (error) {
-    console.log(error.response.data)
-    if(error.response.data.hasOwnProperty('errors')) Object.assign(loanResponseError, error.response.data.errors);
-    console.log(loanResponseError)
+    // console.log(error.response.data)
+    // if(error.response.data.hasOwnProperty('errors')) Object.assign(loanResponseError, error.response.data.errors);
+    // console.log(loanResponseError)
 
   } finally {
 
-    loanBeingSaved.value = false;
-    loanStore.fetchMemberLoans();
+    groupBeingSaved.value = false;
+    groupStore.fetchGroups();
   }
   // closeModal();
 };

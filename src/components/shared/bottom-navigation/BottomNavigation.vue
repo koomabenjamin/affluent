@@ -1,6 +1,6 @@
 <template>
       <div
-      :class="`${primary} h-auto py-1 fixed bottom-0 inset-x-0 flex items-center justify-between px-4 text-black lg:hidden border-t`">
+      :class="`${primaryColour} h-auto py-1 fixed bottom-0 inset-x-0 flex items-center justify-between px-4 text-black lg:hidden border-t`">
       <div class="flex flex-col items-center h-16 w-16 rounded-lg p-1 hover:bg-blue-600 hover:text-white">
         <NewspaperIcon class="w-12 stroke-1" />
         <span class="text-xs">Dasboard</span>
@@ -24,14 +24,11 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 export interface BottomNavigationProps{
-  primaryColour?: Error[] | undefined;
+  primaryColour?: string | undefined;
 }
-
-const
-
-const props = defineProps<InputProps>();
+const props = defineProps<BottomNavigationProps>();
 </script>
 
 <style>

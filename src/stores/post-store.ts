@@ -1,10 +1,15 @@
 import { defineStore } from "pinia";
 import { customAxios } from "../composables/axios";
 
+export interface IState {
+  posts: any[];
+  loadingPosts: boolean;
+}
+
 export const usePostStore = defineStore("GroupStrore", {
-  state: () => {
+  state: (): IState => {
     return {
-      posts: [],
+      posts:[],
       loadingPosts: false,
     }
   },
@@ -16,7 +21,7 @@ export const usePostStore = defineStore("GroupStrore", {
       this.posts = data.data;
       this.loadingPosts = false;
     },
-    async savePost(post) {
+    async savePost(post:any) {
       this.posts.push(post);
     },
   }
