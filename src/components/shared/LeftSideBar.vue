@@ -116,6 +116,7 @@
         <ChevronRightIcon class="h-5 w-5" />
       </button>
       <button @click="updateActiveBoard('groups')"
+      v-if="1 === 0"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'groups' }" class="
           flex
           w-full

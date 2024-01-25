@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col col-span-2 mt-16 items-center space-y-2 px-3 rounded border h-auto pb-3">
+  <div class="flex flex-col col-span-2 mt-4 items-center space-y-2 px-3 rounded border h-auto pb-3">
     <div class="text-base font-bold text-left w-full mb-2 border-b p-2 h-10">Personal Information</div>
-    <div class="w-full grid grid-cols-2 gap-1">
+    <div class="w-full grid md:grid-cols-2 gap-1">
       <div>
         <Input type="text" label="First Name" v-model="user.first_name" />
       </div>

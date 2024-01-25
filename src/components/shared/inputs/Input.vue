@@ -28,7 +28,7 @@
       <label 
         :class="`
           absolute 
-          text-md
+          text-sm
           duration-150 
           transform 
           -translate-y-4 
@@ -45,7 +45,7 @@
       >
         {{props.label}}
       </label>
-      <div class="absolute top-5 right-2">
+      <div class="absolute top-5 right-2" v-if="type !== 'date'">
         <Icon :icon="props.icon" :width="props.iconSize"/>
       </div>
     </div>

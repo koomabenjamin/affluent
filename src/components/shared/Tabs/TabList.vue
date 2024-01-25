@@ -1,5 +1,5 @@
 <template>
-  <div class="w-auto flex items-center overflow-auto divide-x my-4">
+  <div class="w-auto flex items-center overflow-auto divide-x mt-2 border rounded">
     <Tab
       v-for="tab in props.tabs"
       :key="tab"

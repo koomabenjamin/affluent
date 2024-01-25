@@ -29,27 +29,27 @@
     </div>
     <div
       :class="`${primary} h-auto py-1 fixed bottom-0 inset-x-0 flex items-center justify-between px-4 text-black lg:hidden border-t`">
-      <div class="flex flex-col items-center h-16 w-16 rounded p-1 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('')">
         <NewspaperIcon class="w-12 stroke-1" />
         <span class="text-xs">Dashboard</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded p-1 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('groups')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('groups')" v-if="1 === 0">
         <UserGroupIcon class="w-12 stroke-1" />
         <span class="text-xs">Groups</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded p-1 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('collections')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('collections')">
         <BanknotesIcon class="w-12 stroke-1" />
         <span class="text-xs">Collections</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded p-1 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('wallet')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('wallet')">
         <WalletIcon class="w-12 stroke-1" />
         <span class="text-xs">Wallet</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded p-1 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('loans')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('loans')">
         <CreditCardIcon class="w-12 stroke-1" />
         <span class="text-xs">Loans</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded p-1 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('settings')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('settings')">
         <CogIcon class="w-12 stroke-1" />
         <span class="text-xs">Settings</span>
       </div>
@@ -156,6 +156,7 @@
                     <ChevronRightIcon class="h-5 w-5" />
                   </button>
                   <button @click="updateActiveBoard('groups')"
+                  v-if="1 === 0"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'groups' }" class="
           flex
           w-full

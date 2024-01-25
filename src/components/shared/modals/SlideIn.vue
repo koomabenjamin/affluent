@@ -28,7 +28,8 @@
           >
             <DialogPanel
               class="
-                w-1/2
+                lg:w-1/2
+                max-w-2xl
                 h-screen
                 transform
                 overflow-hidden

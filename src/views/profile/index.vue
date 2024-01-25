@@ -11,19 +11,22 @@
         <p class="text-slate-500 text-base">@koomaBenjamin</p>
       </div>
       <!-- <hr class="my-2 w-full"/> -->
-      <div class="w-full grid grid-cols-3 gap-1 space-x-0.5">
-        <div
-          class="flex flex-col justify-start mt-16 h-[198px] items-start rounded divide-y border ">
+      <div class="w-full flex flex-col space-x-0.5">
+        <div class="mt-16">
+          <TabList :tabs="tabs" v-model="activeTab"/>
+        </div>
+        <!-- <div
+          class="flex justify-start mt-16 items-start rounded border ">
           <div 
-          :class="{ 'bg-slate-100': activeTab === 'personalInformation'}"
+          :class="`${ 'bg-slate-100': activeTab === 'personalInformation'}`"
           @click="switchInformationTabs('personalInformation')"
-            class="font-semibold text-lg flex items-center space-x-5 w-full h-10 relative cursor-pointer">
+            class="font-semibold text-lg flex items-center space-x-5 w-full h-10 relative cursor-pointer px-2">
             <span 
               :class="{ 'bg-blue-600': activeTab === 'personalInformation'}"
-              class="absolute h-full w-1  left-0 inset-y-0">
+              class="absolute h-full w-1 left-0 inset-y-0">
             </span>
             <UserIcon class="h-5 text-slate-300" />
-            <span class="text-sm font-normal">Personal Information</span>
+            <span class="text-sm font-normal whitespace-nowrap">Personal Information</span>
           </div>
           <div 
           :class="{ 'bg-slate-100': activeTab === 'groups'}"
@@ -69,7 +72,7 @@
             <UserIcon class="h-5 text-slate-300" />
             <span class="text-sm font-normal">Socials</span>
           </div>
-        </div>
+        </div> -->
         <UpdatePersonalInformation v-if="activeTab === 'personalInformation'"/>
         <UpdatePersonalGroups v-if="activeTab === 'groups'"/>
       </div>
@@ -77,7 +80,7 @@
   </MasterPage>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive } from 'vue';
 import {
   UserIcon,
@@ -92,10 +95,13 @@ import Button from '@/components/shared/Button.vue';
 import UpdatePersonalInformation from '@/components/forms/profile/UpdatePersonalInformation.vue';
 import UpdatePersonalGroups from '@/components/forms/profile/UpdatePersonalGroups.vue';
 import MasterPage from "@/components/shared/Container.vue";
+import TabList from "@/components/shared/Tabs/TabList.vue";
 
 const activeTab = ref('personalInformation');
 
-const switchInformationTabs = (tab) => activeTab.value = tab; 
+const switchInformationTabs = (tab:string):string => activeTab.value = tab; 
+
+const tabs: string[] = ['Personal', 'Accounts', 'Address', 'Socials'];
 
 </script>
 
