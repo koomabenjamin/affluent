@@ -21,6 +21,7 @@
     </tr>
     <tfoot>
       <tr>
+        <th></th>
         <th v-for="column in columns" :key="column" class="capitalize text-sm text-left h-10">{{ column.replace(/_/g, " ") }}</th>
       </tr>
     </tfoot>

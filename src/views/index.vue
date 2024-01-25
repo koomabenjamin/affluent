@@ -22,9 +22,11 @@ const selectedTab = ref<string>(tabs?.[0]);
       <!-- left hand tabs -->
       <TabList :tabs="tabs" v-model="selectedTab"/>
 
-      <div v-if="selectedTab === 'Summary'" class="pt-8">
+      <div v-if="selectedTab === 'Summary'" class="py-8">
         <!-- graph -->
-        <SummaryChart />
+        <div class="my-4">
+          <SummaryChart />
+        </div>
         <!-- card -->
         <div class="w-full h-full p-0 flex flex-col space-y-2">
           <div class="
@@ -33,7 +35,7 @@ const selectedTab = ref<string>(tabs?.[0]);
               no-scroll-bar
               overflow-auto
               grid 
-              grid-cols-3
+              lg:grid-cols-3
               gap-2
             ">
             <!-- TODO: convert the cards below to a shared dynamic component -->
