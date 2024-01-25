@@ -3,10 +3,17 @@
     <template #body>
         <form @submit.prevent="register(credentials)" class="flex flex-col space-y-2">
           <div class="w-full flex space-x-2">
-            <Input class="w-1/2" type="text" :errors="errorMessages.email" v-model="credentials.first_name" required
-              name="first_name" label="First Name" icon="MailIcon" />
-            <Input class="w-1/2" type="text" :errors="errorMessages.email" v-model="credentials.last_name" required
-              name="last_name" label="Last Name" icon="KeyIcon" />
+            <Input  
+              type="text" 
+              :errors="errorMessages.email" 
+              v-model="credentials.first_name" 
+              required
+              name="first_name" 
+              label="First-Name" 
+              icon="heroicons:user" :icon-size="25"
+            />
+            <Input type="text" :errors="errorMessages.email" v-model="credentials.last_name" required
+              name="last_name" label="Last Name" icon="heroicons:user" :icon-size="25" />
           </div>
           <div class="flex w-full space-x-2">
             <Input type="text" :errors="errorMessages.password" v-model="credentials.username" required name="username"
@@ -33,7 +40,7 @@
             <Input type="text" :errors="errorMessages.password" v-model="credentials.city" required name="city"
               label="City" icon="LocationMarkerIcon" />
           </div>
-          <Button label="Signup" :loader="authLoader" />
+          <Button label="Signup" :loader="authLoader" size="block"/>
         </form>
     </template>
   </SlideInModal>

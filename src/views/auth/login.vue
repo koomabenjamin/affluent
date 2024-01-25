@@ -25,7 +25,8 @@ const credentials = reactive({
     center">
 
     <form @submit.prevent="login(credentials)" class="
-        w-1/3 
+        sm:w-1/2
+        lg:w-1/3
         mx-auto 
         flex 
         flex-col 

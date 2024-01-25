@@ -13,9 +13,9 @@ const opt = ref('')
 
 <template>
   <div class="flex w-screen h-screen center bg-blue-50">
-    <div class="w-1/2"></div>
+    <div class="w-1/5 px-5 flex justify-center"></div>
     <form @submit.prevent="twoFactorCodeConfirmation(opt)"
-      class="w-1/3 mx-auto flex flex-col items-center space-y-4 h-auto p-5 shadow bg-white rounded">
+      class="sm:w-1/3 w-full sm:mx-auto  flex flex-col items-center space-y-4 h-auto p-5 shadow bg-white rounded">
       <p class="h1 text-left w-full my-4">HFMSG</p>
       <span class="text-slate-500 w-full text-left my-2">
         Welcome back awesome user, please enter your email and password.
