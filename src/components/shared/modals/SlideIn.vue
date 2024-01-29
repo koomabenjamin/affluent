@@ -57,10 +57,9 @@
                 "
               >
                 <div class="flex flex-col">
-                  <span>Group Request</span>
+                  <span>{{ title }}</span>
                   <span class="text-xs text-gray-500"
-                    >Use this form to submit a group request to a sacco that you
-                    are connected to.</span
+                    >{{ description }}</span
                   >
                 </div>
                 <XCircleIcon

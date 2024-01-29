@@ -1,10 +1,13 @@
 <template>
-  <create-group :open="showCreateGroupModal" @close="closeCreateGroupModal()"></create-group>
+  <AddMemberCollection :open="showCreateGroupModal" @close="closeCreateGroupModal()" />
 
   <Container>
     <div class="w-full flex items-center justify-between mt-5">
       <div class="text-xl font-bold">Collections</div>
-      <Button label="Create New Loan" size="md" @click="closeCreateGroupModal()" />
+      <div class="flex items-center space-x-2">
+        <Button label="Add New Collection" size="md" @click="closeCreateGroupModal()" />
+        <Button label="Bulk Collection Upload" size="md" @click="closeCreateGroupModal()" />
+      </div>
     </div>
 
     <DataTable :rows="loans" :columns="columns" :column-count="4"/>
@@ -18,7 +21,7 @@ import { storeToRefs } from "pinia";
 import { useLoanStore } from "../../stores/loan-store";
 
 import Container from "@/components/shared/Container.vue";
-import CreateGroup from "@/components/forms/loans/CreateNewLoan.vue";
+import AddMemberCollection from "@/components/forms/collections/AddMemberCollection.vue";
 import Button from "@/components/shared/Button.vue";
 import DataTable from "@/components/shared/DataTable.vue";
 
