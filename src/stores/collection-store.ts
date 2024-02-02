@@ -1,28 +1,30 @@
 import { defineStore } from "pinia";
-import { customAxios } from "../composables/axios";
+import { CollectionService } from "@/services/collection.service";
+// import { CollectionPayload, CollectionRequest } from "@/types/collections/index";
 
 export interface IState {
-  posts: any[];
+  collections: any[];
   loadingCollections: boolean;
 }
 
 export const useCollectionStore = defineStore("collectionStore", {
   state: (): IState => {
     return {
-      posts:[],
+      collections: [],
       loadingCollections: false,
     }
   },
   getters: {},
   actions: {
     async fetchCollections() {
-      if(!this.loadingCollections) this.loadingCollections = true;
-      const { data } = await customAxios.get('/posts');
-      this.posts = data.data;
+      if (!this.loadingCollections) this.loadingCollections = true;
+      // const { data } = await customAxios.get('/collections');
+      // this.collections = data.data;
       this.loadingCollections = false;
     },
-    async saveCollection(post:any) {
-      this.posts.push(post);
+    async saveCollection(collection: CollectionRequest) {
+      const response: CollectionPayload = await new CollectionService().save(collection);
+      this.collections = response;
     },
   }
 })

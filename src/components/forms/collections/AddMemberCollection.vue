@@ -1,27 +1,29 @@
 <template>
-  <SlideInModal :isModalOpen="props.open" @close="close" title="Add Member Collection" description="Use this form to input a member's collection for the specified period of time.">
+  <SlideInModal :isModalOpen="props.open" @close="closeModal()" title="Add Member Collection"
+    description="Use this form to input a member's collection for the specified period of time.">
     <template #body>
-      <form class="flex flex-col space-y-2">
+      <div class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
-            <Input type="text" :error="collectionResponseError.member" v-model="collectionRequest.member"
-              label="Member" icon="heroicons:user" :icon-size="25" />
+            <Input type="text" :error="collectionResponseError.member" v-model="collectionRequest.member" label="Member"
+              icon="heroicons:user" :icon-size="25" />
           </div>
           <div>
             <Input type="month" :error="collectionResponseError.period" v-model="collectionRequest.period"
-              label="Period paid For:" />
+              label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="collectionResponseError.amount" v-model="collectionRequest.amount"
-              label="Amount" icon="heroicons:banknote" :icon-size="25" />
+            <Input type="number" :error="collectionResponseError.amount" v-model="collectionRequest.amount" label="Amount"
+              icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="collectionResponseError.account_paid_from" v-model="collectionRequest.account_paid_from"
-              label="From Account:" icon="heroicons:banknote" :icon-size="25" />
+            <Input type="number" :error="collectionResponseError.account_paid_from"
+              v-model="collectionRequest.account_paid_from" label="From Account:" icon="heroicons:banknote"
+              :icon-size="25" />
           </div>
           <div>
-            <Input type="text" :error="collectionResponseError.account_paid_to" v-model="collectionRequest.account_paid_to"
-              label="To Account:" icon="heroicons:banknote" :icon-size="25" />
+            <Input type="text" :error="collectionResponseError.account_paid_to"
+              v-model="collectionRequest.account_paid_to" label="To Account:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
             <Input type="text" :error="collectionResponseError.payment_method" v-model="collectionRequest.payment_method"
@@ -38,9 +40,9 @@
         </div>
 
         <div class="mt-4">
-          <Button label="Confirm" :loader="collectionBeingSaved" size="block" />
+          <Button label="Confirm" :loader="collectionBeingSaved" size="block" @click="saveCollection()"/>
         </div>
-      </form>
+      </div>
     </template>
   </SlideInModal>
 </template>
@@ -68,30 +70,6 @@ export interface CreateGroupModalProps {
   open?: boolean | undefined;
 }
 
-export interface GroupCreationResponse {
-  message: string;
-  errors?: object;
-  status?: string;
-  data?: object | any;
-}
-
-export interface GroupCreationResponseError {
-  email?: string,
-  name?: string,
-}
-
-export interface GroupCreationRequest {
-  name: string;
-  description: string;
-  email: string;
-  phone_number: string,
-  account_number: string;
-  initial_account_balance: string;
-  contract_start_date: string;
-  contract_end_date: string;
-  status: number;
-}
-
 const { register, errorMessages, authLoader } = useAuthentication();
 
 export interface CreateGroupModalProps {
@@ -100,26 +78,24 @@ export interface CreateGroupModalProps {
 
 const props = defineProps<CreateGroupModalProps>();
 const emit = defineEmits(['close'])
-const close = () => emit('close');
+const closeModal = () => emit('close');
 
 const user = ref(null);
 const collectionStore = useCollectionStore();
-const { collections, loadingGroups } = storeToRefs(collectionStore);
+const { collections, loadingCollections } = storeToRefs(collectionStore);
 const collectionBeingSaved = ref(false);
 const _errorMessages = ref<GroupCreationResponseError>({});
 
 const collectionRequest = reactive({
-  user_name: "",
-  collection_amount: "",
-  interest_rate: "",
-  interest_amount: 100020,
-  total_collection_debt: "",
-  date_of_disbursment: "",
-  expiry_date: "",
-  collateral: "",
-  collateralValue: "",
-  issue_date: "",
-  repayment_period: "",
+  group: "",
+  member: "",
+  period: "",
+  amount: "",
+  account_paid_from: 100020,
+  account_paid_to: "",
+  payment_method: "",
+  payment_date: "",
+  payment_note: "",
 });
 const collectionResponseError = reactive({
   user_name: "",
@@ -134,23 +110,8 @@ const collectionResponseError = reactive({
   repayment_period: "",
 });
 
-const saveLoan = async () => {
-  // collectionBeingSaved.value = true;
-  try {
-
-    const response = await customAxios.post("/collections/store_member_collection", collectionRequest);
-
-  } catch (error) {
-    // console.log(error.response.data)
-    // if(error.response.data.hasOwnProperty('errors')) Object.assign(collectionResponseError, error.response.data.errors);
-    // console.log(collectionResponseError)
-
-  } finally {
-
-    collectionBeingSaved.value = false;
-    collectionStore.fetchCollections();
-  }
-  // closeModal();
+const saveCollection = async () => {
+  await collectionStore.saveCollection(collectionRequest);
 };
 </script>
 
