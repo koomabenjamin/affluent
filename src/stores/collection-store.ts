@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { CollectionService } from "@/services/collection.service";
-// import { CollectionPayload, CollectionRequest } from "@/types/collections/index";
+import type { CollectionPayload, CollectionRequest } from "@/types";
 
 export interface IState {
   collections: any[];
@@ -16,13 +16,13 @@ export const useCollectionStore = defineStore("collectionStore", {
   },
   getters: {},
   actions: {
-    async fetchCollections() {
+    async fetchAll(group: string | number) {
       if (!this.loadingCollections) this.loadingCollections = true;
-      // const { data } = await customAxios.get('/collections');
-      // this.collections = data.data;
+      const data = await new CollectionService().fetchAll(group);
+      this.collections = data;
       this.loadingCollections = false;
     },
-    async saveCollection(collection: CollectionRequest) {
+    async save(collection: CollectionRequest) {
       const response: CollectionPayload = await new CollectionService().save(collection);
       this.collections = response;
     },

@@ -111,7 +111,7 @@ const collectionResponseError = reactive({
 });
 
 const saveCollection = async () => {
-  await collectionStore.saveCollection(collectionRequest);
+  await collectionStore.save(collectionRequest);
 };
 </script>
 
