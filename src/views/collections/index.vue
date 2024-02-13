@@ -11,6 +11,14 @@
     </div>
 
     <DataTable :rows="collections" :columns="columns" :column-count="4" data-group-name="collections"/>
+
+    <div>
+      <Icon
+        icon="svg-spinners:180-ring-with-bg"
+        class="text-blue-600"
+        width="20"
+        v-if="loadingCollections" />
+    </div>
     
   </Container>
 </template>
@@ -19,6 +27,7 @@
 import { ref, onBeforeMount } from "vue";
 import { storeToRefs } from "pinia";
 import { useCollectionStore } from "../../stores/collection-store";
+import { Icon } from "@iconify/vue";
 import Container from "@/components/shared/Container.vue";
 import AddMemberCollection from "@/components/forms/collections/AddMemberCollection.vue";
 import Button from "@/components/shared/Button.vue";
@@ -28,7 +37,7 @@ const collectionStore = useCollectionStore();
 
 const { collections, loadingCollections } = storeToRefs(collectionStore);
 
-const columns = ref<string[]>([ 'name', 'email', 'groups', 'created at',]);
+const columns = ref<string[]>([ 'member', 'account_paid_from', 'account_paid_to', 'amount', 'period', 'payment_date', 'created_by', 'created_at']);
 
 const columnCount = ref<Number>(columns.value.length)
 

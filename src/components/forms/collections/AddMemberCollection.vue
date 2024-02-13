@@ -87,7 +87,7 @@ const collectionBeingSaved = ref(false);
 const _errorMessages = ref<GroupCreationResponseError>({});
 
 const collectionRequest = reactive({
-  group: "",
+  group: 1,
   member: "",
   period: "",
   amount: "",
