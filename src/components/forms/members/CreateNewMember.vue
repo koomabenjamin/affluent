@@ -1,47 +1,50 @@
 <template>
-  <SlideInModal :isModalOpen="props.open" @close="close()">
+  <SlideInModal :isModalOpen="props.open" @close="close()" title="Loan Request"
+    description="Use this form to input a member's loan for the specified period of time.">
     <template #body>
-        <form @submit.prevent="register(credentials)" class="flex flex-col space-y-2">
-          <div class="w-full flex space-x-2">
-            <Input  
-              type="text" 
-              :errors="errorMessages.email" 
-              v-model="credentials.first_name" 
-              required
-              name="first_name" 
-              label="First-Name" 
-              icon="heroicons:user" :icon-size="25"
-            />
-            <Input type="text" :errors="errorMessages.email" v-model="credentials.last_name" required
-              name="last_name" label="Last Name" icon="heroicons:user" :icon-size="25" />
-          </div>
-          <div class="flex w-full space-x-2">
-            <Input type="text" :errors="errorMessages.password" v-model="credentials.username" required name="username"
-              label="Username" icon="UserIcon" />
-          </div>
-          <div class="w-full flex space-x-2">
-            <Input class="w-1/2" type="email" :errors="errorMessages.email" v-model="credentials.email" required
-              name="email" label="Email" icon="MailIcon" />
-            <Input class="w-1/2" type="number" :errors="errorMessages.password" v-model="credentials.phone_number"
-              required name="phone_number" label="Phone Number" icon="PhoneIcon" />
-          </div>
-          <div class="w-full flex space-x-2">
-            <Input class="w-1/2" type="password" :errors="errorMessages.password" v-model="credentials.password" required
-              name="password" label="Password" icon="KeyIcon" />
-            <Input class="w-1/2" type="password" :errors="errorMessages.password"
-              v-model="credentials.password_confirmation" required name="password" label="Confirm Password"
-              icon="KeyIcon" />
-          </div>
-          <div class="w-full flex space-x-2">
-            <Input type="text" :errors="errorMessages.password" v-model="credentials.country" required name="country"
-              label="Country" icon="LocationMarkerIcon" />
-            <Input type="text" :errors="errorMessages.password" v-model="credentials.state" required name="state"
-              label="State" icon="LocationMarkerIcon" />
-            <Input type="text" :errors="errorMessages.password" v-model="credentials.city" required name="city"
-              label="City" icon="LocationMarkerIcon" />
-          </div>
-          <Button label="Signup" :loader="authLoader" size="block"/>
-        </form>
+      <form @submit.prevent="register(credentials)" class="flex flex-col space-y-2">
+        <div>
+          <Input type="text" :error="credentials.first_name" v-model="credentials.first_name" label="First Name"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="text" :error="credentials.last_name" v-model="credentials.last_name" label="Last Name"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="number" :error="credentials.phone_number" v-model="credentials.phone_number" label="Phone Number"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="text" :error="credentials.username" v-model="credentials.username" label="Username"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="email" :error="credentials.email" v-model="credentials.email" label="Email"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="password" :error="credentials.password" v-model="credentials.password" label="Password"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="password" :error="credentials.password_confirmation" v-model="credentials.password_confirmation" label="Password Confirmation"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="text" :error="credentials.country" v-model="credentials.country" label="Country"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="text" :error="credentials.state" v-model="credentials.state" label="State"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <div>
+          <Input type="text" :error="credentials.city" v-model="credentials.city" label="City"
+            icon="heroicons:user" :icon-size="25" />
+        </div>
+        <Button label="Signup" :loader="authLoader" size="block" />
+      </form>
     </template>
   </SlideInModal>
 </template>
@@ -50,7 +53,7 @@
 import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { customAxios } from "../../../composables/axios";
-import { useGroupStore } from "../../../stores/group-store";
+import { useMemberStore } from "../../../stores/member-store";
 import Input from "../../shared/inputs/Input.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
@@ -61,84 +64,27 @@ import {
   PlusIcon,
 } from "@heroicons/vue/24/outline";
 import TextArea from "../../shared/inputs/TextArea.vue";
-import MasterPage from "../../shared/MasterPage.vue";
 import useAuthentication from "@/composables/auth";
-
-export interface CreateGroupModalProps {
-  open?: boolean | undefined;
-}
-
-export interface GroupCreationResponse {
-  message: string;
-  errors?: object;
-  status?: string;
-  data?: object | any;
-}
-
-export interface GroupCreationResponseError {
-  email?: string,
-  name?: string,
-}
-
-export interface GroupCreationRequest {
-  name: string;
-  description: string;
-  email: string;
-  phone_number: string,
-  account_number: string;
-  initial_account_balance: string;
-  contract_start_date: string;
-  contract_end_date: string;
-  status: number;
-}
 
 const { register, errorMessages, authLoader } = useAuthentication();
 
-export interface CreateGroupModalProps {
+export interface CreateMemberModalProps {
   open?: boolean | undefined;
 }
 
-const props = defineProps<CreateGroupModalProps>();
+const props = defineProps<CreateMemberModalProps>();
 const emit = defineEmits(['close'])
 const close = () => emit('close');
 
 const user = ref(null);
-const groupStore = useGroupStore();
-const { groups, loadingGroups } = storeToRefs(groupStore);
-const groupBeingSaved = ref(false);
-const _errorMessages = ref<GroupCreationResponseError>({});
+const memberStore = useMemberStore();
+const { members, loadingMembers } = storeToRefs(memberStore);
+const savingMember = ref(false);
 
 const credentials = reactive({
-  first_name: '',
-  last_name: '',
-  name: '',
-  phone_number: '',
-  username: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
-  country: '',
-  state: '',
-  city: '',
+  first_name: '', last_name: '', name: '', phone_number: '', username: '', email: '',
+  password: '', password_confirmation: '', country: '', state: '', city: '',
 });
-
-const saveGroup = async () => {
-  groupBeingSaved.value = true;
-  try {
-
-    const response: GroupCreationResponse = await customAxios.post('/groups', {});  //groupCreationRequest.value);
-    console.log(response);
-  } catch (error) {
-    const errors = {};  //error?.response?.data?.errors;
-    console.log(errors, error);
-    Object.assign(errorMessages.value, errors);
-  } finally {
-
-    loadingGroups.value = false;
-    groupStore.fetchGroups();
-    groupBeingSaved.value = false;
-  }
-};
 </script>
 
 <style></style>

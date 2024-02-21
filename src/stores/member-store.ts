@@ -12,7 +12,7 @@ export const useMemberStore = defineStore("MemberStore", {
   actions: {
     async fetchMembers() {
       if(!this.loadingMembers) this.loadingMembers = true;
-      const { data } = await customAxios.get('/users');
+      const { data } = await customAxios.get('/v1/users');
       this.members = data.data;
       this.loadingMembers = false;
     },

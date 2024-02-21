@@ -229,10 +229,10 @@
           p-2
         ">
         <div class="flex space-x-2 items-center">
-          <CogIcon class="h-6 w-6" />
+          <LifebuoyIcon class="h-6 w-6" />
           <div class="font-semibold text-xs">Help and Support</div>
         </div>
-        <LifebuoyIcon class="h-5 w-5" />
+        <ChevronRightIcon class="h-5 w-5" />
       </button>
       <button @click="updateActiveBoard('settings')"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'settings' }" class="
