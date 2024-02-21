@@ -67,7 +67,7 @@
         </div>
         <ChevronRightIcon class="h-5 w-5" />
       </button>
-      <button @click="updateActiveBoard('profile')"
+      <!-- <button @click="updateActiveBoard('profile')"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'profile' }" class="
           flex
           w-full
@@ -82,7 +82,7 @@
           <div class="font-semibold text-xs">Profile</div>
         </div>
         <ChevronRightIcon class="h-5 w-5" />
-      </button>
+      </button> -->
       <button @click="updateActiveBoard('loans')"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'loans' }" class="
           flex
@@ -148,7 +148,7 @@
         </div>
         <ChevronRightIcon class="h-5 w-5" />
       </button>
-      <button @click="updateActiveBoard('notifications')"
+      <!-- <button @click="updateActiveBoard('notifications')"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'notifications' }" class="
           flex
           w-full
@@ -163,7 +163,7 @@
           <div class="font-semibold text-xs">Notifications</div>
         </div>
         <ChevronRightIcon class="h-5 w-5" />
-      </button>
+      </button> -->
    
       <button @click="updateActiveBoard('reports')"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'reports' }" class="
@@ -218,6 +218,22 @@
 
     <!-- System controls -->
     <div class="mt-5 flex flex-col space-y-2">
+      <button @click="updateActiveBoard('support')"
+        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'support' }" class="
+          flex
+          w-full
+          h-10
+          rounded
+          items-center
+          justify-between
+          p-2
+        ">
+        <div class="flex space-x-2 items-center">
+          <CogIcon class="h-6 w-6" />
+          <div class="font-semibold text-xs">Help and Support</div>
+        </div>
+        <LifebuoyIcon class="h-5 w-5" />
+      </button>
       <button @click="updateActiveBoard('settings')"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'settings' }" class="
           flex
@@ -289,6 +305,7 @@ import {
   MagnifyingGlassIcon,
   BanknotesIcon,
   WalletIcon,
+  LifebuoyIcon
   // CheckBadgeIcon,
 } from '@heroicons/vue/24/outline';
 import useAuthentication from '../../composables/auth';
