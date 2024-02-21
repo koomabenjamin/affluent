@@ -40,7 +40,7 @@ const showCreateGroupModal = ref<boolean>(false);
 const closeCreateGroupModal = () => showCreateGroupModal.value = !showCreateGroupModal.value;
 
 onBeforeMount(() => {
-  loanStore.fetchLoans();
+  loanStore.fetchAll('1');
 });
 </script>
 

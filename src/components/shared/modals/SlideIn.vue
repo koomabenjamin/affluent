@@ -32,10 +32,11 @@
                 max-w-2xl
                 h-screen
                 transform
-                overflow-hidden
+                overflow-auto
                 rounded-none
                 bg-white
-                p-6
+                p-3
+                pb-20
                 text-left
                 align-middle
                 shadow-xl

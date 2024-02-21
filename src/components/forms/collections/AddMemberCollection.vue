@@ -72,10 +72,6 @@ export interface CreateGroupModalProps {
 
 const { register, errorMessages, authLoader } = useAuthentication();
 
-export interface CreateGroupModalProps {
-  open?: boolean | undefined;
-}
-
 const props = defineProps<CreateGroupModalProps>();
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
