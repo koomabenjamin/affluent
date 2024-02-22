@@ -5,57 +5,57 @@
       <div class="flex flex-col space-y-2 h-full">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
-            <Input type="number" :error="loanResponseError.member" v-model="loanRequest.member" label="Member"
+            <FloatingLabelInput type="number" :error="loanResponseError.member" v-model="loanRequest.member" label="Member"
               icon="heroicons:user" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.group" v-model="loanRequest.group"
+            <FloatingLabelInput type="number" :error="loanResponseError.group" v-model="loanRequest.group"
               label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.amount" v-model="loanRequest.amount" label="Amount"
+            <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount" label="Amount"
               icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.interest_rate"
+            <FloatingLabelInput type="number" :error="loanResponseError.interest_rate"
               v-model="loanRequest.interest_rate" label="Interest Rate:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.interest_amount"
+            <FloatingLabelInput type="number" :error="loanResponseError.interest_amount"
               v-model="loanRequest.interest_amount" label="Total Interest Amount:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.application_fee"
+            <FloatingLabelInput type="number" :error="loanResponseError.application_fee"
               v-model="loanRequest.application_fee" label="Application Fee:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.total_loan_debt" v-model="loanRequest.total_loan_debt"
+            <FloatingLabelInput type="number" :error="loanResponseError.total_loan_debt" v-model="loanRequest.total_loan_debt"
               label="Total Loan Debt:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="date" :error="loanResponseError.date_of_disbursement" v-model="loanRequest.date_of_disbursement"
+            <FloatingLabelInput type="date" :error="loanResponseError.date_of_disbursement" v-model="loanRequest.date_of_disbursement"
               label="Disbursement Date" icon="heroicons:calendar" :icon-size="25" />
           </div>
           <div>
-            <Input type="date" :error="loanResponseError.expiry_date" v-model="loanRequest.expiry_date"
+            <FloatingLabelInput type="date" :error="loanResponseError.expiry_date" v-model="loanRequest.expiry_date"
               label="Expiry Date" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.collateral" v-model="loanRequest.collateral"
+            <FloatingLabelInput type="number" :error="loanResponseError.collateral" v-model="loanRequest.collateral"
               label="Collateral" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <Input type="date" :error="loanResponseError.request_date" v-model="loanRequest.request_date"
+            <FloatingLabelInput type="date" :error="loanResponseError.request_date" v-model="loanRequest.request_date"
               label="Request Date" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.repayment_period" v-model="loanRequest.repayment_period"
+            <FloatingLabelInput type="number" :error="loanResponseError.repayment_period" v-model="loanRequest.repayment_period"
               label="Repayment Period" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="loanResponseError.repayment_period_type" v-model="loanRequest.repayment_period_type"
+            <FloatingLabelInput type="number" :error="loanResponseError.repayment_period_type" v-model="loanRequest.repayment_period_type"
               label="Repayment Period Type" icon="heroicons:pencil" :icon-size="25" />
           </div>
         </div>
@@ -73,7 +73,7 @@ import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useLoanStore } from "../../../stores/loan-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
-import Input from "../../shared/inputs/Input.vue";
+import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue"

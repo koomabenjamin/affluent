@@ -28,7 +28,7 @@ import {
   UserIcon,
 } from '@heroicons/vue/24/outline';
 import SummaryChart from "@/components/Metrics/SummaryChart.vue";
-import Input from '@/components/shared/inputs/Input.vue';
+import FloatingLabelInput from '@/components/shared/inputs/FloatingLabelInput.vue';
 import Button from '@/components/shared/Button.vue';
 import UpdatePersonalInformation from '@/components/forms/profile/UpdatePersonalInformation.vue';
 import UpdatePersonalGroups from '@/components/forms/profile/UpdatePersonalGroups.vue';

@@ -3,7 +3,7 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentication from '@/composables/auth';
-import Input from '../../components/shared/inputs/Input.vue';
+import FloatingLabelInput from '../../components/shared/inputs/FloatingLabelInput.vue';
 import Button from '../../components/shared/Button.vue';
 
 const { register, errorMessages, authLoader } = useAuthentication();
@@ -62,38 +62,38 @@ const credentials = reactive({
       </span>
       <div class="w-full flex space-x-2">
 
-        <Input label="First Name" icon=""/>
+        <FloatingLabelInput label="First Name" icon=""/>
 
-        <Input type="text" :errors="errorMessages?.email" 
+        <FloatingLabelInput type="text" :errors="errorMessages?.email" 
         v-model="credentials.last_name" required
           name="last_name" label="Last Name" icon="KeyIcon" />
 
       </div>
 
       <div class="flex w-full space-x-2">
-        <Input type="text" :errors="errorMessages?.password" v-model="credentials.username" required name="username"
+        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.username" required name="username"
           label="Username" icon="UserIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input type="email" :errors="errorMessages?.email" 
+        <FloatingLabelInput type="email" :errors="errorMessages?.email" 
         v-model="credentials.email" required name="email"
           label="Email" icon="MailIcon" />
 
-        <Input type="number" :errors="errorMessages?.password" v-model="credentials.phone_number" required
+        <FloatingLabelInput type="number" :errors="errorMessages?.password" v-model="credentials.phone_number" required
           name="phone_number" label="Phone Number" icon="PhoneIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input type="password" :errors="errorMessages?.password" v-model="credentials.password" required
+        <FloatingLabelInput type="password" :errors="errorMessages?.password" v-model="credentials.password" required
           name="password" label="Password" icon="KeyIcon" />
-        <Input type="password" :errors="errorMessages?.password" v-model="credentials.password_confirmation"
+        <FloatingLabelInput type="password" :errors="errorMessages?.password" v-model="credentials.password_confirmation"
           required name="password" label="Confirm Password" icon="KeyIcon" />
       </div>
       <div class="w-full flex space-x-2">
-        <Input type="text" :errors="errorMessages?.password" v-model="credentials.country" required name="country"
+        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.country" required name="country"
           label="Country" icon="LocationMarkerIcon" />
-        <Input type="text" :errors="errorMessages?.password" v-model="credentials.state" required name="state"
+        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.state" required name="state"
           label="State" icon="LocationMarkerIcon" />
-        <Input type="text" :errors="errorMessages?.password" v-model="credentials.city" required name="city" label="City"
+        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.city" required name="city" label="City"
           icon="LocationMarkerIcon" />
       </div>
       <p class="text-slate-400 w-full text-left my-2 font-semibold text-sm">By signing up, you accept the <span

@@ -8,10 +8,10 @@
         These are the names that will be used on formal documentation within the system and any other printed documents.
       </div>
       <div class="col-span-2">
-        <Input type="text" label="First Name" v-model="user.first_name" />
+        <FloatingLabelInput type="text" label="First Name" v-model="user.first_name" />
       </div>
       <div class="col-span-2">
-        <Input type="text" label="Last Name" v-model="user.last_name" />
+        <FloatingLabelInput type="text" label="Last Name" v-model="user.last_name" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Emails:</div>
@@ -20,7 +20,7 @@
         purposes within the system.
       </div>
       <div class="col-span-4">
-        <Input type="text" label="Email" v-model="user.email" />
+        <FloatingLabelInput type="text" label="Email" v-model="user.email" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Contacts:</div>
@@ -29,7 +29,7 @@
         verification for other purposes within the system.
       </div>
       <div class="col-span-4">
-        <Input type="text" label="Phone Number" v-model="user.phone_number" />
+        <FloatingLabelInput type="text" label="Phone Number" v-model="user.phone_number" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Account Username:</div>
@@ -37,7 +37,7 @@
         Register a unique username for your account as it will be displayed on the profile and portfolio.
       </div>
       <div class="col-span-4">
-        <Input type="text" label="username" v-model="user.username" />
+        <FloatingLabelInput type="text" label="username" v-model="user.username" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Resdential Information:</div>
@@ -45,13 +45,13 @@
         Please register a valid resdential address for proper follow-up or delivery of any document / parcel.
       </div>
       <div class="col-span-2">
-        <Input type="text" label="Country" v-model="user.country" />
+        <FloatingLabelInput type="text" label="Country" v-model="user.country" />
       </div>
       <div>
-        <Input type="text" label="City" v-model="user.city" />
+        <FloatingLabelInput type="text" label="City" v-model="user.city" />
       </div>
       <div>
-        <Input type="text" label="State" v-model="user.state" />
+        <FloatingLabelInput type="text" label="State" v-model="user.state" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Socials:</div>
@@ -59,19 +59,19 @@
         Please register a valid social media addresses as they will be used to sync some information.
       </div>
       <div class="col-span-4">
-        <Input type="text" label="FaceBook" v-model="user.country" />
+        <NormalInput type="text" label="FaceBook" v-model="user.country" icon="flat-color-icons:link" icon-size="20" />
       </div>
       <div class="col-span-4">
-        <Input type="text" label="X" v-model="user.city" />
+        <NormalInput type="text" label="X" v-model="user.city" icon="flat-color-icons:link" icon-size="20" />
       </div>
       <div class="col-span-4">
-        <Input type="text" label="Instagram" v-model="user.state" />
+        <NormalInput type="text" label="Instagram" v-model="user.state" icon="flat-color-icons:link" icon-size="20" />
       </div>
       <div class="col-span-4">
-        <Input type="text" label="Telegram" v-model="user.state" />
+        <NormalInput type="text" label="Telegram" v-model="user.state" icon="flat-color-icons:link" icon-size="20" />
       </div>
       <div class="col-span-4">
-        <Input type="text" label="Telegram" v-model="user.state" />
+        <NormalInput type="text" label="Telegram" v-model="user.state" icon="flat-color-icons:link" icon-size="20" />
       </div>
     </div>
     <Button label="UPDATE INFORMATION" size="lg" />
@@ -80,7 +80,8 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue';
-import Input from '@/components/shared/inputs/Input.vue';
+import NormalInput from '@/components/shared/inputs/Input.vue';
+import FloatingLabelInput from '@/components/shared/inputs/FloatingLabelInput.vue';
 import Button from '@/components/shared/Button.vue';
 
 const userInSession = sessionStorage.getItem('user');

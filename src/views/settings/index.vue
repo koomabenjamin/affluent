@@ -1,12 +1,12 @@
 <template>
   <Container>
-    <div class="flex flex-col p-5 w-full">
+    <div class="flex flex-col p-4 w-full">
       <div class="flex w-full space-x-2">
         <div class="flex flex-col w-1/4 h-[90vh] space-y-1">
           <div v-for="(value, index) in items" :key="index" class="space-y-1 flex flex-col">
             <div 
             :class="`${(activeTabs.includes(value.name)) ? 'bg-blue-600 text-white': ''}`"
-            class="h-10 px-2 flex items-center justify-between border rounded font-normal text-xs">
+            class="h-10 px-1 flex items-center justify-between border rounded font-normal text-xs">
               <span class="font-semibold">{{ value.name }}</span>
               <div @click="openTabs(value.name)" class="cursor-pointer">
                 <span v-if="!activeTabs.includes(value.name)">+</span>
@@ -27,7 +27,7 @@
             </Transition>
           </div>
         </div>
-        <div class="w-3/4 bg-slate-100 h-auto p-2">
+        <div class="w-3/4 bg-slate-100 h-auto p-1">
           <div class="text-2xl font-semibold mb-2">Settings: <span class="text-xl text-blue-600">{{ activePage }}</span></div>
           <UpdatePersonalInformation v-if="activePage === 'Summary'" />
           <UpdatePersonalGroups v-if="activePage === 'Groups'" />
@@ -43,7 +43,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/vue/24/outline';
-import Input from '@/components/shared/inputs/Input.vue';
+import FloatingLabelInput from '@/components/shared/inputs/FloatingLabelInput.vue';
 import Container from "../../components/shared/Container.vue";
 import UpdatePersonalInformation from '@/components/forms/profile/UpdatePersonalInformation.vue';
 import UpdatePersonalGroups from '@/components/forms/profile/UpdatePersonalGroups.vue';

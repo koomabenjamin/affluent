@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentication from '../../composables/auth';
-import Input from '../../components/shared/inputs/Input.vue';
+import FloatingLabelInput from '../../components/shared/inputs/FloatingLabelInput.vue';
 import Button from '../../components/shared/Button.vue';
 
 const { login, errorMessages, authLoader } = useAuthentication();
@@ -56,7 +56,7 @@ const credentials = reactive({
         Welcome back awesome user, please enter your email and password.
       </span>
 
-      <Input 
+      <FloatingLabelInput 
         type="email"
         :errors="errorMessages?.email?.[0]" 
         v-model="credentials.email" 
@@ -67,7 +67,7 @@ const credentials = reactive({
         :icon-size="25"
       />
 
-      <Input 
+      <FloatingLabelInput 
         type="password" 
         :errors="errorMessages?.password" v-model="credentials.password" 
         required 

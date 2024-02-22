@@ -5,29 +5,29 @@
       <form @submit.prevent="saveGroup">
         <div class="mt-2 grid gap-4 w-full grid-cols-2">
           <div class="col-span-2">
-            <Input icon="heroicons:envelope" type="text" v-model="groupCreationRequest.name" label="Group Name" :error="errorMessages?.name" required />
+            <FloatingLabelInput icon="heroicons:envelope" type="text" v-model="groupCreationRequest.name" label="Group Name" :error="errorMessages?.name" required />
           </div>
           <div class="col-span-2">
             <TextArea type="text" v-model="groupCreationRequest.description" label="Description" />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="email" v-model="groupCreationRequest.email" label="Email" :error="errorMessages?.email" required />
+            <FloatingLabelInput icon="heroicons:envelope" type="email" v-model="groupCreationRequest.email" label="Email" :error="errorMessages?.email" required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="number" v-model="groupCreationRequest.account_number" label="Account Number" />
+            <FloatingLabelInput icon="heroicons:envelope" type="number" v-model="groupCreationRequest.account_number" label="Account Number" />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="number" v-model="groupCreationRequest.initial_account_balance" label="Initial Account Balance"
+            <FloatingLabelInput icon="heroicons:envelope" type="number" v-model="groupCreationRequest.initial_account_balance" label="Initial Account Balance"
               required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="text" v-model="groupCreationRequest.phone_number" label="Phone Number" required />
+            <FloatingLabelInput icon="heroicons:envelope" type="text" v-model="groupCreationRequest.phone_number" label="Phone Number" required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_start_date" label="Contract Start Date" required />
+            <FloatingLabelInput icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_start_date" label="Contract Start Date" required />
           </div>
           <div>
-            <Input icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_end_date" label="Contract End Date" required />
+            <FloatingLabelInput icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_end_date" label="Contract End Date" required />
           </div>
         </div>
 
@@ -44,7 +44,7 @@ import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { customAxios } from "../../../composables/axios";
 import { useGroupStore } from "../../../stores/group-store";
-import Input from "../../../components/shared/inputs/Input.vue";
+import FloatingLabelInput from "../../../components/shared/inputs/FloatingLabelInput.vue";
 import MultiSelect from "../../../components/shared/MultiSelect.vue";
 import Button from "../../../components/shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue"

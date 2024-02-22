@@ -23,7 +23,7 @@
       <!-- <component class="h-5 text-blue-600 absolute right-2 top-1/4 dark:text-white" :is="OutlineIcons[props.icon]"></component> -->
       <span class="text-xs text-red-600">{{ props.error }}</span>
     </div>
-    <!-- <Input
+    <!-- <FloatingLabelInput
       :label="props.label"
       @focus="openSelectables()"
       @input="$emit('update:optionName', $event.target.value)"
@@ -79,7 +79,7 @@
 
 <script setup>
 import { ref, watch, onMounted } from "vue";
-import Input from "./Input.vue";
+import FloatingLabelInput from "./FloatingLabelInput.vue";
 
 const emit = defineEmits(["update:optionId", "update:optionName", "update:modelValue"]);
 

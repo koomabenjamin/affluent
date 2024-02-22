@@ -5,32 +5,32 @@
       <div class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
-            <Input type="text" :error="collectionResponseError.member" v-model="collectionRequest.member" label="Member"
+            <FloatingLabelInput type="text" :error="collectionResponseError.member" v-model="collectionRequest.member" label="Member"
               icon="heroicons:user" :icon-size="25" />
           </div>
           <div>
-            <Input type="month" :error="collectionResponseError.period" v-model="collectionRequest.period"
+            <FloatingLabelInput type="month" :error="collectionResponseError.period" v-model="collectionRequest.period"
               label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="collectionResponseError.amount" v-model="collectionRequest.amount" label="Amount"
+            <FloatingLabelInput type="number" :error="collectionResponseError.amount" v-model="collectionRequest.amount" label="Amount"
               icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="number" :error="collectionResponseError.account_paid_from"
+            <FloatingLabelInput type="number" :error="collectionResponseError.account_paid_from"
               v-model="collectionRequest.account_paid_from" label="From Account:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
           <div>
-            <Input type="text" :error="collectionResponseError.account_paid_to"
+            <FloatingLabelInput type="text" :error="collectionResponseError.account_paid_to"
               v-model="collectionRequest.account_paid_to" label="To Account:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="text" :error="collectionResponseError.payment_method" v-model="collectionRequest.payment_method"
+            <FloatingLabelInput type="text" :error="collectionResponseError.payment_method" v-model="collectionRequest.payment_method"
               label="Payment Method:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <Input type="date" :error="collectionResponseError.payment_date" v-model="collectionRequest.payment_date"
+            <FloatingLabelInput type="date" :error="collectionResponseError.payment_date" v-model="collectionRequest.payment_date"
               label="Payment Date" icon="heroicons:calendar" :icon-size="25" />
           </div>
           <div>
@@ -53,7 +53,7 @@ import { storeToRefs } from "pinia";
 import { customAxios } from "../../../composables/axios";
 import { useCollectionStore } from "../../../stores/collection-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
-import Input from "../../shared/inputs/Input.vue";
+import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue"

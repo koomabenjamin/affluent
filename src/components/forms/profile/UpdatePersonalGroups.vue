@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
 import { customAxios } from '@/composables/axios';
-import Input from '@/components/shared/inputs/Input.vue';;
+import FloatingLabelInput from '@/components/shared/inputs/FloatingLabelInput.vue';;
 import Button from '@/components/shared/Button.vue';
 import MultiSelect from '@/components/shared/MultiSelect.vue';
 

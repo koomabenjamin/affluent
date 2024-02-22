@@ -41,7 +41,9 @@
           pt-4
           h-full
           w-full
-          text-sm text-gray-900
+          text-sm 
+          text-gray-900
+          bg-white
           bg-transparent
           rounded-sm
           appearance-none
@@ -100,7 +102,7 @@
           v-if="typeof option?.description !== 'undefined'">{{ option.description }}</span>
       </div>
     </div>
-    <div v-if="!optionsDropdown" class="
+    <div v-if="optionsDropdown" class="
         absolute
         bg-white
         z-20
@@ -121,12 +123,25 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
 import * as OutlineIcons from "@heroicons/vue/24/outline";
-import Input from "./inputs/Input.vue";
+import FloatingLabelInput from "./inputs/FloatingLabelInput.vue";
 
 export interface OptionsInterface {
   id?: string | undefined | number;
   name?: string | undefined;
   description?: string | undefined | number;
+}
+
+export interface MultiSelectProps {
+  id: string;
+  name: string;
+  placeholder: string;
+  optionId: string;
+  optionName: string;
+  optionsSelected: string[] | number[] | object[];
+  label: string;
+  modelValue: string | number | string[];
+  errors: object;
+  options: object[];
 }
 
 const emit = defineEmits([
@@ -157,39 +172,7 @@ const handleOptionNameInput = (e: Event) => {
   emit("update:optionName", (e.target as HTMLInputElement).value);
 }
 
-const props = defineProps({
-  id: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  placeholder: {
-    type: String,
-  },
-  optionId: {
-    type: String,
-  },
-  optionName: {
-    type: String,
-  },
-  optionsSelected: {
-    type: [String, Number, Array, Object],
-  },
-  label: {
-    type: String,
-  },
-  modelValue: {
-    type: [String, Number, Array],
-    default: "",
-  },
-  errors: {
-    type: Object,
-  },
-  options: {
-    type: [Array, Object],
-  },
-});
+const props = defineProps<MultiSelectProps>();
 
 watch(
   () => props.optionName,
@@ -200,6 +183,13 @@ watch(
       );
     }
     if (optionsDropdown.value === false) optionsDropdown.value = true;
+  }
+);
+
+watch(
+  () => props.options,
+  (options) => {
+    if (options.length === 0) optionsDropdown.value = false;
   }
 );
 
