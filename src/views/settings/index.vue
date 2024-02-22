@@ -1,14 +1,13 @@
 <template>
   <Container>
     <div class="flex flex-col p-5 w-full">
-      <div class="text-2xl font-semibold mb-2">Settings</div>
       <div class="flex w-full space-x-2">
         <div class="flex flex-col w-1/4 h-[90vh] space-y-1">
           <div v-for="(value, index) in items" :key="index" class="space-y-1 flex flex-col">
             <div 
             :class="`${(activeTabs.includes(value.name)) ? 'bg-blue-600 text-white': ''}`"
-            class="h-10 px-2 flex items-center justify-between border rounded font-normal text-sm">
-              <span>{{ value.name }}</span>
+            class="h-10 px-2 flex items-center justify-between border rounded font-normal text-xs">
+              <span class="font-semibold">{{ value.name }}</span>
               <div @click="openTabs(value.name)" class="cursor-pointer">
                 <span v-if="!activeTabs.includes(value.name)">+</span>
                 <span v-else>-</span>
@@ -28,9 +27,10 @@
             </Transition>
           </div>
         </div>
-        <div class="flex w-3/4 bg-slate-100 h-[90vh] p-2">
+        <div class="w-3/4 bg-slate-100 h-auto p-2">
+          <div class="text-2xl font-semibold mb-2">Settings: <span class="text-xl text-blue-600">{{ activePage }}</span></div>
           <UpdatePersonalInformation v-if="activePage === 'Summary'" />
-          <UpdatePersonalGroups v-if="activePage === 'groups'" />
+          <UpdatePersonalGroups v-if="activePage === 'Groups'" />
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@ import UpdatePersonalInformation from '@/components/forms/profile/UpdatePersonal
 import UpdatePersonalGroups from '@/components/forms/profile/UpdatePersonalGroups.vue';
 
 const items = [
-  { items: ['Summary', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Profile" },
+  { items: ['Summary', 'Groups', 'sub-item-three'], route: "", icon: "", name: "Profile" },
   { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Portfolio" },
   { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Account" },
   { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Notifications" },

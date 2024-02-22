@@ -1,43 +1,84 @@
 <template>
-  <div class="flex flex-col w-full mt-4 items-center space-y-2 px-3 rounded border h-auto pb-3">
+  <div class="flex flex-col w-full mt-4 items-end space-y-2 px-3 rounded border h-auto pb-3">
     <div class="text-base font-bold text-left w-full mb-2 border-b p-2 h-10">Personal Information</div>
-    <div class="w-full grid md:grid-cols-2 gap-1">
-      <div>
+    <div class="w-full grid md:grid-cols-4 gap-1">
+
+      <div class="col-span-4 font-medium text-sm mt-1">Names:</div>
+      <div class="col-span-4 text-xs text-gray-400 mb-1">
+        These are the names that will be used on formal documentation within the system and any other printed documents.
+      </div>
+      <div class="col-span-2">
         <Input type="text" label="First Name" v-model="user.first_name" />
       </div>
-      <div>
+      <div class="col-span-2">
         <Input type="text" label="Last Name" v-model="user.last_name" />
       </div>
-      <div>
+
+      <div class="col-span-4 font-medium text-sm mt-1">Emails:</div>
+      <div class="col-span-4 text-xs text-gray-400 mb-1">
+        Ensure to register valid emails here as they will be used to confirm your identity as well verification for other
+        purposes within the system.
+      </div>
+      <div class="col-span-4">
         <Input type="text" label="Email" v-model="user.email" />
       </div>
-      <div>
+
+      <div class="col-span-4 font-medium text-sm mt-1">Contacts:</div>
+      <div class="col-span-4 text-xs text-gray-400 mb-1">
+        Ensure to register valid contacts / phone-numbers here as they will be used to confirm your identity as well
+        verification for other purposes within the system.
+      </div>
+      <div class="col-span-4">
         <Input type="text" label="Phone Number" v-model="user.phone_number" />
       </div>
-      <div>
+
+      <div class="col-span-4 font-medium text-sm mt-1">Account Username:</div>
+      <div class="col-span-4 text-xs text-gray-400 mb-1">
+        Register a unique username for your account as it will be displayed on the profile and portfolio.
+      </div>
+      <div class="col-span-4">
         <Input type="text" label="username" v-model="user.username" />
       </div>
-      <div>
+
+      <div class="col-span-4 font-medium text-sm mt-1">Resdential Information:</div>
+      <div class="col-span-4 text-xs text-gray-400 mb-1">
+        Please register a valid resdential address for proper follow-up or delivery of any document / parcel.
+      </div>
+      <div class="col-span-2">
         <Input type="text" label="Country" v-model="user.country" />
       </div>
       <div>
         <Input type="text" label="City" v-model="user.city" />
       </div>
       <div>
-        <Input type="text" label="NOK Name" v-model="user.nok_name" />
+        <Input type="text" label="State" v-model="user.state" />
       </div>
-      <div>
-        <Input type="text" label="NOK Phone Number" v-model="user.nok_phone_number" />
+
+      <div class="col-span-4 font-medium text-sm mt-1">Socials:</div>
+      <div class="col-span-4 text-xs text-gray-400 mb-1">
+        Please register a valid social media addresses as they will be used to sync some information.
       </div>
-      <div>
-        <Input type="text" label="NOK Email" v-model="user.nok_email" />
+      <div class="col-span-4">
+        <Input type="text" label="FaceBook" v-model="user.country" />
+      </div>
+      <div class="col-span-4">
+        <Input type="text" label="X" v-model="user.city" />
+      </div>
+      <div class="col-span-4">
+        <Input type="text" label="Instagram" v-model="user.state" />
+      </div>
+      <div class="col-span-4">
+        <Input type="text" label="Telegram" v-model="user.state" />
+      </div>
+      <div class="col-span-4">
+        <Input type="text" label="Telegram" v-model="user.state" />
       </div>
     </div>
-    <Button label="Update Information" size="block" />
+    <Button label="UPDATE INFORMATION" size="lg" />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { reactive, onMounted } from 'vue';
 import Input from '@/components/shared/inputs/Input.vue';
 import Button from '@/components/shared/Button.vue';
@@ -51,9 +92,7 @@ const user = reactive({
   email: '',
   city: '',
   country: '',
-  nok_name: '',
-  nok_email: '',
-  nok_phone_number: ''
+  state: '',
 }
 );
 
