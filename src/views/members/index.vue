@@ -1,9 +1,9 @@
 <template>
-  <create-group :open="showCreateGroupModal" @close="closeCreateGroupModal()"></create-group>
+  <CreateNewMember :open="showCreateGroupModal" @close="closeCreateGroupModal()" />
 
   <Container>
     <div class="w-full flex items-center justify-between mt-5">
-      <div class="text-xl font-bold">Groups</div>
+      <div class="text-xl font-bold">Members</div>
       <Button label="Create New Member" size="md" @click="closeCreateGroupModal()" />
     </div>
 
@@ -24,7 +24,7 @@ import { storeToRefs } from "pinia";
 import { useMemberStore } from "@/stores/member-store";
 
 import Container from "../../components/shared/Container.vue";
-import CreateGroup from "../../components/forms/members/CreateNewMember.vue";
+import CreateNewMember from "../../components/forms/members/CreateNewMember.vue";
 import Button from "@/components/shared/Button.vue";
 import DataTable from "@/components/shared/DataTable.vue";
 
@@ -36,7 +36,8 @@ const columns = ref<string[]>(
     'name',
     'email',
     'groups',
-    'created at',
+    'phone_number',
+    'created_at',
   ]
 );
 
@@ -46,7 +47,7 @@ const showCreateGroupModal = ref<boolean>(false);
 const closeCreateGroupModal = () => showCreateGroupModal.value = !showCreateGroupModal.value;
 
 onBeforeMount(() => {
-  memberStore.fetchMembers();
+  memberStore.fetchAll(1);
 });
 </script>
 

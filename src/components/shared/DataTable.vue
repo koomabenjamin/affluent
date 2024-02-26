@@ -28,7 +28,7 @@
       </tfoot>
     </table>
   </div>
-  <NoData label="groups" v-if="rows?.length === 0" />
+  <NoData :label="dataGroupName" v-if="rows?.length === 0" />
 </template>
 
 <script setup lang="ts">
@@ -40,6 +40,7 @@ export interface DataTableProps {
   columns?: string[] | number[] | object;
   columnCount?: number;
   actions?: boolean;
+  dataGroupName?: string;
 }
 
 const removeSpecialCharacter = (name: string): string => {

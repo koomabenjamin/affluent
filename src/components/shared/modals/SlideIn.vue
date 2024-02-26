@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot appear :show="props.isModalOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10">
+    <Dialog as="div" class="relative z-10">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -32,10 +32,11 @@
                 max-w-2xl
                 h-screen
                 transform
-                overflow-hidden
+                overflow-auto
                 rounded-none
                 bg-white
-                p-6
+                p-3
+                pb-20
                 text-left
                 align-middle
                 shadow-xl
@@ -57,10 +58,9 @@
                 "
               >
                 <div class="flex flex-col">
-                  <span>Group Request</span>
+                  <span>{{ title }}</span>
                   <span class="text-xs text-gray-500"
-                    >Use this form to submit a group request to a sacco that you
-                    are connected to.</span
+                    >{{ description }}</span
                   >
                 </div>
                 <XCircleIcon

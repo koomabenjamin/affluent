@@ -1,70 +1,69 @@
 <template>
-  <SlideInModal :isModalOpen="props.open" @close="close">
+  <SlideInModal :isModalOpen="props.open" @close="closeModal()" title="Loan Request"
+    description="Use this form to input a member's loan for the specified period of time.">
     <template #body>
-        <form class="flex flex-col space-y-2">
-          <div class="mt-2 grid gap-4 w-full grid-cols-2">
-                <div>
-                  <Input
-                    type="number"
-                    :error="loanResponseError.loan_amount"
-                    v-model="loanRequest.loan_amount"
-                    label="Loan Amount"
-                    icon="heroicons:envelope"
-                    :icon-size="25"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="number"
-                    :error="loanResponseError.repayment_period"
-                    v-model="loanRequest.repayment_period"
-                    label="Repayment Period"
-                    icon="heroicons:envelope"
-                    :icon-size="25"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="date"
-                    :error="loanResponseError.issue_date"
-                    v-model="loanRequest.issue_date"
-                    label="Expected Due-date"
-                    icon="heroicons:envelope"
-                    :icon-size="25"
-                  />
-                </div>
-                <div>
-                  <Input
-                    type="number"
-                    :error="loanResponseError.interest_rate"
-                    v-model="loanRequest.interest_rate"
-                    label="Interest Rate (%)"
-                    icon="heroicons:envelope"
-                    :icon-size="25"
-                  />
-                </div>
-                <!-- <div> -->
-                  <Select
-                    v-model:option-id="loanRequest.collateral"
-                    v-model:option-name="loanRequest.collateralValue"
-                    label="Collateral"
-                    :options="[]"
-                    :id="`collateral-select`"
-                  />
-                  <Input 
-                    :error="loanResponseError.collateral"
-                    v-model="loanRequest.collateral" 
-                    label="Collateral"
-                    icon="heroicons:envelope"
-                    :icon-size="25"
-                  />
-                <!-- </div> -->
-              </div>
+      <div class="flex flex-col space-y-2 h-full">
+        <div class="mt-2 grid gap-4 w-full grid-cols-1">
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.member" v-model="loanRequest.member" label="Member"
+              icon="heroicons:user" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.group" v-model="loanRequest.group"
+              label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount" label="Amount"
+              icon="heroicons:banknote" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.interest_rate"
+              v-model="loanRequest.interest_rate" label="Interest Rate:" icon="heroicons:banknote"
+              :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.interest_amount"
+              v-model="loanRequest.interest_amount" label="Total Interest Amount:" icon="heroicons:banknote"
+              :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.application_fee"
+              v-model="loanRequest.application_fee" label="Application Fee:" icon="heroicons:banknote" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.total_loan_debt" v-model="loanRequest.total_loan_debt"
+              label="Total Loan Debt:" icon="heroicons:banknote" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="date" :error="loanResponseError.date_of_disbursement" v-model="loanRequest.date_of_disbursement"
+              label="Disbursement Date" icon="heroicons:calendar" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="date" :error="loanResponseError.expiry_date" v-model="loanRequest.expiry_date"
+              label="Expiry Date" icon="heroicons:pencil" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.collateral" v-model="loanRequest.collateral"
+              label="Collateral" icon="heroicons:pencil" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="date" :error="loanResponseError.request_date" v-model="loanRequest.request_date"
+              label="Request Date" icon="heroicons:pencil" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.repayment_period" v-model="loanRequest.repayment_period"
+              label="Repayment Period" icon="heroicons:pencil" :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="number" :error="loanResponseError.repayment_period_type" v-model="loanRequest.repayment_period_type"
+              label="Repayment Period Type" icon="heroicons:pencil" :icon-size="25" />
+          </div>
+        </div>
 
-              <div class="mt-4">
-                <Button label="Confirm" :loader="groupBeingSaved" />
-              </div>
-        </form>
+        <div class="mt-4">
+          <Button label="Confirm" :loader="loanBeingSaved" size="block" @click="saveLoan()"/>
+        </div>
+      </div>
     </template>
   </SlideInModal>
 </template>
@@ -72,9 +71,9 @@
 <script setup lang="ts">
 import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
 import { storeToRefs } from "pinia";
-import { customAxios } from "../../../composables/axios";
-import { useGroupStore } from "../../../stores/group-store";
-import Input from "../../shared/inputs/Input.vue";
+import { useLoanStore } from "../../../stores/loan-store";
+import TextArea from "../../shared/inputs/TextArea.vue";
+import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue"
@@ -83,38 +82,9 @@ import {
   MagnifyingGlassIcon,
   PlusIcon,
 } from "@heroicons/vue/24/outline";
-import TextArea from "../../shared/inputs/TextArea.vue";
-import MasterPage from "../../shared/MasterPage.vue";
+import type { LoanPayload, Endpoint, LoanResponse, LoanRequest } from "@/types";
 
 import useAuthentication from "@/composables/auth";
-
-export interface CreateGroupModalProps {
-  open?: boolean | undefined;
-}
-
-export interface GroupCreationResponse {
-  message: string;
-  errors?: object;
-  status?: string;
-  data?: object | any;
-}
-
-export interface GroupCreationResponseError {
-  email?: string,
-  name?: string,
-}
-
-export interface GroupCreationRequest {
-  name: string;
-  description: string;
-  email: string;
-  phone_number: string,
-  account_number: string;
-  initial_account_balance: string;
-  contract_start_date: string;
-  contract_end_date: string;
-  status: number;
-}
 
 const { register, errorMessages, authLoader } = useAuthentication();
 
@@ -123,58 +93,48 @@ export interface CreateGroupModalProps {
 }
 
 const props = defineProps<CreateGroupModalProps>();
+
 const emit = defineEmits(['close'])
-const close = () => emit('close');
+const closeModal = () => emit('close');
 
 const user = ref(null);
-const groupStore = useGroupStore();
-const { groups, loadingGroups } = storeToRefs(groupStore);
-const groupBeingSaved = ref(false);
-const _errorMessages = ref<GroupCreationResponseError>({});
+const loanStore = useLoanStore();
+const { loans, loadingLoans } = storeToRefs(loanStore);
+const loanBeingSaved = ref(false);
 
-const loanRequest = reactive({
-  user_name: "",
-  loan_amount: "",
-  interest_rate: "",
-  interest_amount: 100020,
-  total_loan_debt: "",
-  date_of_disbursment: "",
-  expiry_date: "",
-  collateral: "",
-  collateralValue: "",
-  issue_date: "",
-  repayment_period: "",
+const loanRequest = reactive<LoanRequest>({
+  amount : 0,
+  member : "",
+  group : "",
+  interest_rate : 0,
+  interest_amount : 0,
+  application_fee : 0,
+  total_loan_debt : 0,
+  date_of_disbursement : "",
+  expiry_date : "",
+  collateral : "",
+  request_date : "",
+  repayment_period : "",
+  repayment_period_type : "",
 });
-const loanResponseError = reactive({
-  user_name: "",
-  loan_amount: "",
-  interest_rate: "", 
-  interest_amount: "",
-  total_loan_debt: "",
-  date_of_disbursment: "",
-  expiry_date: "",
-  collateral: "",
-  issue_date: "",
-  repayment_period: "",
+const loanResponseError = reactive<LoanRequest>({
+  amount : 0,
+  member : "",
+  group : "",
+  interest_rate : 0,
+  interest_amount : 0,
+  application_fee : 0,
+  total_loan_debt : 0,
+  date_of_disbursement : "",
+  expiry_date : "",
+  collateral : "",
+  request_date : "",
+  repayment_period : "",
+  repayment_period_type : "",
 });
 
 const saveLoan = async () => {
-  // loanBeingSaved.value = true;
-  try {
-    
-    const response = await customAxios.post("/loans/store_member_loan", loanRequest);
- 
-  } catch (error) {
-    // console.log(error.response.data)
-    // if(error.response.data.hasOwnProperty('errors')) Object.assign(loanResponseError, error.response.data.errors);
-    // console.log(loanResponseError)
-
-  } finally {
-
-    groupBeingSaved.value = false;
-    groupStore.fetchGroups();
-  }
-  // closeModal();
+  await loanStore.save(loanRequest);
 };
 </script>
 

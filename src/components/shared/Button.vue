@@ -16,7 +16,7 @@
         ${(dark) ? 'text-white':''}
         ${(size === 'sm') ? 'px-1 py-2':''}
         ${(size === 'md') ? 'px-2 py-2':''}
-        ${(size === 'lg') ? 'px-2 py-2':''}
+        ${(size === 'lg') ? 'px-4 py-2':''}
         ${(size === 'block') ? 'w-full py-3':''}
 
         ${(loader) ? 'bg-blue-800 text-white': 'text-blue-500'}
@@ -35,7 +35,7 @@
         ${(dark) ? 'text-white':''}
         ${(size === 'sm') ? 'text-xs':''}
         ${(size === 'md') ? 'text-sm':''}
-        ${(size === 'lg') ? 'text-base':''}
+        ${(size === 'lg') ? 'text-sm':''}
         ${(size === 'block') ? 'text-xl':''}
       `">{{ label }}</span>
 

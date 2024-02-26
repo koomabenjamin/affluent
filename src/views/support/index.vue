@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="w-3/4 bg-slate-100 h-auto p-1">
-          <div class="text-2xl font-semibold mb-2">Settings: <span class="text-xl text-blue-600">{{ activePage }}</span></div>
+          <div class="text-2xl font-semibold mb-2">Help & Support: <span class="text-xl text-blue-600">{{ activePage }}</span></div>
           <UpdatePersonalInformation v-if="activePage === 'Summary'" />
           <UpdatePersonalGroups v-if="activePage === 'Groups'" />
         </div>

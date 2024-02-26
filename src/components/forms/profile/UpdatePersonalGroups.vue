@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col col-span-2 mt-4 items-center space-y-2 px-3 rounded border h-auto pb-3">
+  <div class="flex flex-col mt-4 items-center space-y-2 px-3 rounded border h-auto pb-3 w-full">
     <div class="text-base font-bold text-left w-full mb-2 border-b p-2 h-10">Personal Information</div>
     
     <MultiSelect 
@@ -26,10 +26,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue';
 import { customAxios } from '@/composables/axios';
-import Input from '@/components/shared/inputs/Input.vue';;
+import FloatingLabelInput from '@/components/shared/inputs/FloatingLabelInput.vue';;
 import Button from '@/components/shared/Button.vue';
 import MultiSelect from '@/components/shared/MultiSelect.vue';
 
@@ -52,14 +52,15 @@ const group = reactive({
   groups_selected: [],
 });
 
-const fetchGroups = async () => {
-  const { data, status } = await customAxios.get("/groups");
-  groups.value = data.data;
+const fetchAll = async () => {
+  const response = await customAxios.get("v1/groups");
+  // console.log('logging from update-personal-groups components listing groups picked from the database, ', response)
+  groups.value = response?.data?.payload;
 }
 
 onMounted(() => {
   fetchUserInformation();
-  fetchGroups();
+  fetchAll();
 })
 
 </script>

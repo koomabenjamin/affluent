@@ -87,6 +87,11 @@ const router = createRouter({
       name: 'chatroom',
       component: () => import('../views/chatroom/index.vue')
   },
+  {
+      path: '/support',
+      name: 'support',
+      component: () => import('../views/support/index.vue')
+  },
   ]
 });
 
