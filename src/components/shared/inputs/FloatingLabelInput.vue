@@ -51,7 +51,8 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
+// import { defineComponent, PropType } from "vue";
 import { Icon, type IconifyIcon } from "@iconify/vue";
 
 type Error = {
@@ -73,6 +74,23 @@ export interface InputProps{
   modelValue?: string | undefined;
   errors?: Error[] | undefined;
 }
+
+// export default defineComponent({
+//   props: {
+//     myProp: {
+//       type: String as PropType<string>,
+//       default: 'Default Value', // Set your default value here
+//     },
+//   },
+//   setup(props) {
+//     // You can now access `props.myProp` with or without a provided value
+//     console.log(props.myProp);
+
+//     return {
+//       // ... component setup
+//     };
+//   },
+// });
 
 const props = defineProps<InputProps>();
 

@@ -64,7 +64,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, watch, onMounted } from "vue";
 import FloatingLabelInput from "./inputs/FloatingLabelInput.vue";
 
@@ -80,7 +80,7 @@ const displayedOptions = ref([]);
 
 const toggleSelectOptions = () => optionsDropdown.value = !optionsDropdown.value;
 
-const selectOption = (option) => {
+const selectOption = (option:object) => {
   optionsDropdown.value = false;
   const inputField = document.getElementById(props.id);
   // const hiddenInputField = document.getElementById(`${props.id}-hidden-field`);
