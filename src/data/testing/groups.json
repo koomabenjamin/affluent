@@ -1,0 +1,38 @@
+[
+  {  
+    "id":1,
+    "name":"Affluent investments club",
+    "description": "Small sized investments club specifically for bankers",
+    "status": "active",
+    "email": "affluent.sacco@gmail.com",
+    "phone_number": "0780997766",
+    "account_number": "0584838484833",
+    "initial_account_balance": "434823843842323",
+    "contract_start_data": "09/09/2000",
+    "contract_end_data": "09/09/2025"
+  },
+  {  
+    "id":2,
+    "name":"Family SACCO",
+    "description": "Small sized investments club specifically for family",
+    "status": "active",
+    "email": "affluent.sacco@gmail.com",
+    "phone_number": "0780997766",
+    "account_number": "0584838484833",
+    "initial_account_balance": "434823843842323",
+    "contract_start_data": "09/09/2000",
+    "contract_end_data": "09/09/2025"
+  },
+  {  
+    "id":3,
+    "name":"Project Code SACCO",
+    "description": "Small sized investments club specifically for project code",
+    "status": "active",
+    "email": "affluent.sacco@gmail.com",
+    "phone_number": "0780997766",
+    "account_number": "0584838484833",
+    "initial_account_balance": "434823843842323",
+    "contract_start_data": "09/09/2000",
+    "contract_end_data": "09/09/2025"
+  }
+]
