@@ -22,13 +22,11 @@
             h-8
             w-8
             center
-            bg-slate-100
             border
             rounded-full
-            hover:text-white hover:bg-red-600
-            text-red-600
+            
           ">
-          <component class="h-4 w-4" :is="OutlineIcons['XCircleIcon']"></component>
+          <component class="h-6 w-6 stroke-2 bg-red-600 rounded-full text-white" :is="OutlineIcons['XCircleIcon']"></component>
         </div>
         <div class="text-xs stroke-2">{{ option.name }}</div>
       </div>
@@ -102,7 +100,7 @@
           v-if="typeof option?.description !== 'undefined'">{{ option.description }}</span>
       </div>
     </div>
-    <div v-if="optionsDropdown" class="
+    <div v-if="!optionsDropdown" class="
         absolute
         bg-white
         z-20

@@ -5,7 +5,7 @@
       <div class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
-            <FloatingLabelInput type="text" :error="collectionResponseError.member" v-model="collectionRequest.member" label="Member"
+            <Select type="text" :error="collectionResponseError.group" :option="groups" v-model="collectionRequest.group" label="Member"
               icon="heroicons:user" :icon-size="25" />
           </div>
           <div>
@@ -50,11 +50,12 @@
 <script setup lang="ts">
 import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
 import { storeToRefs } from "pinia";
-import { customAxios } from "../../../composables/axios";
+import { useGroupStore } from "../../../stores/group-store";
 import { useCollectionStore } from "../../../stores/collection-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
+import Select from "../../shared/Select.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue"
 import {
@@ -77,7 +78,9 @@ const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
 
 const user = ref(null);
+const groupStore = useGroupStore();
 const collectionStore = useCollectionStore();
+const { groups } = storeToRefs(groupStore);
 const { collections, loadingCollections } = storeToRefs(collectionStore);
 const collectionBeingSaved = ref(false);
 const _errorMessages = ref<GroupCreationResponseError>({});
@@ -109,6 +112,10 @@ const collectionResponseError = reactive({
 const saveCollection = async () => {
   await collectionStore.save(collectionRequest);
 };
+
+onMounted(() => {
+  groupStore.fetchAll();
+})
 </script>
 
 <style></style>

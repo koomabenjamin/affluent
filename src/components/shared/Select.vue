@@ -3,24 +3,18 @@
 
     <input @input="$emit('update:optionId', $event.target.value)" :id="`${props.id}-hidden-field`" hidden />
 
-    {{ props.modelValue }}
-    <div class="relative w-full h-12 dark:text-white mt-3">
-      <input 
-        :id="props.id"
-        class="dark:bg-slate-800 block px-2.5 pb-2.5 border pt-4 h-full w-full text-sm text-gray-900 bg-transparent rounded-sm appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer"
-        :name="props.name"
-        :class="[(props.error !== '') ? 'focus:border-red-600' : 'focus:border-blue-600']"
-        @input="$emit('update:optionName', $event.target.value)" 
-        @focus="toggleSelectOptions()"
-        :type="props.type"
-        readonly
-        placeholder=" " />
+    <div class="relative w-full h-12  mt-3">
+      <input :id="props.id"
+        class=" block px-2.5 pb-2.5 border pt-4 h-full w-full text-sm text-gray-900 bg-transparent rounded-sm appearance-none    focus:outline-none focus:ring-0 peer"
+        :name="props.name" :class="[(props.error !== '') ? 'focus:border-red-600' : 'focus:border-blue-600']"
+        @input="$emit('update:optionName', $event.target.value)" @focus="toggleSelectOptions()" :type="props.type"
+        readonly placeholder=" " />
       <label
-        :class="[(props.error !== '') ? 'peer-focus:text-red-600 peer-focus:dark:text-red-500' : 'peer-focus:text-blue-600 peer-focus:dark:text-blue-500']"
-        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] dark:text-white bg-white dark:bg-slate-800 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
+        :class="[(props.error !== '') ? 'peer-focus:text-red-600' : 'peer-focus:text-blue-600']"
+        class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0]  bg-white  px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
         {{ label }}
       </label>
-      <!-- <component class="h-5 text-blue-600 absolute right-2 top-1/4 dark:text-white" :is="OutlineIcons[props.icon]"></component> -->
+      <!-- <component class="h-5 text-blue-600 absolute right-2 top-1/4 " :is="OutlineIcons[props.icon]"></component> -->
       <span class="text-xs text-red-600">{{ props.error }}</span>
     </div>
     <!-- <FloatingLabelInput
@@ -32,7 +26,7 @@
     /> -->
     <div v-if="optionsDropdown && displayedOptions.length > 0" class="
         absolute
-        dark:bg-slate-800 dark:text-white
+         
         bg-white
         z-20
         border
@@ -60,7 +54,7 @@
     </div>
     <div v-if="!optionsDropdown && displayedOptions.length === 0" class="
         absolute
-        dark:bg-slate-800 dark:text-white
+         
         bg-white
         z-20
         border-r border-l border-b
@@ -79,7 +73,7 @@
 
 <script setup>
 import { ref, watch, onMounted } from "vue";
-import FloatingLabelInput from "./FloatingLabelInput.vue";
+import FloatingLabelInput from "./inputs/FloatingLabelInput.vue";
 
 const emit = defineEmits(["update:optionId", "update:optionName", "update:modelValue"]);
 
@@ -93,6 +87,7 @@ const displayedOptions = ref([]);
 const toggleSelectOptions = () => optionsDropdown.value = !optionsDropdown.value;
 
 const selectOption = (option) => {
+
   optionsDropdown.value = false;
   const inputField = document.getElementById(props.id);
   const hiddenInputField = document.getElementById(`${props.id}-hidden-field`);
@@ -103,9 +98,7 @@ const selectOption = (option) => {
   emit("update:optionId", option.id);
   emit("update:optionName", option.name);
   emit("update:modelValue", option.name);
-  // selectedOptionId.value = option.id;
-  // selectedOptionName.value = option.name;
-  // console.log(option, optionsDropdown.value, displayedOptions.value.length);
+  
 };
 
 const props = defineProps({
@@ -116,9 +109,9 @@ const props = defineProps({
     type: String,
   },
   hide: {
-        type: Boolean,
-        default: false,
-    },
+    type: Boolean,
+    default: false,
+  },
   optionId: {
     type: [String, Number],
   },

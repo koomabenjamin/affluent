@@ -127,7 +127,7 @@ const saveGroup = async () => {
   } finally {
 
     loadingGroups.value = false;
-    groupStore.fetchGroups();
+    groupStore.fetchAll();
     groupBeingSaved.value = false;
   }
 };

@@ -52,14 +52,15 @@ const group = reactive({
   groups_selected: [],
 });
 
-const fetchGroups = async () => {
-  const { data, status } = await customAxios.get("/groups");
-  groups.value = data.data;
+const fetchAll = async () => {
+  const response = await customAxios.get("v1/groups");
+  // console.log('logging from update-personal-groups components listing groups picked from the database, ', response)
+  groups.value = response?.data?.payload;
 }
 
 onMounted(() => {
   fetchUserInformation();
-  fetchGroups();
+  fetchAll();
 })
 
 </script>
