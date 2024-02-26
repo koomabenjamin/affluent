@@ -5,36 +5,56 @@
       <div class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
-            <Select type="text" :error="collectionResponseError.group" :option="groups" v-model="collectionRequest.group" label="Member"
-              icon="heroicons:user" :icon-size="25" />
+            <Select 
+              :options="groups" 
+              type="text"
+              :error="collectionRequest.group" 
+              v-model:option-id="collectionRequest.group" 
+              v-model:option-name="collectionRequest.group_name" 
+              label="Group"
+              id="selectGroup"
+              icon="heroicons:user"
+              :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="month" :error="collectionResponseError.period" v-model="collectionRequest.period"
+            <Select 
+              :options="members" 
+              type="text"
+              :error="collectionRequest.member" 
+              v-model:option-id="collectionRequest.member" 
+              v-model:option-name="collectionRequest.member_name" 
+              label="Member"
+              id="selectMember"
+              icon="heroicons:user"
+              :icon-size="25" />
+          </div>
+          <div>
+            <FloatingLabelInput type="month" :error="collectionRequest.period" v-model="collectionRequest.period"
               label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="collectionResponseError.amount" v-model="collectionRequest.amount" label="Amount"
+            <FloatingLabelInput type="number" :error="collectionRequest.amount" v-model="collectionRequest.amount" label="Amount"
               icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="collectionResponseError.account_paid_from"
+            <FloatingLabelInput type="number" :error="collectionRequest.account_paid_from"
               v-model="collectionRequest.account_paid_from" label="From Account:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="text" :error="collectionResponseError.account_paid_to"
+            <FloatingLabelInput type="text" :error="collectionRequest.account_paid_to"
               v-model="collectionRequest.account_paid_to" label="To Account:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="text" :error="collectionResponseError.payment_method" v-model="collectionRequest.payment_method"
+            <FloatingLabelInput type="text" :error="collectionRequest.payment_method" v-model="collectionRequest.payment_method"
               label="Payment Method:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="date" :error="collectionResponseError.payment_date" v-model="collectionRequest.payment_date"
+            <FloatingLabelInput type="date" :error="collectionRequest.payment_date" v-model="collectionRequest.payment_date"
               label="Payment Date" icon="heroicons:calendar" :icon-size="25" />
           </div>
           <div>
-            <TextArea type="text" :error="collectionResponseError.payment_note" v-model="collectionRequest.payment_note"
+            <TextArea type="text" :error="collectionRequest.payment_note" v-model="collectionRequest.payment_note"
               label="Payment Date" icon="heroicons:pencil" :icon-size="25" />
           </div>
         </div>
@@ -54,10 +74,15 @@ import { useGroupStore } from "../../../stores/group-store";
 import { useCollectionStore } from "../../../stores/collection-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
+import Select from "../../shared/Select.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
 import Select from "../../shared/Select.vue";
 import Button from "../../shared/Button.vue";
-import SlideInModal from "../../shared/modals/SlideIn.vue"
+import SlideInModal from "../../shared/modals/SlideIn.vue";
+
+// IMPORTING SAMPLE DUMMY DATA
+import { groups, members } from "@/data/testing/groups";
+
 import {
   XCircleIcon,
   MagnifyingGlassIcon,
@@ -87,7 +112,9 @@ const _errorMessages = ref<GroupCreationResponseError>({});
 
 const collectionRequest = reactive({
   group: 1,
+  group_name: "",
   member: "",
+  member_name: "",
   period: "",
   amount: "",
   account_paid_from: 100020,
@@ -95,18 +122,6 @@ const collectionRequest = reactive({
   payment_method: "",
   payment_date: "",
   payment_note: "",
-});
-const collectionResponseError = reactive({
-  user_name: "",
-  collection_amount: "",
-  interest_rate: "",
-  interest_amount: "",
-  total_collection_debt: "",
-  date_of_disbursment: "",
-  expiry_date: "",
-  collateral: "",
-  issue_date: "",
-  repayment_period: "",
 });
 
 const saveCollection = async () => {
