@@ -10,10 +10,10 @@ export const useGroupStore = defineStore("GroupStore", {
   },
   getters: {},
   actions: {
-    async fetchGroups() {
+    async fetchAll() {
       if(!this.loadingGroups) this.loadingGroups = true;
-      const { data } = await customAxios.get('/groups');
-      this.groups = data.data;
+      const response = await customAxios.get('/v1/groups');
+      this.groups = response?.data?.payload ?? [];
       this.loadingGroups = false;
     },
   }

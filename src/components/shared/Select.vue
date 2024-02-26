@@ -1,6 +1,5 @@
 <template>
   <div class="w-full relative">
-
     <div class="relative w-full h-12 mt-1">
       <input 
         :id="props.id"
@@ -101,9 +100,9 @@ const props = defineProps({
     type: String,
   },
   hide: {
-        type: Boolean,
-        default: false,
-    },
+    type: Boolean,
+    default: false,
+  },
   optionId: {
     type: [String, Number],
   },

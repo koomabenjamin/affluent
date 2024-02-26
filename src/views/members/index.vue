@@ -3,7 +3,7 @@
 
   <Container>
     <div class="w-full flex items-center justify-between mt-5">
-      <div class="text-xl font-bold">Groups</div>
+      <div class="text-xl font-bold">Members</div>
       <Button label="Create New Member" size="md" @click="closeCreateGroupModal()" />
     </div>
 
@@ -36,7 +36,8 @@ const columns = ref<string[]>(
     'name',
     'email',
     'groups',
-    'created at',
+    'phone_number',
+    'created_at',
   ]
 );
 
@@ -46,7 +47,7 @@ const showCreateGroupModal = ref<boolean>(false);
 const closeCreateGroupModal = () => showCreateGroupModal.value = !showCreateGroupModal.value;
 
 onBeforeMount(() => {
-  memberStore.fetchMembers();
+  memberStore.fetchAll(1);
 });
 </script>
 

@@ -70,12 +70,13 @@
 <script setup lang="ts">
 import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
 import { storeToRefs } from "pinia";
-import { customAxios } from "../../../composables/axios";
+import { useGroupStore } from "../../../stores/group-store";
 import { useCollectionStore } from "../../../stores/collection-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import Select from "../../shared/Select.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
+import Select from "../../shared/Select.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue";
 
@@ -102,7 +103,9 @@ const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
 
 const user = ref(null);
+const groupStore = useGroupStore();
 const collectionStore = useCollectionStore();
+const { groups } = storeToRefs(groupStore);
 const { collections, loadingCollections } = storeToRefs(collectionStore);
 const collectionBeingSaved = ref(false);
 const _errorMessages = ref<GroupCreationResponseError>({});
@@ -124,6 +127,10 @@ const collectionRequest = reactive({
 const saveCollection = async () => {
   await collectionStore.save(collectionRequest);
 };
+
+onMounted(() => {
+  groupStore.fetchAll();
+})
 </script>
 
 <style></style>

@@ -42,7 +42,7 @@ const showCreateGroupModal = ref<boolean>(false);
 const closeCreateGroupModal = () => showCreateGroupModal.value = !showCreateGroupModal.value;
 
 onBeforeMount(() => {
-  groupStore.fetchGroups();
+  groupStore.fetchAll();
 });
 </script>
 

@@ -2,7 +2,7 @@
   <SlideInModal :isModalOpen="props.open" @close="close()" title="Loan Request"
     description="Use this form to input a member's loan for the specified period of time.">
     <template #body>
-      <form @submit.prevent="register(credentials)" class="flex flex-col space-y-2">
+      <form @submit.prevent="memberStore.save(credentials)" class="flex flex-col space-y-2">
         <div>
           <FloatingLabelInput type="text" :error="credentials.first_name" v-model="credentials.first_name" label="First Name"
             icon="heroicons:user" :icon-size="25" />
@@ -43,16 +43,15 @@
           <FloatingLabelInput type="text" :error="credentials.city" v-model="credentials.city" label="City"
             icon="heroicons:user" :icon-size="25" />
         </div>
-        <Button label="Signup" :loader="authLoader" size="block" />
+        <Button label="Signup" :loader="isSavingMember" size="block" />
       </form>
     </template>
   </SlideInModal>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
+import { ref, reactive } from "vue";
 import { storeToRefs } from "pinia";
-import { customAxios } from "../../../composables/axios";
 import { useMemberStore } from "../../../stores/member-store";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
@@ -64,9 +63,6 @@ import {
   PlusIcon,
 } from "@heroicons/vue/24/outline";
 import TextArea from "../../shared/inputs/TextArea.vue";
-import useAuthentication from "@/composables/auth";
-
-const { register, errorMessages, authLoader } = useAuthentication();
 
 export interface CreateMemberModalProps {
   open?: boolean | undefined;
@@ -76,10 +72,8 @@ const props = defineProps<CreateMemberModalProps>();
 const emit = defineEmits(['close'])
 const close = () => emit('close');
 
-const user = ref(null);
 const memberStore = useMemberStore();
-const { members, loadingMembers } = storeToRefs(memberStore);
-const savingMember = ref(false);
+const { isSavingMember } = storeToRefs(memberStore);
 
 const credentials = reactive({
   first_name: '', last_name: '', name: '', phone_number: '', username: '', email: '',

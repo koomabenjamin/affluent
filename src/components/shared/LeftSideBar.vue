@@ -194,7 +194,7 @@
         ">
         <div class="flex space-x-2 items-center">
           <WalletIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Wallet (I & E)</div>
+          <div class="font-semibold text-xs">Wallet (I & E) / Portfolio</div>
         </div>
         <ChevronRightIcon class="h-5 w-5" />
       </button>
