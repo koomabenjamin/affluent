@@ -9,12 +9,13 @@ const { login, errorMessages, authLoader } = useAuthentication();
 
 const credentials = reactive({
   email: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    middleName: '',
-    userName: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  middleName: '',
+  userName: '',
 });
+
 </script>
 
 <template>
@@ -39,16 +40,17 @@ const credentials = reactive({
         bg-white 
         rounded">
 
-      <p class="
+      <span class="
         h1 
         text-left 
         w-full 
+        text-base
         my-4">
-        HFMSG
-      </p>
+        <!-- {{ import.meta.env.CLIENT_APP_NAME }} -->
+        Affluent Investment Club
+      </span>
 
-      <span 
-        class="
+      <span class="
           text-slate-500 
           w-full 
           text-left 
@@ -56,59 +58,34 @@ const credentials = reactive({
         Welcome back awesome user, please enter your email and password.
       </span>
 
-      <FloatingLabelInput 
-        type="email"
-        :errors="errorMessages?.email?.[0]" 
-        v-model="credentials.email" 
-        required 
-        name="email"
-        label="Email" 
-        icon="heroicons:envelope"
-        :icon-size="25"
-      />
+      <FloatingLabelInput type="email" :errors="errorMessages?.email?.[0]" v-model="credentials.email" required
+        name="email" label="Email" icon="heroicons:envelope" :icon-size="25" />
 
-      <FloatingLabelInput 
-        type="password" 
-        :errors="errorMessages?.password" v-model="credentials.password" 
-        required 
-        name="password"
-        label="Password" 
-        icon="heroicons:key"
-        :icon-size="25"
-      />
+      <FloatingLabelInput type="password" :errors="errorMessages?.password" v-model="credentials.password" required
+        name="password" label="Password" icon="heroicons:key" :icon-size="25" />
 
-      <p 
-        class="
+      <p class="
         text-slate-400 w-full text-left my-2 font-semibold text-sm">
-        By logging in, you accept the 
-        <span
-          class="text-blue-600 underline text-sm">
+        By logging in, you accept the
+        <span class="text-blue-600 underline text-sm">
           Terms & Conditions
         </span>
       </p>
 
       <div class="w-full flex items-center justify-between">
-        <Button 
-          label="Login" 
-          class="w-2/3"
-          size="block"
-          :loader="authLoader" />
+        <Button label="Login" class="w-2/3" size="block" :loader="authLoader" />
       </div>
 
       <div class="w-full py-1 text-center text-sm flex items-center justify-between">
-        <div 
-          class="font-light">
+        <div class="font-light">
           Don't have an account ?,
-          <router-link 
-            to="/register" 
-            class="text-blue-600 font-bold">
+          <router-link to="/register" class="text-blue-600 font-bold">
             Create an account.
           </router-link>
         </div>
-        <span 
-          class="text-red-600 text-sm">
+        <span class="text-red-600 text-sm">
           Forgot Password ?
-      </span>
+        </span>
       </div>
 
     </form>
