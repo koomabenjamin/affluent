@@ -51,7 +51,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 // import { defineComponent, PropType } from "vue";
 import { Icon, type IconifyIcon } from "@iconify/vue";
 

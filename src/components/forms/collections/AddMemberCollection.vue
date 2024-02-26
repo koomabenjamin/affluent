@@ -76,7 +76,6 @@ import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import Select from "../../shared/Select.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
-import Select from "../../shared/Select.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue";
 
