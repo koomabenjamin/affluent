@@ -68,6 +68,22 @@ interface SelectOptionStructure {
   name?: string;
 }
 
+export interface SelectProps {
+  id?: string | undefined;
+  name?: string | undefined;
+  label?: string | undefined;
+  price?: string | undefined;
+  hide?: boolean | undefined;
+  iconSize?: string | number | undefined;
+  type?: string | undefined;
+  required?: boolean | undefined;
+  disabled?: boolean | undefined;
+  readonly?: boolean | undefined;
+  modelValue?: string | undefined;
+  errors?: Error[] | undefined;
+}
+
+
 export default defineComponent({
   name: "Select",
   props: {
@@ -116,9 +132,8 @@ export default defineComponent({
       type: [String, Number, Array]
     }
   },
-  setup(props, { emit }) {
-
-    defineEmits(["update:optionId", "update:optionName", "update:modelValue"]);
+  emits:["update:optionId", "update:optionName", "update:modelValue"],
+  setup(props: SelectProps) {
 
     const selectedOptionId = ref("");
 
