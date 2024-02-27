@@ -1,13 +1,13 @@
 <template>
   <div class="w-full relative">
     <div class="relative w-full h-12 mt-1">
-      <input :id="props.id"
+      <input :id="id"
         class="block px-2.5 pb-2.5 border pt-4 h-full w-full text-sm text-gray-900 rounded-sm appearance-none focus:outline-none focus:ring-0 peer"
-        :name="props.name" :class="[(props.error !== '') ? 'focus:border-red-600' : 'focus:border-blue-600']"
-        @input="$emit('update:optionName', $event.target.value); $emit('update:optionId', $event.target.value)"
-        @focus="toggleSelectOptions()" :type="props.type" placeholder=" " />
+        :class="[(error !== '') ? 'focus:border-red-600' : 'focus:border-blue-600']"
+        @input="handleInputChange($event)"
+        @focus="toggleSelectOptions()" placeholder=" " />
       <label
-        :class="[(props.error !== '') ? 'peer-focus:text-red-600 peer-focus:dark:text-red-500' : 'peer-focus:text-blue-600 peer-focus:dark:text-blue-500']"
+        :class="[(error !== '') ? 'peer-focus:text-red-600 peer-focus:dark:text-red-500' : 'peer-focus:text-blue-600 peer-focus:dark:text-blue-500']"
         class="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">
         {{ label }}
       </label>
@@ -60,12 +60,14 @@
 </template>
 
 <script lang="ts">
+import type { PropType } from "vue";
 import { ref, watch, onMounted, defineComponent } from "vue";
 import FloatingLabelInput from "./inputs/FloatingLabelInput.vue";
 
 interface SelectOptionStructure {
   id?: string | number;
   name?: string;
+  description?: string | undefined | null;
 }
 
 export interface SelectProps {
@@ -75,11 +77,15 @@ export interface SelectProps {
   price?: string | undefined;
   hide?: boolean | undefined;
   iconSize?: string | number | undefined;
+  optionName?: string | number | undefined;
+  optionId?: string | number | undefined;
+  options?: object[] | string[] | number[];
   type?: string | undefined;
   required?: boolean | undefined;
   disabled?: boolean | undefined;
   readonly?: boolean | undefined;
   modelValue?: string | undefined;
+  error?: string | string[] | undefined;
   errors?: Error[] | undefined;
 }
 
@@ -88,60 +94,25 @@ export default defineComponent({
   name: "Select",
   props: {
     id: {
-      type: String,
-    },
-    name: {
-      type: String,
+      type: String as PropType<string>,
     },
     hide: {
-      type: Boolean,
       default: false,
     },
-    optionId: {
-      type: [String, Number],
-    },
-    optionName: {
-      type: [String, Number],
-    },
-    label: {
-      type: String,
-    },
     modelValue: {
-      type: [String, Number],
       default: "",
     },
-    errors: {
-      type: Object,
-    },
-    options: {
-      type: [Array, Object],
-    },
-    required: {
-      type: Boolean,
-    },
-    disabled: {
-      type: Boolean,
-    },
-    value: {
-      type: [String, Number],
-    },
-    type: {
-      type: [String, Number, Symbol]
-    },
-    error: {
-      type: [String, Number, Array]
-    }
   },
-  emits:["update:optionId", "update:optionName", "update:modelValue"],
-  setup(props: SelectProps) {
+  emits: ["update:optionId", "update:optionName", "update:modelValue"],
+  setup(props: SelectProps, { emit }) {
 
-    const selectedOptionId = ref("");
+    const selectedOptionId = ref<string>("");
 
-    const selectedOptionName = ref("");
+    const selectedOptionName = ref<string>("");
 
-    const optionsDropdown = ref(false);
+    const optionsDropdown = ref<boolean>(false);
 
-    const displayedOptions = ref([]);
+    const displayedOptions = ref<object[] | string[] | number[]>([]);
 
     const toggleSelectOptions = () => optionsDropdown.value = !optionsDropdown.value;
 
@@ -156,6 +127,11 @@ export default defineComponent({
       emit("update:optionId", option.id);
       emit("update:optionName", option.name);
       emit("update:modelValue", option.name);
+    };
+
+    const handleInputChange = (e: Event) => {
+      emit('update:optionId', (e.target as HTMLInputElement).value)
+      emit('update:optionName', (e.target as HTMLInputElement).value)
     };
 
     watch(
@@ -174,6 +150,7 @@ export default defineComponent({
 
     return {
       selectOption,
+      handleInputChange,
       toggleSelectOptions,
       selectedOptionId,
       selectedOptionName,
