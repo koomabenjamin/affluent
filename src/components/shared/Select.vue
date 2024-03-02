@@ -14,7 +14,7 @@
       <!-- <component class="h-5 text-blue-600 absolute right-2 top-1/4" :is="OutlineIcons[props.icon]"></component> -->
       <!-- <span class="text-xs text-red-600">{{ props.error }}</span> -->
     </div>
-    <div v-if="optionsDropdown && displayedOptions.length > 0" class="
+    <div v-if="optionsDropdown && (displayedOptions?.length ?? 0) > 0" class="
         absolute
         bg-white
         z-20
@@ -41,7 +41,7 @@
           v-if="(typeof option.description) !== 'undefined'">{{ option.description }}</span>
       </div>
     </div>
-    <div v-if="!optionsDropdown" class="
+    <div v-if="!optionsDropdown || !loadingOptions" class="
         absolute
         bg-white
         z-20
@@ -53,7 +53,7 @@
         text-gray-400
         rounded-b
       ">
-      <div class="h-10 w-full cursor-pointer px-4 py-2">Loading...</div>
+      <div class="h-10 w-full cursor-pointer px-4 py-2 text-xs text-center">Loading...</div>
     </div>
     <div v-else></div>
   </div>
@@ -106,6 +106,8 @@ export default defineComponent({
   emits: ["update:optionId", "update:optionName", "update:modelValue"],
   setup(props: SelectProps, { emit }) {
 
+    const loadingOptions = ref<boolean>(false);
+
     const selectedOptionId = ref<string>("");
 
     const selectedOptionName = ref<string>("");
@@ -155,7 +157,8 @@ export default defineComponent({
       selectedOptionId,
       selectedOptionName,
       displayedOptions,
-      optionsDropdown
+      optionsDropdown,
+      loadingOptions
     }
   },
 });
