@@ -5,13 +5,23 @@
       <div class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
-            <FloatingLabelInput type="file" :error="extractionRequest" v-model="extractionRequest"
-              label="Excel File" icon="heroicons:banknote" :icon-size="25" />
+            <FloatingLabelInput 
+              name="file"
+              type="file" 
+              :error="extractionRequest" 
+              v-model="extractionRequest" 
+              label="Excel File"
+              icon="heroicons:banknote" 
+              :icon-size="25" />
           </div>
         </div>
 
         <div class="mt-4">
-          <Button label="Confirm" :loader="isExtractingMemberCollections" size="block" @click="extractMemberCollections()" />
+          <Button 
+            label="Confirm" 
+            :loader="isExtractingMemberCollections" 
+            size="block"
+            @click="extractMemberCollections()" />
         </div>
       </div>
     </template>
@@ -31,15 +41,27 @@ export interface CreateGroupModalProps {
 }
 
 const props = defineProps<CreateGroupModalProps>();
-
 const extractionRequest = ref<any>(null);
 const isExtractingMemberCollections = ref<boolean>(false);
 
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
-
 const extractMemberCollections = async () => {
-  const response = await customAxios.post("v1/extract_collections_from_excel", extractionRequest)
+
+  const formData = new FormData();
+  formData.append('file', extractionRequest.value);
+
+  try {
+    const response = await customAxios.post('v1/bulk/extract_collections_from_excel', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    console.log('File uploaded successfully!');
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+
 }
 </script>
 
