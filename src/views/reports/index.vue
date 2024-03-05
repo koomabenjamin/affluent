@@ -5,7 +5,7 @@
         <div class="flex flex-col w-1/4 h-[90vh] space-y-1">
           <div v-for="(value, index) in items" :key="index" class="space-y-1 flex flex-col">
             <div 
-            :class="`${(activeTabs.includes(value.name)) ? 'bg-blue-600 text-white': ''}`"
+            :class="`${(activeTabs.includes(value.name)) ? 'bg-slate-500 text-white': ''}`"
             class="h-10 px-1 flex items-center justify-between border rounded font-normal text-xs">
               <span class="font-semibold">{{ value.name }}</span>
               <div @click="openTabs(value.name)" class="cursor-pointer">
@@ -49,16 +49,16 @@ import UpdatePersonalInformation from '@/components/forms/profile/UpdatePersonal
 import UpdatePersonalGroups from '@/components/forms/profile/UpdatePersonalGroups.vue';
 
 const items = [
-  { items: ['Summary', 'Groups', 'sub-item-three'], route: "", icon: "", name: "Loans" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Collections" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Members" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Financial Statements" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "System Audit" },
+  { items: ['Loan Book', 'Dead Loans', 'Black-listed Clients'], route: "", icon: "", name: "Loans" },
+  { items: ['Collections Ledger', 'Failed Collections'], route: "", icon: "", name: "Collections" },
+  { items: ['Member Ledger'], route: "", icon: "", name: "Members" },
+  { items: ['Income Statement', 'Cashflow Statement', 'Balance Sheet'], route: "", icon: "", name: "Financial Statements" },
+  { items: ['Security Logs', 'Breach Reports', 'Funny-activties'], route: "", icon: "", name: "System Audit" },
 ];
 
 const activePage = ref<string>("Summary");
 
-const activeTabs = ref<string[]>(["Profile"]);
+const activeTabs = ref<string[]>(["System Audit", "Loans", "Members", "Collections", "Financial Statements"]);
 
 const changeActivePage = (page:string) => activePage.value = page;
 
