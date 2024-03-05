@@ -29,7 +29,7 @@
         <div class="bg-blue-600 h-8 w-10 rounded-full"></div>
         <div class="bg-yellow-400 h-8 w-10 rounded-full"></div>
       </div>
-      <h2>Hfm</h2>
+      <h2>Affluent</h2>
       <span>Savings</span>
     </div>
 
