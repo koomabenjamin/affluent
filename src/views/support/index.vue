@@ -5,7 +5,7 @@
         <div class="flex flex-col w-1/4 h-[90vh] space-y-1">
           <div v-for="(value, index) in items" :key="index" class="space-y-1 flex flex-col">
             <div 
-            :class="`${(activeTabs.includes(value.name)) ? 'bg-blue-600 text-white': ''}`"
+            :class="`${(activeTabs.includes(value.name)) ? 'bg-slate-600 text-white': ''}`"
             class="h-10 px-1 flex items-center justify-between border rounded font-normal text-xs">
               <span class="font-semibold">{{ value.name }}</span>
               <div @click="openTabs(value.name)" class="cursor-pointer">
@@ -49,19 +49,15 @@ import UpdatePersonalInformation from '@/components/forms/profile/UpdatePersonal
 import UpdatePersonalGroups from '@/components/forms/profile/UpdatePersonalGroups.vue';
 
 const items = [
-  { items: ['Summary', 'Groups', 'sub-item-three'], route: "", icon: "", name: "Profile" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Portfolio" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Account" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Notifications" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Appearance" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Billing" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Keys and passwords" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Security Logs" },
+  { items: ['Loans Support', 'Collections Support', 'Members Support', 'Groups Support'], route: "", icon: "", name: "Support" },
+  { items: ['Loans Tutorials', 'Collections Tutorials', 'Members Tutorials', 'Groups Tutorials'], route: "", icon: "", name: "Tutorials" },
+  { items: ['General', 'Loans', 'Collections', 'Members', 'Groups', 'Reports'], route: "", icon: "", name: "FAQs" },
+  { items: ['System', 'Loans', 'Collections', 'Members', 'Groups', 'Reports'], route: "", icon: "", name: "Scheduled Updates" },
 ];
 
 const activePage = ref<string>("Summary");
 
-const activeTabs = ref<string[]>(["Profile"]);
+const activeTabs = ref<string[]>(["Support", "Tutorials", "FAQs", "Scheduled Updates"]);
 
 const changeActivePage = (page:string) => activePage.value = page;
 
