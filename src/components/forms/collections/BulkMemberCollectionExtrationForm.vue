@@ -2,7 +2,7 @@
   <SlideInModal :isModalOpen="props.open" @close="closeModal()" title="Extract Member Collections"
     description="Use this form to input a member's collection for the specified period of time.">
     <template #body>
-      <div class="flex flex-col space-y-2">
+      <form class="flex flex-col space-y-2" @submit.prevent="extractMemberCollections($event)">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
             <FloatingLabelInput 
@@ -21,10 +21,9 @@
           <Button 
             label="Confirm" 
             :loader="isExtractingMemberCollections" 
-            size="block"
-            @click="extractMemberCollections()" />
+            size="block" />
         </div>
-      </div>
+      </form>
     </template>
   </SlideInModal>
 </template>
@@ -47,9 +46,10 @@ const isExtractingMemberCollections = ref<boolean>(false);
 
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
-const extractMemberCollections = async () => {
+const extractMemberCollections = async (event : Event) => {
 
   const formData = new FormData();
+  extractionRequest.value = event?.target;
   formData.append('file', extractionRequest.value);
 
   try {
