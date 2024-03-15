@@ -11,6 +11,7 @@
               :error="extractionRequest" 
               v-model="extractionRequest" 
               label="Excel File"
+              accept=".xlsx,.xls"
               icon="heroicons:banknote" 
               :icon-size="25" />
           </div>

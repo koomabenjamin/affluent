@@ -6,6 +6,7 @@
         placeholder=" "
         :type="props.type"
         autocomplete="off"
+        :accept="props.accept"
         @input="updateValue($event)"
         :class="`
           peer
@@ -64,6 +65,7 @@ export interface InputProps{
   name?: string | undefined;
   label?: string | undefined;
   price?: string | undefined;
+  accept?: string | undefined;
   hide?: boolean | undefined;
   icon: string | IconifyIcon;
   iconSize?: string | number | undefined;
