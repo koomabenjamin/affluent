@@ -2,26 +2,24 @@
   <SlideInModal :isModalOpen="props.open" @close="closeModal()" title="Extract Member Collections"
     description="Use this form to input a member's collection for the specified period of time.">
     <template #body>
-      <form class="flex flex-col space-y-2" @submit.prevent="extractMemberCollections($event)">
+      <form class="flex flex-col space-y-2" @submit.prevent="extractMemberCollections()">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
-            <FloatingLabelInput 
+            <!-- <FloatingLabelInput 
               name="file"
               type="file" 
-              :error="extractionRequest" 
-              v-model="extractionRequest" 
+              :error="fileInput" 
+              v-model="fileInput" 
               label="Excel File"
               accept=".xlsx,.xls"
               icon="heroicons:banknote" 
-              :icon-size="25" />
+              :icon-size="25" /> -->
+            <input type="file" ref="fileInput" accept=".xlsx,.xls" required>
           </div>
         </div>
 
         <div class="mt-4">
-          <Button 
-            label="Confirm" 
-            :loader="isExtractingMemberCollections" 
-            size="block" />
+          <Button label="Confirm" :loader="isExtractingMemberCollections" size="block" />
         </div>
       </form>
     </template>
@@ -41,16 +39,16 @@ export interface CreateGroupModalProps {
 }
 
 const props = defineProps<CreateGroupModalProps>();
-const extractionRequest = ref<any>(null);
+const fileInput = ref<any>(null);
 const isExtractingMemberCollections = ref<boolean>(false);
 
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
-const extractMemberCollections = async (event : Event) => {
+const extractMemberCollections = async () => {
 
   const formData = new FormData();
-  extractionRequest.value = event?.target;
-  formData.append('file', extractionRequest.value);
+  formData.append('file', fileInput.value.files[0]);
+  console.log(fileInput.value.files)
 
   try {
     const response = await customAxios.post('v1/bulk/extract_collections_from_excel', formData, {
@@ -66,4 +64,8 @@ const extractMemberCollections = async (event : Event) => {
 }
 </script>
 
-<style></style>
+<style scoped>
+/* input[type="file"] {
+  display: none;
+} */
+</style>
