@@ -18,7 +18,9 @@ const selectedTab = ref<string>(tabs?.[0]);
     <!-- main system content  -->
     <div class="mt-5 w-full h-full">
       <!-- left hand tabs -->
-      <TabList :tabs="tabs" v-model="selectedTab"/>
+      <div class="w-full mb-2">
+        <TabList :tabs="tabs" v-model="selectedTab"/>
+      </div>
 
       <div v-if="selectedTab === 'Summary'" class="py-8">
         <!-- graph -->

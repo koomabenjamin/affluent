@@ -2,7 +2,7 @@
   <SlideInModal :isModalOpen="props.open" @close="closeModal()" title="Extract Member Collections"
     description="Use this form to input a member's collection for the specified period of time.">
     <template #body>
-      <form class="flex flex-col space-y-2" @submit.prevent="extractMemberCollections()">
+      <form class="flex flex-col space-y-2" @submit.prevent="extractMemberCollections()" enctype="multipart/form-data">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <div>
             <!-- <FloatingLabelInput 
@@ -14,7 +14,7 @@
               accept=".xlsx,.xls"
               icon="heroicons:banknote" 
               :icon-size="25" /> -->
-            <input type="file" ref="fileInput" accept=".xlsx,.xls" required>
+            <input type="file" ref="fileInput" accept=".xlsx,.xls" required name="file">
           </div>
         </div>
 
