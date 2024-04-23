@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentication from '../../composables/auth';
 import FloatingLabelInput from '../../components/shared/inputs/FloatingLabelInput.vue';
 import Button from '../../components/shared/Button.vue';
+
+const appName = import.meta.env.VITE_CLIENT_APP_NAME
 
 const { login, errorMessages, authLoader } = useAuthentication();
 
@@ -46,8 +48,7 @@ const credentials = reactive({
         w-full 
         text-base
         my-4">
-        <!-- {{ import.meta.env.CLIENT_APP_NAME }} -->
-        Affluent Investment Club
+        {{ appName }}
       </span>
 
       <span class="

@@ -23,14 +23,18 @@
         space-x-1
         items-center
         w-full
-        justify-center
+        justify-end
+        flex-shrink-0
+        flex-grow-0
       ">
-      <div class="h-10 w-12 -space-x-3 -space-y-6">
+      <div class="h-10 w-12 -space-x-2 -space-y-6">
         <div class="bg-blue-600 h-8 w-10 rounded-full"></div>
         <div class="bg-yellow-400 h-8 w-10 rounded-full"></div>
       </div>
-      <h2>Affluent</h2>
-      <span>Savings</span>
+      <div class="flex flex-col w-4/5">
+        <h6 class="font-bold text-lg text-wrap">{{ appName }}</h6>
+        <h6 class="font-normal text-xs text-wrap text-slate-400">Taking finances and investments to the next level for a better future.</h6>
+      </div>
     </div>
 
     <!-- Sidebar menu and content -->
@@ -287,7 +291,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" type="module">
 import { ref, inject } from 'vue';
 import {
   NewspaperIcon,
@@ -314,6 +318,8 @@ import { useRouter } from 'vue-router'
 const router = useRouter();
 
 const currentRoute = ref('');
+
+const appName = import.meta.env.VITE_CLIENT_APP_NAME
 
 const updateActiveBoard = (route: string) => {
   currentRoute.value = route;
