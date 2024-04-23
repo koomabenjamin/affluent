@@ -5,7 +5,7 @@ import useAuthentication from '../../composables/auth';
 import FloatingLabelInput from '../../components/shared/inputs/FloatingLabelInput.vue';
 import Button from '../../components/shared/Button.vue';
 
-const appName = import.meta.env.VITE_CLIENT_APP_NAME
+const appName = import.meta.env.VITE_CLIENT_GROUP_NAME
 
 const { login, errorMessages, authLoader } = useAuthentication();
 

@@ -32,8 +32,8 @@
         <div class="bg-yellow-400 h-8 w-10 rounded-full"></div>
       </div>
       <div class="flex flex-col w-4/5">
-        <h6 class="font-bold text-lg text-wrap">{{ appName }}</h6>
-        <h6 class="font-normal text-xs text-wrap text-slate-400">Taking finances and investments to the next level for a better future.</h6>
+        <h6 class="font-bold text-lg text-wrap">{{ appGroupName }}</h6>
+        <h6 class="font-normal text-xs text-wrap text-slate-400">{{ appGroupSlogan }}</h6>
       </div>
     </div>
 
@@ -319,7 +319,8 @@ const router = useRouter();
 
 const currentRoute = ref('');
 
-const appName = import.meta.env.VITE_CLIENT_APP_NAME
+const appGroupName = import.meta.env.VITE_CLIENT_GROUP_NAME;
+const appGroupSlogan = import.meta.env.VITE_CLIENT_GROUP_SLOGAN;
 
 const updateActiveBoard = (route: string) => {
   currentRoute.value = route;
