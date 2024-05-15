@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'vue-select/dist/vue-select.css';
-
 .form-input {
   @apply block p-4 text-base appearance-none focus:outline-none bg-transparent w-full;
 }

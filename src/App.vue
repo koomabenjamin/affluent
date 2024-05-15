@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import '@/assets/main.css'
+import './assets/main.css';
 </script>
 
 <template>
   <RouterView />
 </template>
 
-<style scoped>
+<style>
+
+@import 'vue-select/dist/vue-select.css';
+
 .center {
   @apply flex items-center justify-center
 }
