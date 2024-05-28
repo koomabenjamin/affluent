@@ -73,7 +73,7 @@ export interface InputProps{
   required?: boolean | undefined;
   disabled?: boolean | undefined;
   readonly?: boolean | undefined;
-  modelValue?: string | undefined;
+  modelValue?: string | number;
   errors?: Error[] | undefined;
 }
 

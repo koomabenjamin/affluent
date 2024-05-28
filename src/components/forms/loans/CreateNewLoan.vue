@@ -4,12 +4,15 @@
     <template #body>
       <div class="flex flex-col space-y-2 h-full">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
-          <!-- <div>
+          <div>
             <v-select :options="members" label="name" :loading="loadingMembers" class="h-12"></v-select>
           </div>
           <div>
             <v-select :options="months" label="name" :loading="loadingMembers" multiple></v-select>
-          </div> -->
+          </div>
+          <div>
+            <v-select :options="groups" label="name" :loading="loadingMembers" multiple></v-select>
+          </div>
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
               label="Amount" icon="heroicons:banknote" :icon-size="25" />
@@ -74,6 +77,7 @@ import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useLoanStore } from "../../../stores/loan-store";
 import { useMemberStore } from "../../../stores/member-store";
+import { useGroupStore } from "../../../stores/group-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import MultiSelect from "../../shared/MultiSelect.vue";
@@ -102,15 +106,19 @@ const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
 
 const user = ref(null);
+
 const loanStore = useLoanStore();
 const memberStore = useMemberStore();
+const groupStore = useGroupStore();
+
 const { members, loadingMembers } = storeToRefs(memberStore);
 const { loans, loadingLoans } = storeToRefs(loanStore);
+const { groups } = storeToRefs(groupStore);
+
 const loanBeingSaved = ref(false);
 
 const loanRequest = reactive<LoanRequest>({
   amount: 0,
-  member: "",
   group: "",
   interest_rate: 0,
   interest_amount: 0,
@@ -125,7 +133,6 @@ const loanRequest = reactive<LoanRequest>({
 });
 const loanResponseError = reactive<LoanRequest>({
   amount: 0,
-  member: "",
   group: "",
   interest_rate: 0,
   interest_amount: 0,
