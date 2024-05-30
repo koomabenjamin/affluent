@@ -4,14 +4,14 @@
     <template #body>
       <div class="flex flex-col space-y-2 h-full">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
-          <div>
+          <!-- <div>
             <v-select :options="members" label="name" :loading="loadingMembers" class="h-12"></v-select>
-          </div>
+          </div> -->
           <div>
             <v-select :options="months" label="name" :loading="loadingMembers" multiple></v-select>
           </div>
           <div>
-            <v-select :options="groups" label="name" :loading="loadingMembers" multiple></v-select>
+            <v-select :options="groups" label="name" :loading="loadingMembers"></v-select>
           </div>
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
@@ -151,6 +151,7 @@ const saveLoan = async () => {
 };
 
 onMounted(async () => {
+  await groupStore.fetchAll();
   await memberStore.fetchAll(1);
 })
 </script>

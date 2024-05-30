@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { Icon } from "@iconify/vue";
 import { BanknotesIcon, UserGroupIcon, UserIcon } from "@heroicons/vue/24/outline";
 import Container from "../components/shared/Container.vue";
@@ -7,10 +7,17 @@ import SummaryChart from "../components/Metrics/SummaryChart.vue";
 import TabList from "@/components/shared/Tabs/TabList.vue";
 import Card from "@/components/shared/Cards/Card.vue";
 import DataTable from "@/components/shared/DataTable.vue";
+import { useGroupStore } from '@/stores/group-store';
+
+const groupStore = useGroupStore();
 
 const tabs: string[] = ['Summary', 'Groups', 'Members', 'Collections', 'Cashflows', 'Assets', 'News', 'Events', 'Goodwill', 'Business'];
 
 const selectedTab = ref<string>(tabs?.[0]);
+
+onMounted(() => {
+  groupStore.fetchAll();
+})
 </script>
 
 <template>
