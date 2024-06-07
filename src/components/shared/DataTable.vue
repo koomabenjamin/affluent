@@ -1,10 +1,10 @@
 <template>
   <div class="w-full overflow-auto">
-    <table class="lg:w-full w-[800px] mt-4">
+    <table class="lg:w-full w-[800px] mt-4 overflow-auto">
       <thead>
-        <tr>
+        <tr class="">
           <th></th>
-          <th v-for="column in columns" :key="column" class="capitalize text-left text-xs h-10">{{ removeSpecialCharacter(column) }}</th>
+          <th v-for="column in columns" :key="column" class="capitalize text-left text-xs h-10 whitespace-nowrap">{{ removeSpecialCharacter(column) }}</th>
           <th v-if="actions" class="capitalize text-left text-xs h-10">
             <!--SLOT FOR CUSTOM ACTIONS FOR ANY COMPONENT THAT USES THE DATATABLE-->
             <!-- <slot name="actions"></slot> -->

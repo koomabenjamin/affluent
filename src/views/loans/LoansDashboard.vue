@@ -3,7 +3,7 @@
 
   <Container>
     <div class="w-full flex items-center justify-between mt-5">
-      <div class="text-xl font-bold">Loans</div>
+      <div class="text-xl font-bold">Loan Requests</div>
       <Button label="Create New Loan" size="md" @click="closeCreateGroupModal()" />
     </div>
 
@@ -39,13 +39,13 @@ const { loans, loadingLoans } = storeToRefs(loanStore);
 
 const columns = ref<string[]>(
   [
-    'group',
     'amount',
     'interest_rate',
     'total_loan_debt',
     'repayment_period',
     'request_date',
     'expiry_date',
+    'approval'
   ]
 );
 

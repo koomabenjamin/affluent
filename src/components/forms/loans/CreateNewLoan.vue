@@ -5,14 +5,9 @@
       <div class="flex flex-col space-y-2 h-full">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <!-- <div>
-            <v-select :options="members" label="name" :loading="loadingMembers" class="h-12"></v-select>
+            <v-select :options="months" label="name" v-model="loanRequest.period" multiple placeholder="Select an date" clearable></v-select>
           </div> -->
-          <div>
-            <v-select :options="months" label="name" :loading="loadingMembers" multiple></v-select>
-          </div>
-          <div>
-            <v-select :options="groups" label="name" :loading="loadingMembers"></v-select>
-          </div>
+          <v-select :options="groups" label="name" v-model="selectedGroup" clearable placeholder="Select a group"></v-select>
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
               label="Amount" icon="heroicons:banknote" :icon-size="25" />
@@ -117,9 +112,11 @@ const { groups } = storeToRefs(groupStore);
 
 const loanBeingSaved = ref(false);
 
+const selectedGroup = ref(null);
+
 const loanRequest = reactive<LoanRequest>({
   amount: 0,
-  group: "",
+  group: null,
   interest_rate: 0,
   interest_amount: 0,
   application_fee: 0,
@@ -133,7 +130,7 @@ const loanRequest = reactive<LoanRequest>({
 });
 const loanResponseError = reactive<LoanRequest>({
   amount: 0,
-  group: "",
+  group: null,
   interest_rate: 0,
   interest_amount: 0,
   application_fee: 0,

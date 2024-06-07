@@ -23,7 +23,7 @@ export type LoanPayload = Loan[];
 
 export interface LoanRequest {
   amount :  number | string,
-  group : number | string,
+  group : number | string | null,
   interest_rate :  number | string,
   interest_amount :  number | string,
   application_fee :  number | string,
