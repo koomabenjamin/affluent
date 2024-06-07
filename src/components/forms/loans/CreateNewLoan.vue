@@ -7,7 +7,7 @@
           <!-- <div>
             <v-select :options="months" label="name" v-model="loanRequest.period" multiple placeholder="Select an date" clearable></v-select>
           </div> -->
-          <v-select :options="groups" label="name" v-model="selectedGroup" clearable placeholder="Select a group"></v-select>
+          <v-select :options="groups" label="name" v-model="loanRequest.group" clearable placeholder="Select a group"></v-select>
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
               label="Amount" icon="heroicons:banknote" :icon-size="25" />
