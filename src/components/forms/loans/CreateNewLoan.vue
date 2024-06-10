@@ -2,12 +2,20 @@
   <SlideInModal :isModalOpen="props.open" @close="closeModal()" title="Loan Request"
     description="Use this form to input a member's loan for the specified period of time.">
     <template #body>
-      <div class="flex flex-col space-y-2 h-full">
+      <div class="flex flex-col space-y-2 h-full relative">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
           <!-- <div>
             <v-select :options="months" label="name" v-model="loanRequest.period" multiple placeholder="Select an date" clearable></v-select>
           </div> -->
-          <v-select :options="groups" label="name" v-model="loanRequest.group" clearable placeholder="Select a group"></v-select>
+          <v-select 
+            :options="groups" 
+            label="name" 
+            v-model="loanRequest.group" 
+            clearable 
+            placeholder="Select a group"
+            :reduce="data => data?.id">
+          </v-select>
+
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
               label="Amount" icon="heroicons:banknote" :icon-size="25" />
@@ -31,18 +39,17 @@
               v-model="loanRequest.total_loan_debt" label="Total Loan Debt:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
-          <div>
+          <div class="w-full flex space-x-2">
             <FloatingLabelInput type="date" :error="loanResponseError.date_of_disbursement"
               v-model="loanRequest.date_of_disbursement" label="Disbursement Date" icon="heroicons:calendar"
               :icon-size="25" />
-          </div>
-          <div>
+          
             <FloatingLabelInput type="date" :error="loanResponseError.expiry_date" v-model="loanRequest.expiry_date"
               label="Expiry Date" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.collateral" v-model="loanRequest.collateral"
-              label="Collateral" icon="heroicons:pencil" :icon-size="25" />
+              label="Collateral Worth" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
             <FloatingLabelInput type="date" :error="loanResponseError.request_date" v-model="loanRequest.request_date"
@@ -59,7 +66,7 @@
           </div>
         </div>
 
-        <div class="mt-4">
+        <div class="absolute bottom-2 inset-x-0">
           <Button label="Confirm" :loader="loanBeingSaved" size="block" @click="saveLoan()" />
         </div>
       </div>
@@ -144,7 +151,9 @@ const loanResponseError = reactive<LoanRequest>({
 });
 
 const saveLoan = async () => {
+  loanBeingSaved.value = true;
   await loanStore.save(loanRequest);
+  loanBeingSaved.value = false;
 };
 
 onMounted(async () => {

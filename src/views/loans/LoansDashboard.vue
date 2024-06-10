@@ -10,9 +10,12 @@
     <DataTable :rows="loans" :columns="columns" :column-count="4" actions>
       <template #actions>
         <div class="flex space-x-2 items-center text-xs">
-          <IconButton @click="action()" class="" size="sm" :icon-size="18" type="success" :loader="false" icon="material-symbols:ink-pen-outline" />
-          <IconButton @click="action()" class="" size="sm" :icon-size="18" type="success" :loader="false" icon="material-symbols:delete-outline-rounded" />
-          <IconButton @click="action()" class="" size="sm" :icon-size="18" type="success" :loader="false" icon="material-symbols:info-outline" />
+          <IconButton 
+          @click="action()" class="" size="sm" :icon-size="18" type="edit" :loader="false" icon="material-symbols:ink-pen-outline" />
+          <IconButton 
+          @click="action()" class="" size="sm" :icon-size="18" type="delete" :loader="false" icon="material-symbols:delete-outline-rounded" />
+          <IconButton 
+          @click="action()" class="" size="sm" :icon-size="18" type="info" :loader="false" icon="material-symbols:info-outline" />
           <!-- <button>Edit</button> -->
           <!-- <button>Detail</button> -->
           <!-- <button>Delete</button> -->

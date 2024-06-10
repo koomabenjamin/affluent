@@ -10,7 +10,7 @@
 
     :class="`
         text-lg
-        ${processedColor}
+        ${processedColor()}
         ${(dark) ? 'text-white' : ''}
         ${(loader) ? 'bg-blue-800 text-white': 'text-blue-500'}
       `"
@@ -56,19 +56,19 @@ const props = defineProps<ButtonProps>();
 
 const processedColor = () => {
   if (props.type === 'success') {
-    return 'hover:bg-green-500 bg-green-500';
+    return 'hover:bg-green-500 bg-green-200 hover:text-white';
   }
   if (props.type === 'delete') {
-    return 'hover:bg-red-500 bg-red-500';
+    return 'hover:bg-red-600 bg-red-200 hover:text-white';
   }
   if (props.type === 'info') {
-    return 'hover:bg-indigo-500 bg-indigo-500';
+    return 'hover:bg-indigo-500 bg-indigo-200 hover:text-white';
   }
   if (props.type === 'edit') {
-    return 'hover:bg-yellow-500 bg-yellow-500';
+    return 'hover:bg-yellow-400 bg-yellow-200 hover:text-white';
   }
   if (props.type === 'normal') {
-    return 'hover:bg-blue-500 bg-blue-500';
+    return 'hover:bg-blue-500 bg-blue-100 hover:text-white';
   }
 }
 
