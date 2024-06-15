@@ -60,7 +60,7 @@ const router = createRouter({
   {
       path: '/loans',
       name: 'loans',
-      component: () => import('../views/loans/index.vue')
+      component: () => import('../views/loans/LoansDashboard.vue')
   },
   {
       path: '/reports',

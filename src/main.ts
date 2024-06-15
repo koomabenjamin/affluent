@@ -3,7 +3,7 @@ import "./assets/main.css";
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
-import vSelect from 'vue-select'
+import vSelect from 'vue-select';
 
 // Third party installations
 import VueApexCharts from "vue3-apexcharts";

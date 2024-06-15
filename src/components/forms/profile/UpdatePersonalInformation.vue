@@ -7,20 +7,25 @@
       <div class="col-span-4 text-xs text-gray-400 mb-1">
         These are the names that will be used on formal documentation within the system and any other printed documents.
       </div>
+
       <div class="col-span-2">
-        <FloatingLabelInput type="text" label="First Name" v-model="user.first_name" />
+        <FloatingLabelInput type="text" label="First Name" v-model="user.first_name" icon="heroicons:envelope"
+          :icon-size="20" />
       </div>
+
       <div class="col-span-2">
-        <FloatingLabelInput type="text" label="Last Name" v-model="user.last_name" />
+        <FloatingLabelInput type="text" label="Last Name" v-model="user.last_name" icon="heroicons:envelope"
+          :icon-size="20" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Emails:</div>
       <div class="col-span-4 text-xs text-gray-400 mb-1">
-        Ensure to register valid emails here as they will be used to confirm your identity as well verification for other
+        Ensure to register valid emails here as they will be used to confirm your identity as well verification for
+        other
         purposes within the system.
       </div>
       <div class="col-span-4">
-        <FloatingLabelInput type="text" label="Email" v-model="user.email" />
+        <FloatingLabelInput type="text" label="Email" v-model="user.email" icon="heroicons:envelope" :icon-size="20" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Contacts:</div>
@@ -29,7 +34,8 @@
         verification for other purposes within the system.
       </div>
       <div class="col-span-4">
-        <FloatingLabelInput type="text" label="Phone Number" v-model="user.phone_number" />
+        <FloatingLabelInput type="text" label="Phone Number" v-model="user.phone_number" icon="heroicons:envelope"
+          :icon-size="20" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Account Username:</div>
@@ -37,7 +43,8 @@
         Register a unique username for your account as it will be displayed on the profile and portfolio.
       </div>
       <div class="col-span-4">
-        <FloatingLabelInput type="text" label="username" v-model="user.username" />
+        <FloatingLabelInput type="text" label="username" v-model="user.username" icon="heroicons:envelope"
+          :icon-size="20" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Resdential Information:</div>
@@ -45,13 +52,14 @@
         Please register a valid resdential address for proper follow-up or delivery of any document / parcel.
       </div>
       <div class="col-span-2">
-        <FloatingLabelInput type="text" label="Country" v-model="user.country" />
+        <FloatingLabelInput type="text" label="Country" v-model="user.country" icon="heroicons:envelope"
+          :icon-size="20" />
       </div>
       <div>
-        <FloatingLabelInput type="text" label="City" v-model="user.city" />
+        <FloatingLabelInput type="text" label="City" v-model="user.city" icon="heroicons:envelope" :icon-size="20" />
       </div>
       <div>
-        <FloatingLabelInput type="text" label="State" v-model="user.state" />
+        <FloatingLabelInput type="text" label="State" v-model="user.state" icon="heroicons:envelope" :icon-size="20" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Socials:</div>
@@ -90,15 +98,15 @@ const user = reactive({
   first_name: '',
   last_name: '',
   phone_number: '',
+  username: '',
   email: '',
   city: '',
   country: '',
   state: '',
-}
-);
+});
 
 onMounted(() => {
-  Object.assign(user, JSON.parse(userInSession));
+  Object.assign(user, JSON.parse(userInSession ?? "{}"));
 })
 
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <master-page>
+  <MasterPage>
     <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 py-2 px-2 overflow-auto no-scroll-bar relative h-full">
       <!-- Top with user total -->
       <div class="w-full h-12 flex items-center justify-between border-b">
@@ -38,7 +38,7 @@
       </div>
       <slot></slot>
     </div>
-  </master-page>
+  </MasterPage>
 </template>
 
 <script setup lang="ts">

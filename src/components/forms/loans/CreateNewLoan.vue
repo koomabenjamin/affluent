@@ -2,17 +2,19 @@
   <SlideInModal :isModalOpen="props.open" @close="closeModal()" title="Loan Request"
     description="Use this form to input a member's loan for the specified period of time.">
     <template #body>
-      <div class="flex flex-col space-y-2 h-full">
+      <div class="flex flex-col space-y-2 h-full relative">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
-          <div>
-            <v-select :options="members" label="name" :loading="loadingMembers" class="h-12"></v-select>
-          </div>
-          <div>
-            <v-select :options="months" label="name" :loading="loadingMembers" multiple></v-select>
-          </div>
-          <div>
-            <v-select :options="groups" label="name" :loading="loadingMembers" multiple></v-select>
-          </div>
+          <!-- <div>
+            <v-select :options="months" label="name" v-model="loanRequest.period" multiple placeholder="Select an date" clearable></v-select>
+          </div> -->
+          <v-select 
+            :options="groups" 
+            label="name" 
+            v-model="loanRequest.group" 
+            placeholder="Select a group"
+            :reduce="extractGroupId">
+          </v-select>
+
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
               label="Amount" icon="heroicons:banknote" :icon-size="25" />
@@ -36,18 +38,17 @@
               v-model="loanRequest.total_loan_debt" label="Total Loan Debt:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
-          <div>
+          <div class="w-full flex space-x-2">
             <FloatingLabelInput type="date" :error="loanResponseError.date_of_disbursement"
               v-model="loanRequest.date_of_disbursement" label="Disbursement Date" icon="heroicons:calendar"
               :icon-size="25" />
-          </div>
-          <div>
+          
             <FloatingLabelInput type="date" :error="loanResponseError.expiry_date" v-model="loanRequest.expiry_date"
               label="Expiry Date" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
             <FloatingLabelInput type="number" :error="loanResponseError.collateral" v-model="loanRequest.collateral"
-              label="Collateral" icon="heroicons:pencil" :icon-size="25" />
+              label="Collateral Worth" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
             <FloatingLabelInput type="date" :error="loanResponseError.request_date" v-model="loanRequest.request_date"
@@ -64,7 +65,7 @@
           </div>
         </div>
 
-        <div class="mt-4">
+        <div class="absolute bottom-2 inset-x-0">
           <Button label="Confirm" :loader="loanBeingSaved" size="block" @click="saveLoan()" />
         </div>
       </div>
@@ -80,7 +81,7 @@ import { useMemberStore } from "../../../stores/member-store";
 import { useGroupStore } from "../../../stores/group-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
-import MultiSelect from "../../shared/MultiSelect.vue";
+// import MultiSelect from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue"
 import {
@@ -88,7 +89,7 @@ import {
   MagnifyingGlassIcon,
   PlusIcon,
 } from "@heroicons/vue/24/outline";
-import type { LoanPayload, Endpoint, LoanResponse, LoanRequest } from "@/types";
+import type { LoanRequest, Group } from "@/types";
 
 import useAuthentication from "@/composables/auth";
 
@@ -104,6 +105,7 @@ const props = defineProps<CreateGroupModalProps>();
 
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
+const extractGroupId = (group: Group) => group?.id;
 
 const user = ref(null);
 
@@ -117,9 +119,11 @@ const { groups } = storeToRefs(groupStore);
 
 const loanBeingSaved = ref(false);
 
+const selectedGroup = ref(null);
+
 const loanRequest = reactive<LoanRequest>({
   amount: 0,
-  group: "",
+  group: null,
   interest_rate: 0,
   interest_amount: 0,
   application_fee: 0,
@@ -133,7 +137,7 @@ const loanRequest = reactive<LoanRequest>({
 });
 const loanResponseError = reactive<LoanRequest>({
   amount: 0,
-  group: "",
+  group: null,
   interest_rate: 0,
   interest_amount: 0,
   application_fee: 0,
@@ -147,10 +151,13 @@ const loanResponseError = reactive<LoanRequest>({
 });
 
 const saveLoan = async () => {
+  loanBeingSaved.value = true;
   await loanStore.save(loanRequest);
+  loanBeingSaved.value = false;
 };
 
 onMounted(async () => {
+  await groupStore.fetchAll();
   await memberStore.fetchAll(1);
 })
 </script>
