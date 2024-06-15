@@ -4,13 +4,13 @@
     <template #body>
       <div class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
-          <div>
-            <Select 
+          <!-- <div>
+             <Select 
               :options="groups" 
               type="text"
               :error="collectionRequest.group" 
               v-model:option-id="collectionRequest.group" 
-              v-model:option-name="collectionRequest.group_name" 
+              v-model:option-name="collectionRequest.group" 
               label="Group"
               id="selectGroup"
               icon="heroicons:user"
@@ -18,16 +18,16 @@
           </div>
           <div>
             <Select 
-              :options="members" 
+              :options="[]" 
               type="text"
               :error="collectionRequest.member" 
               v-model:option-id="collectionRequest.member" 
-              v-model:option-name="collectionRequest.member_name" 
+              v-model:option-name="collectionRequest.member" 
               label="Member"
               id="selectMember"
               icon="heroicons:user"
               :icon-size="25" />
-          </div>
+          </div> -->
           <div>
             <FloatingLabelInput type="month" :error="collectionRequest.period" v-model="collectionRequest.period"
               label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
@@ -68,19 +68,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, inject, onBeforeMount, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useGroupStore } from "../../../stores/group-store";
 import { useCollectionStore } from "../../../stores/collection-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
-import Select from "../../shared/Select.vue";
-import MultiSelect from "../../shared/MultiSelect.vue";
+// import Select from "../../shared/Select.vue";
+// import MultiSelect from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue";
-
-// IMPORTING SAMPLE DUMMY DATA
-import { groups, members } from "@/data/testing/groups";
+import type { CollectionRequest } from "@/types";
 
 import {
   XCircleIcon,
@@ -107,17 +105,15 @@ const collectionStore = useCollectionStore();
 const { groups } = storeToRefs(groupStore);
 const { collections, loadingCollections } = storeToRefs(collectionStore);
 const collectionBeingSaved = ref(false);
-const _errorMessages = ref<GroupCreationResponseError>({});
+const _errorMessages = ref<any>({});
 
-const collectionRequest = reactive({
-  group: 1,
-  group_name: "",
+const collectionRequest = reactive<CollectionRequest>({
+  group: "",
   member: "",
-  member_name: "",
   period: "",
-  amount: "",
+  amount: 0,
   account_paid_from: 100020,
-  account_paid_to: "",
+  account_paid_to: 0,
   payment_method: "",
   payment_date: "",
   payment_note: "",
