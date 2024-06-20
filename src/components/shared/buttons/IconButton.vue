@@ -56,19 +56,19 @@ const props = defineProps<ButtonProps>();
 
 const processedColor = () => {
   if (props.type === 'success') {
-    return 'hover:bg-green-500 bg-green-200 hover:text-white';
+    return 'hover:bg-green-500 bg-green-400 text-white';
   }
   if (props.type === 'delete') {
-    return 'hover:bg-red-600 bg-red-200 hover:text-white';
+    return 'hover:bg-red-600 bg-red-400 text-white';
   }
   if (props.type === 'info') {
-    return 'hover:bg-indigo-500 bg-indigo-200 hover:text-white';
+    return 'hover:bg-indigo-500 bg-indigo-400 text-white';
   }
   if (props.type === 'edit') {
-    return 'hover:bg-yellow-400 bg-yellow-200 hover:text-white';
+    return 'hover:bg-yellow-400 bg-yellow-400 text-white';
   }
   if (props.type === 'normal') {
-    return 'hover:bg-blue-500 bg-blue-100 hover:text-white';
+    return 'hover:bg-blue-500 bg-blue-400 text-white';
   }
 }
 

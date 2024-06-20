@@ -4,30 +4,15 @@
     <template #body>
       <div class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
-          <!-- <div>
-             <Select 
-              :options="groups" 
-              type="text"
-              :error="collectionRequest.group" 
-              v-model:option-id="collectionRequest.group" 
-              v-model:option-name="collectionRequest.group" 
-              label="Group"
-              id="selectGroup"
-              icon="heroicons:user"
-              :icon-size="25" />
-          </div>
-          <div>
-            <Select 
-              :options="[]" 
-              type="text"
-              :error="collectionRequest.member" 
-              v-model:option-id="collectionRequest.member" 
-              v-model:option-name="collectionRequest.member" 
-              label="Member"
-              id="selectMember"
-              icon="heroicons:user"
-              :icon-size="25" />
-          </div> -->
+
+          <v-select 
+            :options="groups" 
+            label="name" 
+            v-model="collectionRequest.group" 
+            placeholder="Select a group"
+            :reduce="extractGroupId">
+          </v-select>
+
           <div>
             <FloatingLabelInput type="month" :error="collectionRequest.period" v-model="collectionRequest.period"
               label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
@@ -98,6 +83,7 @@ const { register, errorMessages, authLoader } = useAuthentication();
 const props = defineProps<CreateGroupModalProps>();
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
+const extractGroupId = (group: Group) => group?.id;
 
 const user = ref(null);
 const groupStore = useGroupStore();

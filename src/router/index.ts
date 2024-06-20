@@ -55,7 +55,7 @@ const router = createRouter({
   {
       path: '/collections',
       name: 'collections',
-      component: () => import('../views/collections/index.vue')
+      component: () => import('../views/collections/CollectionsDashboard.vue')
   },
   {
       path: '/loans',
