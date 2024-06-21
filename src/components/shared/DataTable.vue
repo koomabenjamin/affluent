@@ -21,7 +21,7 @@
 
         <td v-for="column in columns" :key="column" class="text-xs pl-2 pr-2 py-4">
           <div v-if="!customSlots?.includes(column)">{{ value[column] }}</div>
-          <slot v-else :name="column"></slot>
+          <slot v-else :name="column" :data="value[column]"></slot>
         </td>
 
         <td v-if="actions">

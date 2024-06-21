@@ -16,11 +16,16 @@
       :columns="columns" 
       :column-count="4" 
       data-group-name="collections" 
-      actions 
+      actions
       :custom-slots="['payment_date', 'created_at']">
 
-      <template #payment_date>233</template>
-      <template #created_at></template>
+      <template #payment_date="{data}">
+        <DateFormatter :date="data"/>
+      </template>
+
+      <template #created_at="{data}">
+        <DateFormatter :date="data"/>
+      </template>
 
       <template #actions>
         <div class="flex space-x-2 items-center text-xs">
@@ -64,7 +69,7 @@ const collectionStore = useCollectionStore();
 
 const { collections, loadingCollections } = storeToRefs(collectionStore);
 
-const columns = ref<string[]>([ 'member', 'account_paid_from', 'account_paid_to', 'amount', 'period', 'payment_date', 'created_by', 'created_at']);
+const columns = ref<string[]>([ 'account_paid_from', 'account_paid_to', 'amount', 'period', 'payment_date', 'created_by', 'created_at']);
 
 const columnCount = ref<Number>(columns.value.length)
 
