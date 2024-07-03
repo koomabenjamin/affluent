@@ -1,5 +1,8 @@
 <template>
-   <div className="w-full relative">
+   <div 
+    class="w-full relative"
+    :class="{ 'has-error': !!errorMessage, success: meta.valid }"
+   >
       <input
         :id=props.id
         :disabled="props.disabled"
@@ -8,6 +11,7 @@
         autocomplete="off"
         :accept="props.accept"
         @input="updateValue($event)"
+        @blur="handleBlur()"
         :class="`
           peer
           w-full
@@ -49,11 +53,13 @@
       <div class="absolute top-5 right-2" v-if="type !== 'date'">
         <Icon :icon="props.icon" :width="props.iconSize"/>
       </div>
+      <p class="help-message" v-show="errorMessage || meta.valid"></p>
     </div>
 </template>
 
 <script lang="ts" setup>
-// import { defineComponent, PropType } from "vue";
+import { toRef } from 'vue';
+import { useField } from 'vee-validate';
 import { Icon, type IconifyIcon } from "@iconify/vue";
 
 type Error = {
@@ -62,7 +68,7 @@ type Error = {
 
 export interface InputProps{
   id?: string | undefined;
-  name?: string | undefined;
+  name: string;
   label?: string | undefined;
   price?: string | undefined;
   accept?: string | undefined;
@@ -77,28 +83,24 @@ export interface InputProps{
   errors?: Error[] | undefined;
 }
 
-// export default defineComponent({
-//   props: {
-//     myProp: {
-//       type: String as PropType<string>,
-//       default: 'Default Value', // Set your default value here
-//     },
-//   },
-//   setup(props) {
-//     // You can now access `props.myProp` with or without a provided value
-//     console.log(props.myProp);
-
-//     return {
-//       // ... component setup
-//     };
-//   },
-// });
-
 const props = defineProps<InputProps>();
+
+const name = toRef(props, 'name');
+
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+  meta,
+} = useField(name, undefined, {
+  initialValue: props.modelValue,
+});
 
 const emit = defineEmits(['update:modelValue'])
 
 const updateValue = (e: Event) => {
+  handleChange(e);
   emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 </script>
