@@ -1,7 +1,7 @@
 <template>
-   <div 
+   <div
+    v-show="!hidden"
     class="w-full relative"
-    :class="{ 'has-error': !!errorMessage, success: meta.valid }"
    >
       <input
         :id=props.id
@@ -26,7 +26,8 @@
           disabled:opacity-70
           disabled:cursor-not-allowed
           ${props.price ? 'pl-9' : 'pl-4'}
-          ${props.errors ? 'border-rose-500' : 'border-neutral-300'}
+          ${errorMessage ? 'border-rose-500' : ''}
+          ${props.errors ? 'border-rose-500' : ''}
           ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}
         `"
       />
@@ -45,7 +46,8 @@
           peer-placeholder-shown:translate-y-0 
           peer-focus:scale-75
           peer-focus:-translate-y-4
-          ${props.errors ? 'text-rose-500' : 'text-zinc-400'}
+          ${props.errors ? 'text-rose-500' : ''}
+          ${errorMessage ? 'text-rose-500' : ''}
         `"
       >
         {{props.label}}
@@ -53,8 +55,11 @@
       <div class="absolute top-5 right-2" v-if="type !== 'date'">
         <Icon :icon="props.icon" :width="props.iconSize"/>
       </div>
-      <p class="help-message" v-show="errorMessage || meta.valid"></p>
     </div>
+    <p class="help-message text-red-600 text-xs" v-show="errorMessage || meta.valid">
+      <!-- {{ errorMessage }} - {{ meta }} -->
+      {{ errorMessage }}
+    </p>
 </template>
 
 <script lang="ts" setup>
@@ -72,7 +77,7 @@ export interface InputProps{
   label?: string | undefined;
   price?: string | undefined;
   accept?: string | undefined;
-  hide?: boolean | undefined;
+  hidden?: boolean | undefined;
   icon: string | IconifyIcon;
   iconSize?: string | number | undefined;
   type?: string | undefined;

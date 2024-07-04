@@ -13,6 +13,7 @@
 
     :class="`
         text-lg
+        ${className}
         ${(dark) ? 'text-white':''}
         ${(size === 'sm') ? 'px-1 py-2':''}
         ${(size === 'md') ? 'px-2 py-2':''}
@@ -51,6 +52,8 @@ export interface ButtonProps {
   label: string | number,
   dark?: boolean,
   loader?: boolean,
+  className?: string,
+  id?: string,
 }
 
 defineProps<ButtonProps>();

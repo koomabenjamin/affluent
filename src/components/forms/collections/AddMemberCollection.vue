@@ -5,24 +5,38 @@
       <Form
         @submit="saveCollection()"
         :validation-schema="schema"
-        @invalid-submit="onInvalidSubmit" 
+        @invalid-submit="onInvalidSubmit()" 
         class="flex flex-col space-y-2">
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
 
-          <v-select 
-            :options="groups" 
-            label="name" 
-            v-model="collectionRequest.group" 
-            placeholder="Select a group"
-            :reduce="extractGroupId">
-          </v-select>
+          <div>
+            <v-select 
+              :options="groups"
+              label="name" 
+              v-model="collectionRequest.group" 
+              placeholder="Select a group"
+              :reduce="extractGroupId">
+  
+              <template #search="{attributes, events}">
+                <input
+                  class="vs__search"
+                  :required="!collectionRequest.group"
+                  v-bind="attributes"
+                  v-on="events"
+                />
+              </template>
+            </v-select>
+
+            <FloatingLabelInput name="group" type="text" v-model="collectionRequest.group" hidden
+              label="Group" icon="heroicons:banknote" :icon-size="25" />
+          </div>
 
           <div>
             <FloatingLabelInput name="period" type="month" :error="collectionRequest.period" v-model="collectionRequest.period"
               label="Period paid For:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput name="amount" type="number" :error="collectionRequest.amount" v-model="collectionRequest.amount" label="Amount"
+            <FloatingLabelInput name="amount" type="number" placeholder="0" :error="collectionRequest.amount" v-model="collectionRequest.amount" label="Amount"
               icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
@@ -31,7 +45,7 @@
               :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput name="account_paid_to" type="text" :error="collectionRequest.account_paid_to"
+            <FloatingLabelInput name="account_paid_to" type="number" :error="collectionRequest.account_paid_to"
               v-model="collectionRequest.account_paid_to" label="To Account:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
@@ -49,8 +63,7 @@
         </div>
 
         <div class="mt-4">
-          <!-- <Button label="Confirm" :loader="collectionBeingSaved" size="block" @click="saveCollection()"/> -->
-          <button class="submit-btn" type="submit">Submit</button>
+          <Button label="Confirm" :loader="collectionBeingSaved" size="block" class-name="submit-btn"/>
         </div>
       </Form>
     </template>
@@ -87,20 +100,15 @@ export interface CreateGroupModalProps {
 
 const schema = Yup.object().shape({
 
-  period: Yup.string().email().required(),
-  number: Yup.string().required(),
-  account_paid_from: Yup.number().required(),
-  account_paid_to: Yup.number().required(),
-  payment_method: Yup.string().required(),
-  payment_date: Yup.string().required(),
-  payment_note: Yup.string().required(),
+  group: Yup.string().required("Please select a group."),
+  period: Yup.string().required("Period is a required field."),
+  amount: Yup.number().moreThan(0),
+  account_paid_from: Yup.number().min(9,'Please provide the account number'),
+  account_paid_to: Yup.number().min(9,'Please provide the account number'),
+  payment_method: Yup.string().required("Payment Method is a required field."),
+  payment_date: Yup.string().required("Payment Date is a required field."),
+  payment_note: Yup.string().required("Payment Note / Description is a required field."),
 
-  // name: Yup.string().required(),
-  // email: Yup.string().email().required(),
-  // password: Yup.string().min(6).required(),
-  // confirm_password: Yup.string()
-  //   .required()
-  //   .oneOf([Yup.ref('password')], 'Passwords do not match'),
 });
 
 const { register, errorMessages, authLoader } = useAuthentication();
@@ -108,7 +116,7 @@ const { register, errorMessages, authLoader } = useAuthentication();
 const props = defineProps<CreateGroupModalProps>();
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
-const extractGroupId = (group: Group) => group?.id;
+const extractGroupId = (group: Group) => group?.id.toString();
 
 const user = ref(null);
 const groupStore = useGroupStore();
@@ -123,7 +131,7 @@ const collectionRequest = reactive<CollectionRequest>({
   member: "",
   period: "",
   amount: 0,
-  account_paid_from: 100020,
+  account_paid_from: 0,
   account_paid_to: 0,
   payment_method: "",
   payment_date: "",
@@ -131,8 +139,7 @@ const collectionRequest = reactive<CollectionRequest>({
 });
 
 const saveCollection = async () => {
-  alert(JSON.stringify(collectionRequest, null, 2));
-  // await collectionStore.save(collectionRequest);
+  await collectionStore.save(collectionRequest);
 };
 
 function onInvalidSubmit() {
@@ -149,4 +156,46 @@ onMounted(() => {
 })
 </script>
 
-<style></style>
+<style scoped>
+.submit-btn.invalid {
+  animation: shake 0.5s;
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px);
+  }
+  10% {
+    transform: translate(-1px, -2px);
+  }
+  20% {
+    transform: translate(-3px, 0px);
+  }
+  30% {
+    transform: translate(3px, 2px);
+  }
+  40% {
+    transform: translate(1px, -1px);
+  }
+  50% {
+    transform: translate(-1px, 2px);
+  }
+  60% {
+    transform: translate(-3px, 1px);
+  }
+  70% {
+    transform: translate(3px, 1px);
+  }
+  80% {
+    transform: translate(-1px, -1px);
+  }
+  90% {
+    transform: translate(1px, 2px);
+  }
+  100% {
+    transform: translate(1px, -2px);
+  }
+}
+</style>
