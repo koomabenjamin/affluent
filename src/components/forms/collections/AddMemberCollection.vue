@@ -27,8 +27,8 @@
               </template>
             </v-select>
 
-            <FloatingLabelInput name="group" type="text" v-model="collectionRequest.group" hidden
-              label="Group" icon="heroicons:banknote" :icon-size="25" />
+            <!-- <FloatingLabelInput name="group" type="text" v-model="collectionRequest.group" hidden
+              label="Group" icon="heroicons:banknote" :icon-size="25" /> -->
           </div>
 
           <div>

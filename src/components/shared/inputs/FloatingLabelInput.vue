@@ -12,6 +12,7 @@
         :accept="props.accept"
         @input="updateValue($event)"
         @blur="handleBlur()"
+        :value="props.modelValue"
         :class="`
           peer
           w-full
@@ -63,7 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { toRef } from 'vue';
+import { toRef, watch } from 'vue';
 import { useField } from 'vee-validate';
 import { Icon, type IconifyIcon } from "@iconify/vue";
 
@@ -101,6 +102,13 @@ const {
 } = useField(name, undefined, {
   initialValue: props.modelValue,
 });
+
+watch(
+  () => props.modelValue,
+  (modelValue) => {
+    emit('update:modelValue', modelValue);
+  }
+);
 
 const emit = defineEmits(['update:modelValue'])
 
