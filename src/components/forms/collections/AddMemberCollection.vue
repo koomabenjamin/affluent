@@ -15,7 +15,7 @@
               label="name" 
               v-model="collectionRequest.group" 
               placeholder="Select a group"
-              :reduce="extractGroupId">
+              :reduce="extractGroupId" multiple>
   
               <template #search="{attributes, events}">
                 <input

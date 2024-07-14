@@ -1,16 +1,15 @@
 <template>
-  <div v-show="!hidden" :class="`w-full relative border rounded-md 
+  <div v-show="!hidden" :class="`w-full relative border rounded-md flex flex-wrap
          p-2
          pt-6 ${errorMessage ? 'border-rose-500' : ''}
          ${props.errors ? 'border-rose-500' : ''}
          ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}`">
 
-         <div v-if="multiple">
-          <div v-for="selected in selectedOptions" :key="selected">{{ selected }}</div>
-         </div>
+    <span v-for="selected in selectedOptions" :key="selected"
+      class="border border-slate-100 p-1">{{ selected?.[props.field] }} <strong>X</strong></span>
 
     <input :id=props.id :disabled="props.disabled" placeholder=" " type="text" autocomplete="off" :accept="props.accept"
-      @input="updateValue($event)" @blur="handleBlur()" :value="props.modelValue" @focus="showOptions()" :class="`
+      @input="updateValue($event)" @blur="handleBlur()" :value="searchText" @focus="showOptions()" :class="`
          peer
          ${(multiple) ? 'w-auto' : 'w-full'}
          font-light 
@@ -23,8 +22,8 @@
          disabled:opacity-70
          disabled:cursor-not-allowed
          ${props.price ? 'pl-9' : 'pl-2'}
-         
-       `" />
+         `" />
+
     <label :class="`
          absolute 
          text-sm
@@ -35,10 +34,8 @@
          z-10 
          origin-[0] 
          ${props.price ? 'left-9' : 'left-4'}
-         peer-placeholder-shown:scale-100 
-         peer-placeholder-shown:translate-y-0 
-         peer-focus:scale-75
-         peer-focus:-translate-y-4
+         scale-75
+         -translate-y-4
          ${props.errors ? 'text-rose-500' : ''}
          ${errorMessage ? 'text-rose-500' : ''}
        `">
@@ -46,7 +43,7 @@
     </label>
 
   </div>
-  <div v-show="optionsVisible">
+  <div v-show="displayOptions">
     <div v-for="option in displayedOptions" :key="option"><span
         @click="selectOption(option)">{{ option?.[field] ?? '' }}</span></div>
   </div>
@@ -85,6 +82,8 @@ export interface InputProps {
   errors?: Error[] | undefined;
 }
 
+const searchText = ref<String>('');
+
 const props = defineProps<InputProps>();
 
 const name = toRef(props, 'name');
@@ -115,19 +114,31 @@ watch(
 
 const emit = defineEmits(['update:modelValue']);
 
+const selectedOptions = ref<any>(null);
+const selectedOptionsArray = ref<any[]>([]);
+
 const updateValue = (e: Event) => {
   handleChange(e);
-  emit('update:modelValue', (e.target as HTMLInputElement).value)
+  displayOptions.value = true;
+  // emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 
 const selectOption = (option: any) => {
-  emit('update:modelValue', option?.[props.field]);
+  if (props.multiple) {
+    selectedOptionsArray.value.push(option);
+    selectedOptions.value = [...new Set(selectedOptionsArray.value)];
+    emit('update:modelValue', selectedOptions.value[0]?.[props.field]);
+    searchText.value = "";
+  } else {
+    searchText.value = option?.[props.field];
+    emit('update:modelValue', option?.[props.field]);
+  }
   showOptions();
 }
 
-const optionsVisible = ref<Boolean>(false);
+const displayOptions = ref<Boolean>(false);
 
-const showOptions = () => optionsVisible.value = !optionsVisible.value;
+const showOptions = () => displayOptions.value = !displayOptions.value;
 </script>
 
 <style></style>
