@@ -106,7 +106,7 @@ watch(
     console.log(props.modelValue)
     displayedOptions.value = props.options.filter((option) => {
       if (typeof option === "string") {
-        return option.includes(modelValue);
+        return option.includes(searchText.value);
       }
     })
   }
