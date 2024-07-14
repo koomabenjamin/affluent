@@ -10,7 +10,7 @@
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
 
           <div>
-            <v-select 
+            <!-- <v-select 
               :options="groups"
               label="name" 
               v-model="collectionRequest.group" 
@@ -25,10 +25,10 @@
                   v-on="events"
                 />
               </template>
-            </v-select>
+            </v-select> -->
 
-            <!-- <FloatingLabelInput name="group" type="text" v-model="collectionRequest.group" hidden
-              label="Group" icon="heroicons:banknote" :icon-size="25" /> -->
+            <Select name="group" field="name" :options="groups" icon="" label="Group" v-model="collectionRequest.group" multiple/>
+
           </div>
 
           <div>
@@ -77,8 +77,7 @@ import { useGroupStore } from "../../../stores/group-store";
 import { useCollectionStore } from "../../../stores/collection-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
-// import Select from "../../shared/Select.vue";
-// import MultiSelect from "../../shared/MultiSelect.vue";
+import Select from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue";
 import type { CollectionRequest } from "@/types";

@@ -1,206 +1,133 @@
 <template>
-  <div class="w-full relative border">
-    <input :value="optionId" @input="handleOptionIdInput($event)" hidden />
-    <!-- Selected options -->
-    <div class="h-auto w-full flex flex-wrap overflow-auto p-0.5">
-      <!-- <slot :options="selectedOptions"></slot> -->
-      <div v-for="option in selectedOptions" :key="option.id" class="
-          pl-1
-          pr-2
-          py-1
-          w-auto
-          h-10
-          border
-          bg-slate-100
-          flex flex-shrink-0
-          m-0.5
-          items-center
-          space-x-2
-          rounded-full
-        ">
-        <div class="
-            h-8
-            w-8
-            center
-            border
-            rounded-full
-            
-          ">
-          <component class="h-6 w-6 stroke-2 bg-red-600 rounded-full text-white" :is="OutlineIcons['XCircleIcon']"></component>
-        </div>
-        <div class="text-xs stroke-2">{{ option.name }}</div>
-      </div>
-    </div>
-    <div class="relative w-full h-10 mt-1">
-      <input class="
-          block
-          px-2.5
-          pb-2.5
-          pt-4
-          h-full
-          w-full
-          text-sm 
-          text-gray-900
-          bg-white
-          bg-transparent
-          rounded-sm
-          appearance-none
-          focus:outline-none focus:ring-0
-          peer
-        " :label="props.label" @input="handleOptionNameInput($event)" :name="props.name" :id="props.id"
-        autocomplete="off" :placeholder="props.placeholder" />
-      <label class="
-          absolute
-          text-sm text-gray-500
-          duration-300
-          transform
-          -translate-y-4
-          scale-75
-          top-2
-          z-10
-          origin-[0]
-          bg-white
-          px-2
-          peer-focus:px-2 peer-focus:text-blue-600
-          peer-placeholder-shown:scale-100
-          peer-placeholder-shown:-translate-y-1/2
-          peer-placeholder-shown:top-1/2
-          peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4
-          left-1
-        ">
-        {{ props.label }}
-      </label>
-      <!-- <component class="h-5 text-blue-600 absolute right-2 top-1/4 :is="OutlineIcons[props.icon]"></component> -->
-    </div>
+  <div v-show="!hidden" :class="`w-full relative border rounded-md 
+         p-2
+         pt-6 ${errorMessage ? 'border-rose-500' : ''}
+         ${props.errors ? 'border-rose-500' : ''}
+         ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}`">
 
-    <div v-if="optionsDropdown && displayedOptions.length > 0" class="
-        absolute
-        bg-white
-        z-20
-        border
-        w-full
-        text-black
-        h-auto
-        max-h-56
-        overflow-y-auto
-        divide-y
-        rounded-b
-      ">
-      <div class="
-          h-12
-          hover:bg-slate-100
-          w-full
-          cursor-pointer
-          px-4
-          py-2
-          flex flex-col
-        " v-for="option in displayedOptions" :key="option.id" @click="selectOption(option)">
-        <span class="text-sm text-blue-600">{{ option.name }}</span>
-        <span class="text-xs text-gray-400"
-          v-if="typeof option?.description !== 'undefined'">{{ option.description }}</span>
-      </div>
-    </div>
-    <div v-if="!optionsDropdown" class="
-        absolute
-        bg-white
-        z-20
-        border-r border-l border-b
-        w-full
-        h-auto
-        overflow-y-auto
-        divide-y
-        text-gray-400
-        rounded-b
-      ">
-      <div class="h-10 w-full cursor-pointer px-4 py-2">Loading...</div>
-    </div>
-    <div v-else></div>
+         <div v-if="multiple">
+          <div v-for="selected in selectedOptions" :key="selected">{{ selected }}</div>
+         </div>
+
+    <input :id=props.id :disabled="props.disabled" placeholder=" " type="text" autocomplete="off" :accept="props.accept"
+      @input="updateValue($event)" @blur="handleBlur()" :value="props.modelValue" @focus="showOptions()" :class="`
+         peer
+         ${(multiple) ? 'w-auto' : 'w-full'}
+         font-light 
+         bg-white
+         transition
+         focus:outline-none
+         focus:ring-0
+         focus:ring-transparent
+         border-green-500
+         disabled:opacity-70
+         disabled:cursor-not-allowed
+         ${props.price ? 'pl-9' : 'pl-2'}
+         
+       `" />
+    <label :class="`
+         absolute 
+         text-sm
+         duration-150 
+         transform 
+         -translate-y-4 
+         top-5 
+         z-10 
+         origin-[0] 
+         ${props.price ? 'left-9' : 'left-4'}
+         peer-placeholder-shown:scale-100 
+         peer-placeholder-shown:translate-y-0 
+         peer-focus:scale-75
+         peer-focus:-translate-y-4
+         ${props.errors ? 'text-rose-500' : ''}
+         ${errorMessage ? 'text-rose-500' : ''}
+       `">
+      {{ props.label }}
+    </label>
+
   </div>
+  <div v-show="optionsVisible">
+    <div v-for="option in displayedOptions" :key="option"><span
+        @click="selectOption(option)">{{ option?.[field] ?? '' }}</span></div>
+  </div>
+  <p class="help-message text-red-600 text-xs" v-show="errorMessage || meta.valid">
+    <!-- {{ errorMessage }} - {{ meta }} -->
+    {{ errorMessage }}
+  </p>
 </template>
-  
-<script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
-import * as OutlineIcons from "@heroicons/vue/24/outline";
-import FloatingLabelInput from "./inputs/FloatingLabelInput.vue";
 
-export interface OptionsInterface {
-  id?: string | undefined | number;
-  name?: string | undefined;
-  description?: string | undefined | number;
+<script lang="ts" setup>
+import { toRef, watch, ref, shallowRef } from 'vue';
+import { useField } from 'vee-validate';
+import { Icon, type IconifyIcon } from "@iconify/vue";
+
+type Error = {
+  error: string;
 }
 
-export interface MultiSelectProps {
-  id: string;
+export interface InputProps {
+  id?: string | undefined;
   name: string;
-  placeholder: string;
-  optionId: string;
-  optionName: string;
-  optionsSelected: string[] | number[] | object[];
-  label: string;
-  modelValue: string | number | string[];
-  errors: object;
+  label?: string | undefined;
+  price?: string | undefined;
+  accept?: string | undefined;
+  hidden?: boolean | undefined;
+  icon: string | IconifyIcon;
+  iconSize?: string | number | undefined;
+  type?: string | undefined;
+  required?: boolean | undefined;
+  disabled?: boolean | undefined;
+  readonly?: boolean | undefined;
+  modelValue: string | number | object | string[] | number[] | object[];
   options: object[];
+  multiple?: boolean;
+  field: string;
+  errors?: Error[] | undefined;
 }
 
-const emit = defineEmits([
-  "update:optionId",
-  "update:optionName",
-  "update:optionsSelected",
-]);
+const props = defineProps<InputProps>();
 
-const optionsDropdown = ref(false);
+const name = toRef(props, 'name');
 
-const displayedOptions = ref<any[]>([]);
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+  meta,
+} = useField(name, undefined, {
+  initialValue: props.modelValue,
+});
 
-const selectedOptions = ref<OptionsInterface[]>([]);
+const displayedOptions = shallowRef(props.options);
 
-const selectOption = (option: OptionsInterface) => {
-  optionsDropdown.value = false;
-  if (!selectedOptions.value.includes(option))
-    selectedOptions.value.push(option);
-  emit("update:optionId", option.id);
-  emit("update:optionName", option.name);
-  emit("update:optionsSelected", selectedOptions.value);
+watch(
+  () => props.modelValue,
+  (modelValue) => {
+    console.log(props.modelValue)
+    displayedOptions.value = props.options.filter((option) => {
+      if (typeof option === "string") {
+        return option.includes(modelValue);
+      }
+    })
+  }
+);
+
+const emit = defineEmits(['update:modelValue']);
+
+const updateValue = (e: Event) => {
+  handleChange(e);
+  emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 
-const handleOptionIdInput = (e: Event) => {
-  emit("update:optionId", (e.target as HTMLInputElement).value);
-}
-const handleOptionNameInput = (e: Event) => {
-  emit("update:optionName", (e.target as HTMLInputElement).value);
+const selectOption = (option: any) => {
+  emit('update:modelValue', option?.[props.field]);
+  showOptions();
 }
 
-const props = defineProps<MultiSelectProps>();
+const optionsVisible = ref<Boolean>(false);
 
-watch(
-  () => props.optionName,
-  (optionName) => {
-    if (typeof props?.options !== 'undefined') {
-      displayedOptions.value = props.options.filter((item: OptionsInterface) =>
-        item?.name?.toLowerCase().includes(optionName ?? '')
-      );
-    }
-    if (optionsDropdown.value === false) optionsDropdown.value = true;
-  }
-);
-
-watch(
-  () => props.options,
-  (options) => {
-    if (options.length === 0) optionsDropdown.value = false;
-  }
-);
-
-onMounted(() => {
-  // if (typeof props?.options !== 'undefined') displayedOptions.value = props.options;
-});
+const showOptions = () => optionsVisible.value = !optionsVisible.value;
 </script>
-  
-<style scoped>
-select {
-  padding: 10px;
-  margin: 0;
-  box-sizing: border-box;
-  height: 100%;
-}
-</style>
+
+<style></style>
