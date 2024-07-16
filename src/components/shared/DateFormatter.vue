@@ -12,7 +12,7 @@ const props = defineProps({
   }
 })
 
-const formatDate = (date) => moment(date).format("DD-MM-YYYY");
+const formatDate = (date:string) => moment(date).format("DD-MM-YYYY");
 
 </script>
 

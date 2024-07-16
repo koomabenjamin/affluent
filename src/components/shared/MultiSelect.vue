@@ -1,14 +1,16 @@
 <template>
-  <div v-show="!hidden" :class="`w-full relative border rounded-md flex flex-wrap
+  <div v-show="!hidden" :class="`w-full relative flex flex-wrap
          p-2
-         pt-6 ${errorMessage ? 'border-rose-500' : ''}
+         pt-6
+         ${displayOptions ? 'border-x border-t rounded-t-md' : 'border rounded'}
+         ${errorMessage ? 'border-rose-500' : ''}
          ${props.errors ? 'border-rose-500' : ''}
          ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}`">
 
     <span v-for="selected in selectedOptions" :key="selected"
       class="border border-slate-100 p-1">{{ selected?.[props.field] }} <strong>X</strong></span>
 
-    <input :id=props.id :disabled="props.disabled" placeholder=" " type="text" autocomplete="off" :accept="props.accept"
+    <input :id=props?.id :disabled="props.disabled" placeholder=" " type="text" autocomplete="off" :accept="props.accept"
       @input="updateValue($event)" @blur="handleBlur()" :value="searchText" @focus="showOptions()" :class="`
          peer
          ${(multiple) ? 'w-auto' : 'w-full'}
@@ -43,9 +45,9 @@
     </label>
 
   </div>
-  <div v-show="displayOptions">
-    <div v-for="option in displayedOptions" :key="option"><span
-        @click="selectOption(option)">{{ option?.[field] ?? '' }}</span></div>
+  <div v-show="displayOptions" class="w-full bg-slate-100 border-x border-b rounded-b-md divide-y text-sm">
+    <div v-for="(value, index) in displayedOptions" :key="index" class="h-8 p-1 pl-4 hover:bg-slate-200 cursor-pointer"><span
+        @click="selectOption(value)">{{ value?.[props.field] ?? '' }}</span></div>
   </div>
   <p class="help-message text-red-600 text-xs" v-show="errorMessage || meta.valid">
     <!-- {{ errorMessage }} - {{ meta }} -->
@@ -62,7 +64,11 @@ type Error = {
   error: string;
 }
 
-export interface InputProps {
+export interface OptionArrayStructure {
+  [key: string]: any; // Allows any string key and any value type
+}
+
+export interface SelectProps {
   id?: string | undefined;
   name: string;
   label?: string | undefined;
@@ -76,15 +82,91 @@ export interface InputProps {
   disabled?: boolean | undefined;
   readonly?: boolean | undefined;
   modelValue: string | number | object | string[] | number[] | object[];
-  options: object[];
+  options: OptionArrayStructure[];
   multiple?: boolean;
   field: string;
   errors?: Error[] | undefined;
+  reduce: Function;
 }
 
-const searchText = ref<String>('');
 
-const props = defineProps<InputProps>();
+const props = withDefaults(defineProps<SelectProps>(), {
+  reduce: (option: any) => option.field,
+});
+
+const searchText = ref('');
+
+// const props = defineProps({
+//   id: {
+//     type: String,
+//     required: false,
+//   },
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+//   accept: {
+//     type: String,
+//     required: false,
+//   },
+//   label: {
+//     type: [String, Number],
+//     required: false,
+//   },
+//   price: {
+//     type: Boolean,
+//     required: false,
+//   },
+//   hidden: {
+//     type: Boolean,
+//     required: false,
+//   },
+//   multiple: {
+//     type: Boolean,
+//     required: false,
+//   },
+//   readonly: {
+//     type: Boolean,
+//     required: false,
+//   },
+//   disabled: {
+//     type: Boolean,
+//     required: false,
+//   },
+//   type: {
+//     type: String,
+//     required: true,
+//   },
+//   field: {
+//     type: [String, Number],
+//     required: true,
+//   },
+//   icon: {
+//     type: String,
+//     required: false,
+//   },
+//   iconSize: {
+//     type: [String, Number],
+//     required: false,
+//   },
+//   modelValue: {
+//     type: [String, Number, Array, Object],
+//     required: true,
+//   },
+//   options: {
+//     type: Array,
+//     required: true,
+//   },
+//   errors: {
+//     type: [String, Number, Array, Object],
+//     required: true,
+//   },
+//   reduce: {
+//     type: Function,
+//     required: false,
+//     default: (option: any) => option
+//   },
+// });
 
 const name = toRef(props, 'name');
 
@@ -98,18 +180,25 @@ const {
   initialValue: props.modelValue,
 });
 
-const displayedOptions = shallowRef(props.options);
+const displayedOptions = shallowRef<OptionArrayStructure[]>(props.options);
 
-watch(
-  () => props.modelValue,
-  (modelValue) => {
-    console.log(props.modelValue)
-    displayedOptions.value = props.options.filter((option) => {
-      if (typeof option === "string") {
-        return option.includes(searchText.value);
-      }
-    })
-  }
+// watch(
+//   () => props.modelValue,
+//   (modelValue) => {
+//     console.log(props.modelValue)
+//     displayedOptions.value = props.options.filter((option) => {
+//       if (typeof option[props.field] === "string") {
+//         return option[props.field].includes(searchText.value);
+//       }
+//     })
+//   }
+// );
+watch(searchText, () => {
+  displayedOptions.value = props.options.filter((option) => {
+    if (typeof option[props.field] === "string") return option[props.field].includes(searchText.value);
+    else searchText.value = "";
+  });
+}
 );
 
 const emit = defineEmits(['update:modelValue']);
@@ -120,18 +209,23 @@ const selectedOptionsArray = ref<any[]>([]);
 const updateValue = (e: Event) => {
   handleChange(e);
   displayOptions.value = true;
+  searchText.value = (e.target as HTMLInputElement).value ?? '';
   // emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 
 const selectOption = (option: any) => {
+
   if (props.multiple) {
     selectedOptionsArray.value.push(option);
     selectedOptions.value = [...new Set(selectedOptionsArray.value)];
     emit('update:modelValue', selectedOptions.value[0]?.[props.field]);
     searchText.value = "";
-  } else {
+  }
+  else {
+
     searchText.value = option?.[props.field];
-    emit('update:modelValue', option?.[props.field]);
+    if(props.reduce)emit('update:modelValue', props?.reduce(option) ?? option?.[props.field]);
+    else emit('update:modelValue', option?.[props.field]);
   }
   showOptions();
 }

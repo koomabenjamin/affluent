@@ -10,24 +10,10 @@
         <div class="mt-2 grid gap-4 w-full grid-cols-1">
 
           <div>
-            <!-- <v-select 
-              :options="groups"
-              label="name" 
-              v-model="collectionRequest.group" 
-              placeholder="Select a group"
-              :reduce="extractGroupId" multiple>
-  
-              <template #search="{attributes, events}">
-                <input
-                  class="vs__search"
-                  :required="!collectionRequest.group"
-                  v-bind="attributes"
-                  v-on="events"
-                />
-              </template>
-            </v-select> -->
 
-            <Select name="group" field="name" :options="groups" icon="" label="Group" v-model="collectionRequest.group" multiple/>
+            <Select name="group" field="name" :options="groups" icon="" label="Group" v-model="collectionRequest.group" :reduce="option => option.id"/>
+            <!-- SELECTION BOX WITHOUT A REDUCE FUNCTION -->
+            <!-- <Select name="group" field="name" :options="groups" icon="" label="Group" v-model="collectionRequest.group"/> -->
 
           </div>
 
