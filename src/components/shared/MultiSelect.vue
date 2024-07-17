@@ -96,78 +96,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const searchText = ref('');
 
-// const props = defineProps({
-//   id: {
-//     type: String,
-//     required: false,
-//   },
-//   name: {
-//     type: String,
-//     required: true,
-//   },
-//   accept: {
-//     type: String,
-//     required: false,
-//   },
-//   label: {
-//     type: [String, Number],
-//     required: false,
-//   },
-//   price: {
-//     type: Boolean,
-//     required: false,
-//   },
-//   hidden: {
-//     type: Boolean,
-//     required: false,
-//   },
-//   multiple: {
-//     type: Boolean,
-//     required: false,
-//   },
-//   readonly: {
-//     type: Boolean,
-//     required: false,
-//   },
-//   disabled: {
-//     type: Boolean,
-//     required: false,
-//   },
-//   type: {
-//     type: String,
-//     required: true,
-//   },
-//   field: {
-//     type: [String, Number],
-//     required: true,
-//   },
-//   icon: {
-//     type: String,
-//     required: false,
-//   },
-//   iconSize: {
-//     type: [String, Number],
-//     required: false,
-//   },
-//   modelValue: {
-//     type: [String, Number, Array, Object],
-//     required: true,
-//   },
-//   options: {
-//     type: Array,
-//     required: true,
-//   },
-//   errors: {
-//     type: [String, Number, Array, Object],
-//     required: true,
-//   },
-//   reduce: {
-//     type: Function,
-//     required: false,
-//     default: (option: any) => option
-//   },
-// });
-
 const name = toRef(props, 'name');
 
 const {
@@ -182,21 +110,12 @@ const {
 
 const displayedOptions = shallowRef<OptionArrayStructure[]>(props.options);
 
-// watch(
-//   () => props.modelValue,
-//   (modelValue) => {
-//     console.log(props.modelValue)
-//     displayedOptions.value = props.options.filter((option) => {
-//       if (typeof option[props.field] === "string") {
-//         return option[props.field].includes(searchText.value);
-//       }
-//     })
-//   }
-// );
 watch(searchText, () => {
   displayedOptions.value = props.options.filter((option) => {
     if (typeof option[props.field] === "string") return option[props.field].includes(searchText.value);
-    else searchText.value = "";
+    else {
+      searchText.value = "";
+    }
   });
 }
 );
@@ -210,6 +129,7 @@ const updateValue = (e: Event) => {
   handleChange(e);
   displayOptions.value = true;
   searchText.value = (e.target as HTMLInputElement).value ?? '';
+  inputValue.value = (e.target as HTMLInputElement).value ?? '';
   // emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 
@@ -224,6 +144,7 @@ const selectOption = (option: any) => {
   else {
 
     searchText.value = option?.[props.field];
+    inputValue.value = option?.[props.field];
     if(props.reduce)emit('update:modelValue', props?.reduce(option) ?? option?.[props.field]);
     else emit('update:modelValue', option?.[props.field]);
   }
