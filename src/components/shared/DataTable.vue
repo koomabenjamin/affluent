@@ -6,7 +6,9 @@
       <thead>
         <tr class="">
           <th></th>
-          <th v-for="column in columns" :key="column" class="capitalize text-left text-xs h-10 whitespace-nowrap">{{ removeSpecialCharacter(column) }}</th>
+          <th v-for="column in columns" :key="column" class="capitalize text-left text-xs h-10 whitespace-nowrap">
+            {{ removeSpecialCharacter(column) }}
+          </th>
           <th v-if="actions" class="capitalize text-left text-xs h-10">
             <!--SLOT FOR CUSTOM ACTIONS FOR ANY COMPONENT THAT USES THE DATATABLE-->
             <!-- <slot name="actions"></slot> -->
@@ -32,7 +34,14 @@
       <tfoot v-if="(rows?.length ?? 0) > 10">
         <tr>
           <th></th>
-          <th v-for="column in columns" :key="column" class="capitalize text-sm text-left h-10">{{ removeSpecialCharacter(column) }}</th>
+          <th v-for="column in columns" :key="column" class="capitalize text-sm text-left h-10">
+            {{ removeSpecialCharacter(column) }}
+          </th>
+          <th v-if="actions" class="capitalize text-left text-xs h-10">
+            <!--SLOT FOR CUSTOM ACTIONS FOR ANY COMPONENT THAT USES THE DATATABLE-->
+            <!-- <slot name="actions"></slot> -->
+            Actions
+          </th>
         </tr>
       </tfoot>
 
@@ -56,7 +65,7 @@ export interface DataTableProps {
 
 const removeSpecialCharacter = (name: string): string => {
   return name.replace(/_/g, " ")
-} 
+}
 
 const props = defineProps<DataTableProps>();
 

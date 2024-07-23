@@ -14,7 +14,7 @@
               accept=".xlsx,.xls"
               icon="heroicons:banknote" 
               :icon-size="25" /> -->
-            <input type="file" ref="fileInput" accept=".xlsx,.xls" required name="file">
+            <input type="file" ref="fileInput" accept=".xlsx,.xls,.csv" required name="file">
           </div>
         </div>
 
