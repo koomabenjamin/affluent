@@ -1,5 +1,8 @@
 <template>
-   <div className="w-full relative">
+   <div
+    v-show="!hidden"
+    class="w-full relative"
+   >
       <input
         :id=props.id
         :disabled="props.disabled"
@@ -8,6 +11,8 @@
         autocomplete="off"
         :accept="props.accept"
         @input="updateValue($event)"
+        @blur="handleBlur()"
+        :value="props.modelValue"
         :class="`
           peer
           w-full
@@ -22,7 +27,8 @@
           disabled:opacity-70
           disabled:cursor-not-allowed
           ${props.price ? 'pl-9' : 'pl-4'}
-          ${props.errors ? 'border-rose-500' : 'border-neutral-300'}
+          ${errorMessage ? 'border-rose-500' : ''}
+          ${props.errors ? 'border-rose-500' : ''}
           ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}
         `"
       />
@@ -41,7 +47,8 @@
           peer-placeholder-shown:translate-y-0 
           peer-focus:scale-75
           peer-focus:-translate-y-4
-          ${props.errors ? 'text-rose-500' : 'text-zinc-400'}
+          ${props.errors ? 'text-rose-500' : ''}
+          ${errorMessage ? 'text-rose-500' : ''}
         `"
       >
         {{props.label}}
@@ -50,10 +57,15 @@
         <Icon :icon="props.icon" :width="props.iconSize"/>
       </div>
     </div>
+    <p class="help-message text-red-600 text-xs" v-show="errorMessage || meta.valid">
+      <!-- {{ errorMessage }} - {{ meta }} -->
+      {{ errorMessage }}
+    </p>
 </template>
 
 <script lang="ts" setup>
-// import { defineComponent, PropType } from "vue";
+import { toRef, watch } from 'vue';
+import { useField } from 'vee-validate';
 import { Icon, type IconifyIcon } from "@iconify/vue";
 
 type Error = {
@@ -62,11 +74,11 @@ type Error = {
 
 export interface InputProps{
   id?: string | undefined;
-  name?: string | undefined;
+  name: string;
   label?: string | undefined;
   price?: string | undefined;
   accept?: string | undefined;
-  hide?: boolean | undefined;
+  hidden?: boolean | undefined;
   icon: string | IconifyIcon;
   iconSize?: string | number | undefined;
   type?: string | undefined;
@@ -77,28 +89,31 @@ export interface InputProps{
   errors?: Error[] | undefined;
 }
 
-// export default defineComponent({
-//   props: {
-//     myProp: {
-//       type: String as PropType<string>,
-//       default: 'Default Value', // Set your default value here
-//     },
-//   },
-//   setup(props) {
-//     // You can now access `props.myProp` with or without a provided value
-//     console.log(props.myProp);
-
-//     return {
-//       // ... component setup
-//     };
-//   },
-// });
-
 const props = defineProps<InputProps>();
+
+const name = toRef(props, 'name');
+
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+  meta,
+} = useField(name, undefined, {
+  initialValue: props.modelValue,
+});
+
+watch(
+  () => props.modelValue,
+  (modelValue) => {
+    emit('update:modelValue', modelValue);
+  }
+);
 
 const emit = defineEmits(['update:modelValue'])
 
 const updateValue = (e: Event) => {
+  handleChange(e);
   emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 </script>

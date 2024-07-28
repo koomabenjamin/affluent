@@ -16,9 +16,6 @@
           @click="action()" class="" size="sm" :icon-size="18" type="delete" :loader="false" icon="material-symbols:delete-outline-rounded" />
           <IconButton 
           @click="action()" class="" size="sm" :icon-size="18" type="info" :loader="false" icon="material-symbols:info-outline" />
-          <!-- <button>Edit</button> -->
-          <!-- <button>Detail</button> -->
-          <!-- <button>Delete</button> -->
         </div>
       </template>
     </DataTable>

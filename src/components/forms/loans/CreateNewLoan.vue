@@ -11,8 +11,9 @@
             :options="groups" 
             label="name" 
             v-model="loanRequest.group" 
+            clearable 
             placeholder="Select a group"
-            :reduce="extractGroupId">
+            :reduce="data => data?.id">
           </v-select>
 
           <div>
@@ -81,7 +82,7 @@ import { useMemberStore } from "../../../stores/member-store";
 import { useGroupStore } from "../../../stores/group-store";
 import TextArea from "../../shared/inputs/TextArea.vue";
 import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
-// import MultiSelect from "../../shared/MultiSelect.vue";
+import MultiSelect from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue"
 import {
@@ -89,7 +90,7 @@ import {
   MagnifyingGlassIcon,
   PlusIcon,
 } from "@heroicons/vue/24/outline";
-import type { LoanRequest, Group } from "@/types";
+import type { LoanPayload, Endpoint, LoanResponse, LoanRequest } from "@/types";
 
 import useAuthentication from "@/composables/auth";
 
@@ -105,7 +106,6 @@ const props = defineProps<CreateGroupModalProps>();
 
 const emit = defineEmits(['close'])
 const closeModal = () => emit('close');
-const extractGroupId = (group: Group) => group?.id;
 
 const user = ref(null);
 

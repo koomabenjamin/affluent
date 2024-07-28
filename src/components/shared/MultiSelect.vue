@@ -1,206 +1,159 @@
 <template>
-  <div class="w-full relative border">
-    <input :value="optionId" @input="handleOptionIdInput($event)" hidden />
-    <!-- Selected options -->
-    <div class="h-auto w-full flex flex-wrap overflow-auto p-0.5">
-      <!-- <slot :options="selectedOptions"></slot> -->
-      <div v-for="option in selectedOptions" :key="option.id" class="
-          pl-1
-          pr-2
-          py-1
-          w-auto
-          h-10
-          border
-          bg-slate-100
-          flex flex-shrink-0
-          m-0.5
-          items-center
-          space-x-2
-          rounded-full
-        ">
-        <div class="
-            h-8
-            w-8
-            center
-            border
-            rounded-full
-            
-          ">
-          <component class="h-6 w-6 stroke-2 bg-red-600 rounded-full text-white" :is="OutlineIcons['XCircleIcon']"></component>
-        </div>
-        <div class="text-xs stroke-2">{{ option.name }}</div>
-      </div>
-    </div>
-    <div class="relative w-full h-10 mt-1">
-      <input class="
-          block
-          px-2.5
-          pb-2.5
-          pt-4
-          h-full
-          w-full
-          text-sm 
-          text-gray-900
-          bg-white
-          bg-transparent
-          rounded-sm
-          appearance-none
-          focus:outline-none focus:ring-0
-          peer
-        " :label="props.label" @input="handleOptionNameInput($event)" :name="props.name" :id="props.id"
-        autocomplete="off" :placeholder="props.placeholder" />
-      <label class="
-          absolute
-          text-sm text-gray-500
-          duration-300
-          transform
-          -translate-y-4
-          scale-75
-          top-2
-          z-10
-          origin-[0]
-          bg-white
-          px-2
-          peer-focus:px-2 peer-focus:text-blue-600
-          peer-placeholder-shown:scale-100
-          peer-placeholder-shown:-translate-y-1/2
-          peer-placeholder-shown:top-1/2
-          peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4
-          left-1
-        ">
-        {{ props.label }}
-      </label>
-      <!-- <component class="h-5 text-blue-600 absolute right-2 top-1/4 :is="OutlineIcons[props.icon]"></component> -->
-    </div>
+  <div v-show="!hidden" :class="`w-full relative flex flex-wrap
+         p-2
+         pt-6
+         ${displayOptions ? 'border-x border-t rounded-t-md' : 'border rounded'}
+         ${errorMessage ? 'border-rose-500' : ''}
+         ${props.errors ? 'border-rose-500' : ''}
+         ${props.errors ? 'focus:border-rose-500' : 'focus:border-black'}`">
 
-    <div v-if="optionsDropdown && displayedOptions.length > 0" class="
-        absolute
-        bg-white
-        z-20
-        border
-        w-full
-        text-black
-        h-auto
-        max-h-56
-        overflow-y-auto
-        divide-y
-        rounded-b
-      ">
-      <div class="
-          h-12
-          hover:bg-slate-100
-          w-full
-          cursor-pointer
-          px-4
-          py-2
-          flex flex-col
-        " v-for="option in displayedOptions" :key="option.id" @click="selectOption(option)">
-        <span class="text-sm text-blue-600">{{ option.name }}</span>
-        <span class="text-xs text-gray-400"
-          v-if="typeof option?.description !== 'undefined'">{{ option.description }}</span>
-      </div>
-    </div>
-    <div v-if="!optionsDropdown" class="
-        absolute
-        bg-white
-        z-20
-        border-r border-l border-b
-        w-full
-        h-auto
-        overflow-y-auto
-        divide-y
-        text-gray-400
-        rounded-b
-      ">
-      <div class="h-10 w-full cursor-pointer px-4 py-2">Loading...</div>
-    </div>
-    <div v-else></div>
+    <span v-for="selected in selectedOptions" :key="selected"
+      class="border border-slate-100 p-1">{{ selected?.[props.field] }} <strong>X</strong></span>
+
+    <input :id=props?.id :disabled="props.disabled" placeholder=" " type="text" autocomplete="off" :accept="props.accept"
+      @input="updateValue($event)" @blur="handleBlur()" :value="searchText" @focus="showOptions()" :class="`
+         peer
+         ${(multiple) ? 'w-auto' : 'w-full'}
+         font-light 
+         bg-white
+         transition
+         focus:outline-none
+         focus:ring-0
+         focus:ring-transparent
+         border-green-500
+         disabled:opacity-70
+         disabled:cursor-not-allowed
+         ${props.price ? 'pl-9' : 'pl-2'}
+         `" />
+
+    <label :class="`
+         absolute 
+         text-sm
+         duration-150 
+         transform 
+         -translate-y-4 
+         top-5 
+         z-10 
+         origin-[0] 
+         ${props.price ? 'left-9' : 'left-4'}
+         scale-75
+         -translate-y-4
+         ${props.errors ? 'text-rose-500' : ''}
+         ${errorMessage ? 'text-rose-500' : ''}
+       `">
+      {{ props.label }}
+    </label>
+
   </div>
+  <div v-show="displayOptions" class="w-full bg-slate-100 border-x border-b rounded-b-md divide-y text-sm">
+    <div v-for="(value, index) in displayedOptions" :key="index" class="h-8 p-1 pl-4 hover:bg-slate-200 cursor-pointer"><span
+        @click="selectOption(value)">{{ value?.[props.field] ?? '' }}</span></div>
+  </div>
+  <p class="help-message text-red-600 text-xs" v-show="errorMessage || meta.valid">
+    <!-- {{ errorMessage }} - {{ meta }} -->
+    {{ errorMessage }}
+  </p>
 </template>
-  
-<script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
-import * as OutlineIcons from "@heroicons/vue/24/outline";
-import FloatingLabelInput from "./inputs/FloatingLabelInput.vue";
 
-export interface OptionsInterface {
-  id?: string | undefined | number;
-  name?: string | undefined;
-  description?: string | undefined | number;
+<script lang="ts" setup>
+import { toRef, watch, ref, shallowRef } from 'vue';
+import { useField } from 'vee-validate';
+import { Icon, type IconifyIcon } from "@iconify/vue";
+
+type Error = {
+  error: string;
 }
 
-export interface MultiSelectProps {
-  id: string;
+export interface OptionArrayStructure {
+  [key: string]: any; // Allows any string key and any value type
+}
+
+export interface SelectProps {
+  id?: string | undefined;
   name: string;
-  placeholder: string;
-  optionId: string;
-  optionName: string;
-  optionsSelected: string[] | number[] | object[];
-  label: string;
-  modelValue: string | number | string[];
-  errors: object;
-  options: object[];
+  label?: string | undefined;
+  price?: string | undefined;
+  accept?: string | undefined;
+  hidden?: boolean | undefined;
+  icon: string | IconifyIcon;
+  iconSize?: string | number | undefined;
+  type?: string | undefined;
+  required?: boolean | undefined;
+  disabled?: boolean | undefined;
+  readonly?: boolean | undefined;
+  modelValue: string | number | object | string[] | number[] | object[];
+  options: OptionArrayStructure[];
+  multiple?: boolean;
+  field: string;
+  errors?: Error[] | undefined;
+  reduce: Function;
 }
 
-const emit = defineEmits([
-  "update:optionId",
-  "update:optionName",
-  "update:optionsSelected",
-]);
 
-const optionsDropdown = ref(false);
+const props = withDefaults(defineProps<SelectProps>(), {
+  reduce: (option: any) => option.field,
+});
 
-const displayedOptions = ref<any[]>([]);
+const searchText = ref('');
 
-const selectedOptions = ref<OptionsInterface[]>([]);
+const name = toRef(props, 'name');
 
-const selectOption = (option: OptionsInterface) => {
-  optionsDropdown.value = false;
-  if (!selectedOptions.value.includes(option))
-    selectedOptions.value.push(option);
-  emit("update:optionId", option.id);
-  emit("update:optionName", option.name);
-  emit("update:optionsSelected", selectedOptions.value);
+const {
+  value: inputValue,
+  errorMessage,
+  handleBlur,
+  handleChange,
+  meta,
+} = useField(name, undefined, {
+  initialValue: props.modelValue,
+});
+
+const displayedOptions = shallowRef<OptionArrayStructure[]>(props.options);
+
+watch(searchText, () => {
+  displayedOptions.value = props.options.filter((option) => {
+    if (typeof option[props.field] === "string") return option[props.field].includes(searchText.value);
+    else {
+      searchText.value = "";
+    }
+  });
+}
+);
+
+const emit = defineEmits(['update:modelValue']);
+
+const selectedOptions = ref<any>(null);
+const selectedOptionsArray = ref<any[]>([]);
+
+const updateValue = (e: Event) => {
+  handleChange(e);
+  displayOptions.value = true;
+  searchText.value = (e.target as HTMLInputElement).value ?? '';
+  inputValue.value = (e.target as HTMLInputElement).value ?? '';
+  // emit('update:modelValue', (e.target as HTMLInputElement).value)
 };
 
-const handleOptionIdInput = (e: Event) => {
-  emit("update:optionId", (e.target as HTMLInputElement).value);
-}
-const handleOptionNameInput = (e: Event) => {
-  emit("update:optionName", (e.target as HTMLInputElement).value);
-}
+const selectOption = (option: any) => {
 
-const props = defineProps<MultiSelectProps>();
-
-watch(
-  () => props.optionName,
-  (optionName) => {
-    if (typeof props?.options !== 'undefined') {
-      displayedOptions.value = props.options.filter((item: OptionsInterface) =>
-        item?.name?.toLowerCase().includes(optionName ?? '')
-      );
-    }
-    if (optionsDropdown.value === false) optionsDropdown.value = true;
+  if (props.multiple) {
+    selectedOptionsArray.value.push(option);
+    selectedOptions.value = [...new Set(selectedOptionsArray.value)];
+    emit('update:modelValue', selectedOptions.value[0]?.[props.field]);
+    searchText.value = "";
   }
-);
+  else {
 
-watch(
-  () => props.options,
-  (options) => {
-    if (options.length === 0) optionsDropdown.value = false;
+    searchText.value = option?.[props.field];
+    inputValue.value = option?.[props.field];
+    if(props.reduce)emit('update:modelValue', props?.reduce(option) ?? option?.[props.field]);
+    else emit('update:modelValue', option?.[props.field]);
   }
-);
+  showOptions();
+}
 
-onMounted(() => {
-  // if (typeof props?.options !== 'undefined') displayedOptions.value = props.options;
-});
+const displayOptions = ref<Boolean>(false);
+
+const showOptions = () => displayOptions.value = !displayOptions.value;
 </script>
-  
-<style scoped>
-select {
-  padding: 10px;
-  margin: 0;
-  box-sizing: border-box;
-  height: 100%;
-}
-</style>
+
+<style></style>
