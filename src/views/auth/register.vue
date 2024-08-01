@@ -62,7 +62,7 @@ const credentials = reactive({
       </span>
       <div class="w-full flex space-x-2">
 
-        <FloatingLabelInput label="First Name" icon=""/>
+        <FloatingLabelInput name="" label="First Name" icon=""/>
 
         <FloatingLabelInput type="text" :errors="errorMessages?.email" 
         v-model="credentials.last_name" required

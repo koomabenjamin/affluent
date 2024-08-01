@@ -5,29 +5,29 @@
       <form @submit.prevent="saveGroup">
         <div class="mt-2 grid gap-4 w-full grid-cols-2">
           <div class="col-span-2">
-            <FloatingLabelInput icon="heroicons:envelope" type="text" v-model="groupCreationRequest.name" label="Group Name" :error="errorMessages?.name" required />
+            <FloatingLabelInput name="" icon="heroicons:envelope" type="text" v-model="groupCreationRequest.name" label="Group Name" :error="errorMessages?.name" required />
           </div>
           <div class="col-span-2">
-            <TextArea type="text" v-model="groupCreationRequest.description" label="Description" />
+            <TextArea name="" type="text" v-model="groupCreationRequest.description" label="Description" />
           </div>
           <div>
-            <FloatingLabelInput icon="heroicons:envelope" type="email" v-model="groupCreationRequest.email" label="Email" :error="errorMessages?.email" required />
+            <FloatingLabelInput name="" icon="heroicons:envelope" type="email" v-model="groupCreationRequest.email" label="Email" :error="errorMessages?.email" required />
           </div>
           <div>
-            <FloatingLabelInput icon="heroicons:envelope" type="number" v-model="groupCreationRequest.account_number" label="Account Number" />
+            <FloatingLabelInput name="" icon="heroicons:envelope" type="number" v-model="groupCreationRequest.account_number" label="Account Number" />
           </div>
           <div>
-            <FloatingLabelInput icon="heroicons:envelope" type="number" v-model="groupCreationRequest.initial_account_balance" label="Initial Account Balance"
+            <FloatingLabelInput name="" icon="heroicons:envelope" type="number" v-model="groupCreationRequest.initial_account_balance" label="Initial Account Balance"
               required />
           </div>
           <div>
-            <FloatingLabelInput icon="heroicons:envelope" type="text" v-model="groupCreationRequest.phone_number" label="Phone Number" required />
+            <FloatingLabelInput name="" icon="heroicons:envelope" type="text" v-model="groupCreationRequest.phone_number" label="Phone Number" required />
           </div>
           <div>
-            <FloatingLabelInput icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_start_date" label="Contract Start Date" required />
+            <FloatingLabelInput name="" icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_start_date" label="Contract Start Date" required />
           </div>
           <div>
-            <FloatingLabelInput icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_end_date" label="Contract End Date" required />
+            <FloatingLabelInput name="" icon="heroicons:envelope" type="date" v-model="groupCreationRequest.contract_end_date" label="Contract End Date" required />
           </div>
         </div>
 

@@ -13,54 +13,54 @@
             v-model="loanRequest.group" 
             clearable 
             placeholder="Select a group"
-            :reduce="data => data?.id">
+            :reduce="extractGroupId">
           </v-select>
 
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.amount" v-model="loanRequest.amount"
               label="Amount" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.interest_rate"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.interest_rate"
               v-model="loanRequest.interest_rate" label="Interest Rate:" icon="heroicons:banknote" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.interest_amount"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.interest_amount"
               v-model="loanRequest.interest_amount" label="Total Interest Amount:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.application_fee"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.application_fee"
               v-model="loanRequest.application_fee" label="Application Fee:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.total_loan_debt"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.total_loan_debt"
               v-model="loanRequest.total_loan_debt" label="Total Loan Debt:" icon="heroicons:banknote"
               :icon-size="25" />
           </div>
           <div class="w-full flex space-x-2">
-            <FloatingLabelInput type="date" :error="loanResponseError.date_of_disbursement"
+            <FloatingLabelInput name="" type="date" :error="loanResponseError.date_of_disbursement"
               v-model="loanRequest.date_of_disbursement" label="Disbursement Date" icon="heroicons:calendar"
               :icon-size="25" />
           
-            <FloatingLabelInput type="date" :error="loanResponseError.expiry_date" v-model="loanRequest.expiry_date"
+            <FloatingLabelInput name="" type="date" :error="loanResponseError.expiry_date" v-model="loanRequest.expiry_date"
               label="Expiry Date" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.collateral" v-model="loanRequest.collateral"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.collateral" v-model="loanRequest.collateral"
               label="Collateral Worth" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="date" :error="loanResponseError.request_date" v-model="loanRequest.request_date"
+            <FloatingLabelInput name="" type="date" :error="loanResponseError.request_date" v-model="loanRequest.request_date"
               label="Request Date" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.repayment_period"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.repayment_period"
               v-model="loanRequest.repayment_period" label="Repayment Period" icon="heroicons:pencil" :icon-size="25" />
           </div>
           <div>
-            <FloatingLabelInput type="number" :error="loanResponseError.repayment_period_type"
+            <FloatingLabelInput name="" type="number" :error="loanResponseError.repayment_period_type"
               v-model="loanRequest.repayment_period_type" label="Repayment Period Type" icon="heroicons:pencil"
               :icon-size="25" />
           </div>
@@ -90,7 +90,7 @@ import {
   MagnifyingGlassIcon,
   PlusIcon,
 } from "@heroicons/vue/24/outline";
-import type { LoanPayload, Endpoint, LoanResponse, LoanRequest } from "@/types";
+import type { LoanPayload, Endpoint, LoanResponse, LoanRequest, Group } from "@/types";
 
 import useAuthentication from "@/composables/auth";
 
@@ -112,6 +112,8 @@ const user = ref(null);
 const loanStore = useLoanStore();
 const memberStore = useMemberStore();
 const groupStore = useGroupStore();
+
+const extractGroupId = (group: Group) => group?.id.toString();
 
 const { members, loadingMembers } = storeToRefs(memberStore);
 const { loans, loadingLoans } = storeToRefs(loanStore);

@@ -9,12 +9,12 @@
       </div>
 
       <div class="col-span-2">
-        <FloatingLabelInput type="text" label="First Name" v-model="user.first_name" icon="heroicons:envelope"
+        <FloatingLabelInput name="" type="text" label="First Name" v-model="user.first_name" icon="heroicons:envelope"
           :icon-size="20" />
       </div>
 
       <div class="col-span-2">
-        <FloatingLabelInput type="text" label="Last Name" v-model="user.last_name" icon="heroicons:envelope"
+        <FloatingLabelInput name="" type="text" label="Last Name" v-model="user.last_name" icon="heroicons:envelope"
           :icon-size="20" />
       </div>
 
@@ -25,7 +25,7 @@
         purposes within the system.
       </div>
       <div class="col-span-4">
-        <FloatingLabelInput type="text" label="Email" v-model="user.email" icon="heroicons:envelope" :icon-size="20" />
+        <FloatingLabelInput name="" type="text" label="Email" v-model="user.email" icon="heroicons:envelope" :icon-size="20" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Contacts:</div>
@@ -34,7 +34,7 @@
         verification for other purposes within the system.
       </div>
       <div class="col-span-4">
-        <FloatingLabelInput type="text" label="Phone Number" v-model="user.phone_number" icon="heroicons:envelope"
+        <FloatingLabelInput name="" type="text" label="Phone Number" v-model="user.phone_number" icon="heroicons:envelope"
           :icon-size="20" />
       </div>
 
@@ -43,7 +43,7 @@
         Register a unique username for your account as it will be displayed on the profile and portfolio.
       </div>
       <div class="col-span-4">
-        <FloatingLabelInput type="text" label="username" v-model="user.username" icon="heroicons:envelope"
+        <FloatingLabelInput name="" type="text" label="username" v-model="user.username" icon="heroicons:envelope"
           :icon-size="20" />
       </div>
 
@@ -52,14 +52,14 @@
         Please register a valid resdential address for proper follow-up or delivery of any document / parcel.
       </div>
       <div class="col-span-2">
-        <FloatingLabelInput type="text" label="Country" v-model="user.country" icon="heroicons:envelope"
+        <FloatingLabelInput name="" type="text" label="Country" v-model="user.country" icon="heroicons:envelope"
           :icon-size="20" />
       </div>
       <div>
-        <FloatingLabelInput type="text" label="City" v-model="user.city" icon="heroicons:envelope" :icon-size="20" />
+        <FloatingLabelInput name="" type="text" label="City" v-model="user.city" icon="heroicons:envelope" :icon-size="20" />
       </div>
       <div>
-        <FloatingLabelInput type="text" label="State" v-model="user.state" icon="heroicons:envelope" :icon-size="20" />
+        <FloatingLabelInput name="" type="text" label="State" v-model="user.state" icon="heroicons:envelope" :icon-size="20" />
       </div>
 
       <div class="col-span-4 font-medium text-sm mt-1">Socials:</div>

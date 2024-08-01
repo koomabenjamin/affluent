@@ -11,7 +11,7 @@
 
           <div>
 
-            <Select name="group" field="name" :options="groups" icon="" label="Group" v-model="collectionRequest.group" :reduce="option => option.id"/>
+            <Select name="group" field="name" :options="groups" icon="" label="Group" v-model="collectionRequest.group" :reduce="extractGroupId"/>
             <!-- SELECTION BOX WITHOUT A REDUCE FUNCTION -->
             <!-- <Select name="group" field="name" :options="groups" icon="" label="Group" v-model="collectionRequest.group"/> -->
 
@@ -66,7 +66,7 @@ import FloatingLabelInput from "../../shared/inputs/FloatingLabelInput.vue";
 import Select from "../../shared/MultiSelect.vue";
 import Button from "../../shared/Button.vue";
 import SlideInModal from "../../shared/modals/SlideIn.vue";
-import type { CollectionRequest } from "@/types";
+import type { CollectionRequest, Group } from "@/types";
 import { Form } from 'vee-validate';
 import * as Yup from 'yup';
 
