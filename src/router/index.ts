@@ -10,7 +10,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/index.vue')
+      component: () => import('../views/MainDashboard.vue')
     },
     {
       path: '/login',
@@ -70,7 +70,7 @@ const router = createRouter({
   {
       path: '/wallet',
       name: 'wallet',
-      component: () => import('../views/WalletDashboard.vue')
+      component: () => import('../views/wallet/WalletDashboard.vue')
   },
   {
       path: '/developer',
