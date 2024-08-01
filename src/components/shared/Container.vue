@@ -1,8 +1,8 @@
 <template>
   <MasterPage>
-    <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 py-2 px-2 overflow-auto no-scroll-bar relative h-full">
+    <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 overflow-auto no-scroll-bar relative h-full flex flex-col">
       <!-- Top with user total -->
-      <div class="w-full h-12 flex items-center justify-between border-b">
+      <div class="w-full h-12 flex items-center justify-between border-b sticky top-0 bg-slate-50 p-4 shadow-sm">
         <div class="flex items-center space-x-2">
           <div class="font-sans text-lg lg:text-4xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
           </div>
@@ -36,7 +36,9 @@
           <span class="font-semibold text-sm lg:text-2xl">{{ userSessionDetails?.name ?? 'No user detected' }}</span>
         </div>
       </div>
-      <slot></slot>
+      <div class="px-4 py-0 bg-slate-100 relative">
+        <slot></slot>
+      </div>
     </div>
   </MasterPage>
 </template>
