@@ -30,27 +30,27 @@ const router = createRouter({
     {
       path: '/newsfeed',
       name: 'newsfeed',
-      component: () => import('../views/newsfeed/index.vue')
+      component: () => import('../views/newsfeed/NewsFeedDashboard.vue')
   },
   {
       path: '/members',
       name: 'members',
-      component: () => import('../views/members/index.vue')
+      component: () => import('../views/members/MembersDashboard.vue')
   },
   {
       path: '/settings',
       name: 'settings',
-      component: () => import('../views/settings/index.vue')
+      component: () => import('../views/settings/SettingsDashboard.vue')
   },
   {
       path: '/profile',
       name: 'profile',
-      component: () => import('../views/profile/index.vue')
+      component: () => import('../views/profile/ProfileDashboard.vue')
   },
   {
       path: '/groups',
       name: 'groups',
-      component: () => import('../views/groups/index.vue')
+      component: () => import('../views/groups/GroupsDashboard.vue')
   },
   {
       path: '/collections',
@@ -65,32 +65,32 @@ const router = createRouter({
   {
       path: '/reports',
       name: 'reports',
-      component: () => import('../views/reports/index.vue')
+      component: () => import('../views/reports/ReportsDashboard.vue')
   },
   {
       path: '/wallet',
       name: 'wallet',
-      component: () => import('../views/wallet/index.vue')
+      component: () => import('../views/WalletDashboard.vue')
   },
   {
       path: '/developer',
       name: 'developer',
-      component: () => import('../views/wallet/index.vue')
+      component: () => import('../views/developer/DeveloperDashboard.vue')
   },
   {
       path: '/notifications',
       name: 'notifications',
-      component: () => import('../views/notifications/index.vue')
+      component: () => import('../views/notifications/NotificationsDashboard.vue')
   },
   {
       path: '/chatroom',
       name: 'chatroom',
-      component: () => import('../views/chatroom/index.vue')
+      component: () => import('../views/chatroom/ChatRoomDashboard.vue')
   },
   {
       path: '/support',
       name: 'support',
-      component: () => import('../views/support/index.vue')
+      component: () => import('../views/support/SupportDashboard.vue')
   },
   ]
 });
