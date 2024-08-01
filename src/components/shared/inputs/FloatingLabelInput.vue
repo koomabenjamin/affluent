@@ -47,8 +47,8 @@
           peer-placeholder-shown:translate-y-0 
           peer-focus:scale-75
           peer-focus:-translate-y-4
-          ${props.errors ? 'text-rose-500' : ''}
-          ${errorMessage ? 'text-rose-500' : ''}
+          ${props.errors ? 'text-rose-500' : 'text-blue-500'}
+          ${errorMessage ? 'text-rose-500' : 'text-blue-500'}
         `"
       >
         {{props.label}}
