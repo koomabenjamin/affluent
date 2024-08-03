@@ -58,7 +58,7 @@ const items = [
   { items: ['Loan Book', 'Dead Loans', 'Black-listed Clients'], route: "", icon: "", name: "Loans" },
   { items: ['Collections Ledger', 'Failed Collections'], route: "", icon: "", name: "Collections" },
   { items: ['Member Ledger'], route: "", icon: "", name: "Members" },
-  { items: ['Income Statement', 'Cashflow Statement', 'Balance Sheet'], route: "", icon: "", name: "Financial Statements" },
+  { items: ['Charts of Accounts', 'Income Statement', 'Cashflow Statement', 'Balance Sheet'], route: "", icon: "", name: "Accounting" },
   { items: ['Security Logs', 'Breach Reports', 'Funny-activties'], route: "", icon: "", name: "System Audit" },
 ];
 
@@ -69,7 +69,7 @@ const month = ref("");
 const endDate = ref("");
 const startDate = ref("");
 
-const activeTabs = ref<string[]>(["System Audit", "Loans", "Members", "Collections", "Financial Statements"]);
+const activeTabs = ref<string[]>(["System Audit", "Loans", "Members", "Collections", "Accounting"]);
 
 const changeActivePage = (page: string) => activePage.value = page;
 
