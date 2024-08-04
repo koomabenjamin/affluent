@@ -48,14 +48,13 @@ import UpdatePersonalInformation from '@/components/forms/profile/UpdatePersonal
 import UpdatePersonalGroups from '@/components/forms/profile/UpdatePersonalGroups.vue';
 
 const items = [
-  { items: ['Summary', 'Groups', 'sub-item-three'], route: "", icon: "", name: "Profile" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Portfolio" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Account" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Notifications" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Appearance" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Billing" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Keys and passwords" },
-  { items: ['sub-item-one', 'sub-item-two', 'sub-item-three'], route: "", icon: "", name: "Security Logs" },
+  { items: ['Summary', 'Groups'], route: "", icon: "", name: "Profile" },
+  { items: ['Visible Details', 'Privacy Status'], route: "", icon: "", name: "Portfolio" },
+  { items: ['Privacy', 'Deactivate', 'Delete'], route: "", icon: "", name: "Account" },
+  { items: ['Enable / Disable', 'Preview Type', 'Blocked'], route: "", icon: "", name: "Notifications" },
+  { items: ['Preffered Colors', 'Font-type', 'Display Options'], route: "", icon: "", name: "Appearance" },
+  { items: ['Manage Cards', 'Payment History'], route: "", icon: "", name: "Billing" },
+  { items: ['Reset', 'Manage Tokens', 'Manage Passwords'], route: "", icon: "", name: "Keys and passwords" },
 ];
 
 const activePage = ref<string>("Summary");
@@ -68,7 +67,6 @@ const activeTabs = ref<string[]>([
   "Appearance",
   "Billing",
   "Keys and passwords",
-  "Security Logs"
 ]);
 
 const changeActivePage = (page: string) => activePage.value = page;
