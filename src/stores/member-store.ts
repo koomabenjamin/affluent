@@ -21,7 +21,7 @@ export const useMemberStore = defineStore("MemberStore", {
     async fetchAll(group: string | number) {
       if (!this.loadingMembers) this.loadingMembers = true;
       const data = await new MemberService().fetchAll(group);
-      this.members = data ?? [];
+      if(data.length > 0) this.members = data ?? [];
       this.loadingMembers = false;
     },
     async save(member: MemberRequest) {
