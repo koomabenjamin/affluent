@@ -15,6 +15,13 @@ export interface NoDataProps{
 }
 
 const props = defineProps<NoDataProps>();
+
+</script>
+
+<script lang="ts">
+export default {
+  name: "NoData"
+}
 </script>
 
 <style>
