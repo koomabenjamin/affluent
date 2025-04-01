@@ -1,8 +1,8 @@
 <template>
-  <div class="
+  <div :class="`
       hidden
       lg:block
-      w-1/5
+      ${minimize ? 'w-16' : 'w-1/5'}
       h-full 
       text-white
        bg-slate-800
@@ -14,7 +14,7 @@
       overflow-auto
       no-scroll-bar
       relative
-    ">
+    `">
     <!-- Image and company -->
     <div class="
         text-2xl
@@ -330,6 +330,8 @@ const updateActiveBoard = (route: string) => {
 const bgMain = ref('bg-blue-600');
 
 const { logout } = useAuthentication();
+
+const minimize = ref(false);
 
 </script>
 
