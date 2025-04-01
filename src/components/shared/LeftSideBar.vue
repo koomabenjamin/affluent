@@ -276,7 +276,7 @@
   <div class="
       fixed
       bottom-0
-      left-0
+      -left-1
       w-1/5
       bg-black
       h-12

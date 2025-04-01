@@ -29,27 +29,33 @@
     </div>
     <div
       :class="`${primary} h-auto py-1 fixed bottom-0 inset-x-0 flex items-center justify-between px-4 text-black lg:hidden border-t`">
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('')">
         <NewspaperIcon class="w-12 stroke-1" />
         <span class="text-xs">Dashboard</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('groups')" v-if="false">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('groups')" v-if="false">
         <UserGroupIcon class="w-12 stroke-1" />
         <span class="text-xs">Groups</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('collections')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('collections')">
         <BanknotesIcon class="w-12 stroke-1" />
         <span class="text-xs">Collections</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('wallet')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('wallet')">
         <WalletIcon class="w-12 stroke-1" />
         <span class="text-xs">Wallet</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('loans')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('loans')">
         <CreditCardIcon class="w-12 stroke-1" />
         <span class="text-xs">Loans</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('settings')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('settings')">
         <CogIcon class="w-12 stroke-1" />
         <span class="text-xs">Settings</span>
       </div>
@@ -77,14 +83,14 @@
                 <div class="my-10 flex flex-col space-y-2">
                   <button @click="updateActiveBoard('')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'home' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                      flex
+                      w-full
+                      h-10
+                      rounded
+                      items-center
+                      justify-between
+                      p-2
+                    ">
                     <div class="flex space-x-2 items-center">
                       <Squares2X2Icon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Dashboard</div>
@@ -93,14 +99,14 @@
                   </button>
                   <button @click="updateActiveBoard('newsfeed')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'newsfeed' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                      flex
+                      w-full
+                      h-10
+                      rounded
+                      items-center
+                      justify-between
+                      p-2
+                    ">
                     <div class="flex space-x-2 items-center">
                       <NewspaperIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">NewsFeed</div>
@@ -109,14 +115,14 @@
                   </button>
                   <button @click="updateActiveBoard('profile')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'profile' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                      flex
+                      w-full
+                      h-10
+                      rounded
+                      items-center
+                      justify-between
+                      p-2
+                    ">
                     <div class="flex space-x-2 items-center">
                       <UserCircleIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Profile</div>
@@ -125,14 +131,14 @@
                   </button>
                   <button @click="updateActiveBoard('loans')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'loans' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <BanknotesIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Loans</div>
@@ -141,31 +147,30 @@
                   </button>
                   <button @click="updateActiveBoard('collections')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'collections' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <WalletIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Collections</div>
                     </div>
                     <ChevronRightIcon class="h-5 w-5" />
                   </button>
-                  <button @click="updateActiveBoard('groups')"
-                  v-if="false"
+                  <button @click="updateActiveBoard('groups')" v-if="false"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'groups' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <UserGroupIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Groups</div>
@@ -174,14 +179,14 @@
                   </button>
                   <button @click="updateActiveBoard('members')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'members' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <UsersIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Members</div>
@@ -190,14 +195,14 @@
                   </button>
                   <button @click="updateActiveBoard('notifications')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'notifications' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <BellIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Notifications</div>
@@ -207,14 +212,14 @@
 
                   <button @click="updateActiveBoard('reports')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'reports' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <Bars4Icon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Reports</div>
@@ -223,14 +228,14 @@
                   </button>
                   <button @click="updateActiveBoard('wallet')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'wallet' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <WalletIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Wallet (I & E)</div>
@@ -242,15 +247,15 @@
                 <!-- Ad banner and general notifications -->
                 <div class="w-full flex flex-col">
                   <div class="
-          bg-yellow-400
-          h-48
-          rounded
-          flex
-          items-center
-          justify-center
-          text-white
-          font-black
-        ">
+                    bg-yellow-400
+                    h-48
+                    rounded
+                    flex
+                    items-center
+                    justify-center
+                    text-white
+                    font-black
+                  ">
                     Ad Banner
                   </div>
                 </div>
@@ -259,14 +264,14 @@
                 <div class="mt-5 flex flex-col space-y-2">
                   <button @click="updateActiveBoard('settings')"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'settings' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <CogIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Account Settings</div>
@@ -274,14 +279,14 @@
                     <ChevronRightIcon class="h-5 w-5" />
                   </button>
                   <button @click="logout()" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
+                    flex
+                    w-full
+                    h-10
+                    rounded
+                    items-center
+                    justify-between
+                    p-2
+                  ">
                     <div class="flex space-x-2 items-center">
                       <ArrowLeftOnRectangleIcon class="h-6 w-6" />
                       <div class="font-semibold text-xs">Logout</div>
@@ -321,8 +326,8 @@
               <div class="space-y-2 overflow-auto h-full px-2 pb-[55px]" v-if="showChats">
                 <div
                   class="h-16 w-full rounded bg-blue-100 flex p-2 items-center border space-x-2 flex-shrink-0 hover:scale-105 duration-200 cursor-pointer"
-                  v-for="chat in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15, 26, 345, 2321, 36, 89]" @click="openChat(chat)"
-                  :key="chat">
+                  v-for="chat in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15, 26, 345, 2321, 36, 89]"
+                  @click="openChat(chat)" :key="chat">
                   <div class="h-12 w-12 rounded bg-blue-700 flex flex-shrink-0"></div>
                   <div class="h-12 w-full rounded bg-blue-400"></div>
                 </div>
@@ -352,18 +357,15 @@ import {
   CogIcon,
   UserCircleIcon,
   ChatBubbleOvalLeftEllipsisIcon,
-  Square2StackIcon,
   NewspaperIcon,
   Squares2X2Icon,
   ChevronRightIcon,
-  ArrowDownIcon,
   UserGroupIcon,
   UsersIcon,
   BellIcon,
   CreditCardIcon,
   ArrowLeftOnRectangleIcon,
   BanknotesIcon,
-  MagnifyingGlassIcon,
   WalletIcon,
 } from "@heroicons/vue/24/outline";
 import {

@@ -10,7 +10,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/MainDashboard.vue')
+      // component: () => import('../views/MainDashboard.vue')
+      component: () => import('../views/InitialSetupScreen.vue')
     },
     {
       path: '/login',

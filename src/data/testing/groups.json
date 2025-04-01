@@ -1,7 +1,7 @@
 [
   {  
     "id":1,
-    "name":"Affluent investments club",
+    "name":"App Name",
     "description": "Small sized investments club specifically for bankers",
     "status": "active",
     "email": "affluent.sacco@gmail.com",

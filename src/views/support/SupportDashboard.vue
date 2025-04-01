@@ -1,7 +1,7 @@
 <template>
   <Container>
     <div class="flex px-2 w-full">
-        <div class="flex flex-col w-1/4 h-[90vh] space-y-1 overflow-auto">
+        <div class="flex flex-col w-1/4 h-[97vh] space-y-1 overflow-auto">
           <div v-for="(value, index) in items" :key="index" class="space-y-1 flex flex-col">
             <div 
             :class="`${(activeTabs.includes(value.name)) ? 'bg-slate-600 text-white': ''}`"

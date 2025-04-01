@@ -1,7 +1,7 @@
 export const groups = [
   {
     "id": 1,
-    "name": "Affluent investments club",
+    "name": "App Name",
     "description": "Small sized investments club specifically for bankers",
     "status": "active",
     "email": "affluent.sacco@gmail.com",
@@ -39,7 +39,7 @@ export const groups = [
 export const members = [
   {
     "id": 1,
-    "name": "Affluent investments club",
+    "name": "App Name",
     "description": "Small sized investments club specifically for bankers",
     "status": "active",
     "email": "affluent.sacco@gmail.com",
