@@ -24,7 +24,8 @@ const credentials = reactive({
   <div class="
     flex 
     w-screen 
-    h-screen 
+    h-screen
+    bg-slate-200
     center">
 
     <form @submit.prevent="login(credentials)" class="

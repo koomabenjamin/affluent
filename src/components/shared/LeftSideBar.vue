@@ -152,6 +152,22 @@
         </div>
         <ChevronRightIcon class="h-5 w-5" />
       </button>
+      <button @click="updateActiveBoard('members')"
+        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'members' }" class="
+          flex
+          w-full
+          h-10
+          rounded
+          items-center
+          justify-between
+          p-2
+        ">
+        <div class="flex space-x-2 items-center">
+          <UsersIcon class="h-6 w-6" />
+          <div class="font-semibold text-xs">Groups</div>
+        </div>
+        <ChevronRightIcon class="h-5 w-5" />
+      </button>
       <!-- <button @click="updateActiveBoard('notifications')"
         :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'notifications' }" class="
           flex
