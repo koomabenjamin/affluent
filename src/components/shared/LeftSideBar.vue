@@ -285,7 +285,7 @@
       items-center
       justify-start
       text-xs
-      px-5
+      px-4
     ">
     &copy; Copyright 2022
   </div>

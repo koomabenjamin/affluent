@@ -29,27 +29,33 @@
     </div>
     <div
       :class="`${primary} h-auto py-1 fixed bottom-0 inset-x-0 flex items-center justify-between px-4 text-black lg:hidden border-t`">
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('')">
         <NewspaperIcon class="w-12 stroke-1" />
         <span class="text-xs">Dashboard</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('groups')" v-if="false">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('groups')" v-if="false">
         <UserGroupIcon class="w-12 stroke-1" />
         <span class="text-xs">Groups</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('collections')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('collections')">
         <BanknotesIcon class="w-12 stroke-1" />
         <span class="text-xs">Collections</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('wallet')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('wallet')">
         <WalletIcon class="w-12 stroke-1" />
         <span class="text-xs">Wallet</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('loans')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('loans')">
         <CreditCardIcon class="w-12 stroke-1" />
         <span class="text-xs">Loans</span>
       </div>
-      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white" @click="updateActiveBoard('settings')">
+      <div class="flex flex-col items-center h-16 w-16 rounded px-3 py-2 hover:bg-blue-600 hover:text-white"
+        @click="updateActiveBoard('settings')">
         <CogIcon class="w-12 stroke-1" />
         <span class="text-xs">Settings</span>
       </div>
@@ -155,8 +161,7 @@
                     </div>
                     <ChevronRightIcon class="h-5 w-5" />
                   </button>
-                  <button @click="updateActiveBoard('groups')"
-                  v-if="false"
+                  <button @click="updateActiveBoard('groups')" v-if="false"
                     :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'groups' }" class="
           flex
           w-full
@@ -321,8 +326,8 @@
               <div class="space-y-2 overflow-auto h-full px-2 pb-[55px]" v-if="showChats">
                 <div
                   class="h-16 w-full rounded bg-blue-100 flex p-2 items-center border space-x-2 flex-shrink-0 hover:scale-105 duration-200 cursor-pointer"
-                  v-for="chat in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15, 26, 345, 2321, 36, 89]" @click="openChat(chat)"
-                  :key="chat">
+                  v-for="chat in [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 10, 11, 12, 13, 14, 15, 26, 345, 2321, 36, 89]"
+                  @click="openChat(chat)" :key="chat">
                   <div class="h-12 w-12 rounded bg-blue-700 flex flex-shrink-0"></div>
                   <div class="h-12 w-full rounded bg-blue-400"></div>
                 </div>
