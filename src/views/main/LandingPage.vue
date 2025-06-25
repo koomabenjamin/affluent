@@ -37,7 +37,7 @@ const navigateTo = (id: string) => {
           cursor-pointer 
           hover:bg-blue-100 
           text-blue-600
-          rounded-lg 
+          rounded-3xl 
           center 
           flex-none">
         <div>Default</div>
@@ -52,7 +52,7 @@ const navigateTo = (id: string) => {
           border-[0.5px] 
           cursor-pointer 
           hover:bg-blue-100 
-          rounded-lg 
+          rounded-3xl 
           center 
           flex-none" 
         v-for="(value, index) in 11" :key="value">
