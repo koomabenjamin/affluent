@@ -5,7 +5,7 @@ import useAuthentication from '../../composables/auth';
 import FloatingLabelInput from '../../components/shared/inputs/FloatingLabelInput.vue';
 import Button from '../../components/shared/Button.vue';
 
-const appName = import.meta.env.VITE_CLIENT_GROUP_NAME
+const appName = import.meta.env.VITE_CLIENT_GROUP_NAME;
 
 const { login, errorMessages, authLoader } = useAuthentication();
 
@@ -24,20 +24,37 @@ const credentials = reactive({
   <div class="
     flex 
     w-screen 
-    h-screen 
-    center">
+    h-screen">
+
+    <div class="
+      hidden 
+      lg:block 
+      w-2/3 
+      bg-gradient-to-r 
+      from-blue-500 
+      to-blue-600 
+      text-white 
+      flex 
+      items-center 
+      justify-center
+      text-4xl
+      font-bold
+      text-center">
+      
+      <p>Banner</p>
+      
+    </div>
 
     <form @submit.prevent="login(credentials)" class="
-        sm:w-1/2
-        lg:w-1/3
-        mx-auto 
+        w-1/4
+        mx-auto
+        my-auto 
         flex 
         flex-col 
-        items-center 
+        items-center
+        justify-center 
         space-y-4 
         h-auto p-5
-        border
-        shadow-md
         hover:bg-blue-50
         bg-white 
         rounded">
@@ -55,6 +72,7 @@ const credentials = reactive({
           text-slate-500 
           w-full 
           text-left 
+          font-light
           my-2">
         Welcome back awesome user, please enter your email and password.
       </span>
@@ -77,7 +95,7 @@ const credentials = reactive({
         <Button label="Login" class="w-2/3" size="block" :loader="authLoader" />
       </div>
 
-      <div class="w-full py-1 text-center text-sm flex items-center justify-between">
+      <div class="w-full py-1 text-center text-xs flex items-center justify-between">
         <div class="font-light">
           Don't have an account ?,
           <router-link to="/register" class="text-blue-600 font-bold">
