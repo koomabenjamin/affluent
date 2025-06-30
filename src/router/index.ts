@@ -15,8 +15,8 @@ const router = createRouter({
     {
       path: '/main/:id',
       name: 'main',
-      component: () => import('../views/main/TemporaryPage.vue')
-      //   component: () => import('../views/MainDashboard.vue')
+      // component: () => import('../views/main/TemporaryPage.vue')
+      component: () => import('../views/MainDashboard.vue')
     },
     {
       path: '/login',
