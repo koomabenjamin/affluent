@@ -1,13 +1,11 @@
 <template>
-  <button @click="updateActiveBoard(path)" :class="{ 'bg-blue-600 text-white hover:text-blue-500': isActive }"
-    class="flex w-full h-10 rounded-lg items-center justify-between p-2 hover:bg-slate-100 hover:shadow hover:scale-105 transition-all duration-200 ease-in-out">
+  <button @click="updateActiveBoard(path)"
+    :class="`${sideBarItemClasses.base} ${isActive ? sideBarItemClasses.active : sideBarItemClasses.inactive}`">
     <div class="flex space-x-2 items-center">
-      <Icon
-        :icon="icon" 
-        :width="iconSize" />
-      <div class="font-semibold text-xs capitalize">{{ name }}</div>
+      <Icon :icon="icon" :width="iconSize" />
+      <div class="font-semibold text-xs capitalize" v-if="!minimize">{{ name }}</div>
     </div>
-    <ChevronRightIcon class="h-5 w-5" />
+    <ChevronRightIcon class="h-5 w-5" v-if="!minimize" />
   </button>
 </template>
 
@@ -18,12 +16,19 @@ import {
 import { defineProps, defineEmits, ref } from 'vue';
 import { Icon, type IconifyIcon } from "@iconify/vue";
 
+const sideBarItemClasses = {
+  base: 'flex items-center justify-between p-2 hover:bg-slate-100 hover:shadow hover:scale-105 transition-all duration-200 ease-in-out',
+  active: 'bg-blue-600 text-white hover:text-blue-500',
+  inactive: 'text-gray-700 hover:text-gray-900',
+};
+
 const props = defineProps<{
   isActive?: boolean;
   name: string;
   path: string;
   icon: string | IconifyIcon;
   iconSize?: string | number | undefined;
+  minimize?: boolean;
 }>();
 
 const emit = defineEmits<{
