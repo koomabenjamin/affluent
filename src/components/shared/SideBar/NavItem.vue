@@ -1,6 +1,6 @@
 <template>
   <button @click="updateActiveBoard(path)" :class="{ 'bg-blue-600 text-white': isActive }"
-    class="flex w-full h-10 rounded-lg items-center justify-between p-2 hover:bg-slate-200 hover:border">
+    class="flex w-full h-10 rounded-lg items-center justify-between p-2 hover:bg-slate-100 hover:shadow">
     <div class="flex space-x-2 items-center">
       <Icon
         :icon="icon" 

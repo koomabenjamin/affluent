@@ -5,7 +5,7 @@
       ${minimize ? 'w-16' : 'w-1/5'}
       h-full 
       text-black
-       bg-slate-100
+       bg-slate-50
       border-r
       shadow
       py-5
