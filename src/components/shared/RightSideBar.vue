@@ -140,6 +140,22 @@
           font-black
         "
       >
+        Assets
+      </div>
+    </div>
+    <div class="w-full flex flex-col mt-5">
+      <div
+        class="
+          bg-black
+          h-60
+          rounded-lg
+          flex
+          items-center
+          justify-center
+          text-white
+          font-black
+        "
+      >
         Ad Banner
       </div>
     </div>
