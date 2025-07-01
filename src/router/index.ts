@@ -10,7 +10,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/MainDashboard.vue')
+      component: () => import('../views/main/LandingPage.vue')
     },
     {
       path: '/main/:id',
@@ -87,6 +87,11 @@ const router = createRouter({
       path: '/notifications',
       name: 'notifications',
       component: () => import('../views/notifications/NotificationsDashboard.vue')
+    },
+    {
+      path: '/education',
+      name: 'education',
+      component: () => import('../views/education/EducationDashboard.vue')
     },
     {
       path: '/chatroom',

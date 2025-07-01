@@ -128,6 +128,7 @@ const topNavItems: SideBarItemProps[] = [
 ];
 
 const bottomNavItems = [
+  { name: 'Skills Path', icon: "solar:square-academic-cap-2-linear", path: 'education' },
   { name: 'Settings', icon: "solar:settings-linear", path: 'settings' },
   { name: 'Support', icon: "solar:help-outline", path: 'support' },
   { name: 'Logout', icon: "solar:logout-3-outline", path: 'logout' }
