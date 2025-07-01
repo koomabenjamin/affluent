@@ -2,9 +2,9 @@
   <MasterPage>
     <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 overflow-auto no-scroll-bar relative h-full flex flex-col">
       <!-- Top with user total -->
-      <div class="w-full h-12 flex items-center justify-between border-b sticky top-0 bg-slate-50 p-4 shadow-sm">
+      <div class="w-full h-[66px] flex items-center justify-between border-b sticky top-0 bg-slate-50 p-4 shadow-sm">
         <div class="flex items-center space-x-2">
-          <div class="font-sans text-lg lg:text-4xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
+          <div class="font-sans text-lg lg:text-3xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
           </div>
           <div :class="{
             'bg-gradient-to-r from-cyan-500 to-blue-500 text-rose-100': ((userSessionDetails?.percentage_growth ?? 0) < 0),
@@ -33,7 +33,7 @@
         </div>
         <div class="text-sm lg:text-lg">
           Welcome back,
-          <span class="font-semibold text-sm lg:text-2xl">{{ userSessionDetails?.name ?? 'No user detected' }}</span>
+          <span class="font-semibold text-sm lg:text-xl">{{ userSessionDetails?.name ?? 'No user detected' }}</span>
         </div>
       </div>
       <div class="px-2 py-0 bg-slate-100 relative">

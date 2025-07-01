@@ -5,10 +5,10 @@
       ${minimize ? 'w-16' : 'w-1/5'}
       h-full 
       text-black
-       bg-slate-50
+      bg-slate-50
       border-r
       shadow
-      py-5
+      py-4
       px-2
       pb-16
       overflow-auto
@@ -23,7 +23,7 @@
         space-x-3
         items-center
         w-full
-        justify-end
+        justify-start
         flex-shrink-0
         flex-grow-0
       ">
@@ -33,12 +33,14 @@
       </div>
       <div class="flex flex-col w-4/5" v-if="!minimize">
         <h6 class="font-bold text-lg text-wrap">{{ appGroupName }}</h6>
-        <h6 class="font-normal text-xs text-wrap text-slate-400">{{ appGroupSlogan }}</h6>
+        <!-- <h6 class="font-normal text-xs text-wrap text-slate-400">{{ appGroupSlogan }}</h6> -->
       </div>
     </div>
 
+    <hr>
+
     <!-- Sidebar menu and content -->
-    <div class="my-10 flex flex-col space-y-2">
+    <div class="my-2 flex flex-col space-y-2">
       <SideBarItem v-for="item in topNavItems" :key="item.name" :isActive="router.currentRoute.value.name === item.path"
         :name="item.name" :icon="item.icon" :iconSize="28" :path="item.path" @updateActiveBoard="updateActiveBoard"
         :minimize="minimize" />

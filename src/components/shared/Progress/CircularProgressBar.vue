@@ -11,14 +11,14 @@
       </defs>
 
       <!-- Background circle -->
-      <circle
+      <!-- <circle
         :cx="size / 2"
         :cy="size / 2"
         :r="radius"
-        stroke="#374151"
+        stroke="oklch(92.9% 0.013 255.508)"
         :stroke-width="strokeWidth"
         fill="none"
-      />
+      /> -->
 
       <!-- Progress circle with gradient stroke -->
       <circle
@@ -37,7 +37,7 @@
 
     <!-- Center label -->
     <div class="absolute inset-0 flex items-center justify-center">
-      <span class="text-xl font-bold text-white">{{ value }}</span>
+      <span class="text-xl font-bold text-black">{{ value }}</span>
     </div>
   </div>
 </template>
