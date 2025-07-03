@@ -2,7 +2,7 @@
   <div :class="`
       hidden
       lg:block
-      ${minimize ? 'w-16' : 'w-1/5'}
+      ${minimize ? 'w-16' : 'w-1/6'}
       h-full 
       text-black
       bg-slate-50
@@ -76,7 +76,7 @@
       fixed
       bottom-0
       left-0
-      w-1/5
+      w-1/6
       bg-black
       h-12
       text-white

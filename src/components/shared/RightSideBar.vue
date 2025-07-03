@@ -3,7 +3,7 @@
     class="
       hidden
       lg:block
-      w-1/5
+      w-1/6
       h-full bg-slate-50
       border-l
       shadow-inner

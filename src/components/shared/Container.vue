@@ -1,8 +1,8 @@
 <template>
   <MasterPage>
-    <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 overflow-auto no-scroll-bar relative h-full flex flex-col">
+    <div class="lg:mt-0 lg:ml-0 w-full lg:w-2/3 overflow-auto no-scroll-bar relative h-full flex flex-col">
       <!-- Top with user total -->
-      <div class="w-full h-[66px] flex items-center justify-between border-b sticky top-0 bg-slate-50 p-4 shadow-sm">
+      <div class="w-full h-[66px] flex items-center justify-between border-b sticky top-0 bg-slate-50 p-4 shadow-sm z-10">
         <div class="flex items-center space-x-2">
           <div class="font-sans text-lg lg:text-3xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
           </div>
