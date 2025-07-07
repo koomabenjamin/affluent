@@ -44,12 +44,12 @@
       <div class="w-full center" v-if="savingPost">
         <Icon icon="svg-spinners:180-ring-with-bg" class="text-blue-500" width="20" v-if="savingPost" />
       </div>
-      <div class="w-full space-y-2 rounded overflow-auto h-full" v-if="(posts?.length ?? 0) > 0">
-        <div class="h-full overflow-auto">
+      <div class="w-full space-y-1 rounded overflow-auto h-full" v-if="(posts?.length ?? 0) > 0">
+        <div class="h-full overflow-auto divide-y">
           <!-- ******* START OF LIST OF POSTS ****** -->
-          <div class="h-auto flex space-x-2 items-center px-20"
+          <div class="h-auto flex space-x-2 items-center bg-white"
             v-for="(feed, index) in (posts ?? []).sort((a, b) => b + a)" :key="feed">
-            <div class="flex flex-col w-full p-2 h-auto space-y-1 border hover:bg-slate-100">
+            <div class="flex flex-col w-full px-6 py-4 h-auto space-y-1 hover:bg-slate-100">
               <div class="w-full h-auto rounded-lg p-2 text-xs flex space-x-2">
                 <div class="h-12 w-12 rounded-full bg-black"></div>
                 <div class="flex flex-col text-sm">
@@ -110,7 +110,7 @@
                 <!-- <div class="space-y-1"> -->
                 <div class="py-2 px-2 border text-sm" v-for="(comment, commentIndex) in feed.comments" :key="comment">
                   <div class="w-full h-auto rounded-lg p-1 text-xs flex space-x-2">
-                    <div class="h-10 w-10 rounded-full bg-black"></div>
+                    <div class="h-10 w-10 rounded-full bg-black flex-none"></div>
                     <div class="flex flex-col text-sm">
                       <div>
                         <span class="font-bold">Benjamin Kooma</span>
@@ -198,17 +198,6 @@ const content = ref("");
 const comment = ref("");
 const activePost = ref(null);
 const savingPost = ref(false);
-
-// const content = ref("");
-// const comment = ref("");
-// const savingPost = ref(false);
-
-// const commentButtonActive = ref(false);
-
-// const addComment = () =>
-//   (commentButtonActive.value = !commentButtonActive.value);
-
-const _posts = ref([]);
 
 const savePost = () => {
   if (content.value) {

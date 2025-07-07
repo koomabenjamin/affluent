@@ -3,7 +3,7 @@
     :class="`${sideBarItemClasses.base} ${isActive ? sideBarItemClasses.active : sideBarItemClasses.inactive}`">
     <div class="flex space-x-2 items-center">
       <Icon :icon="icon" :width="iconSize" />
-      <div class="font-semibold text-sm capitalize" v-if="!minimize">{{ name }}</div>
+      <div class="font-semibold text-xs capitalize" v-if="!minimize">{{ name }}</div>
     </div>
     <ChevronRightIcon class="h-5 w-5" v-if="!minimize" />
   </button>

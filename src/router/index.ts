@@ -33,11 +33,11 @@ const router = createRouter({
       name: 'register',
       component: () => import('../views/auth/register.vue')
     },
-    {
-      path: '/newsfeed',
-      name: 'newsfeed',
-      component: () => import('../views/newsfeed/NewsFeedDashboard.vue')
-    },
+    // {
+    //   path: '/newsfeed',
+    //   name: 'newsfeed',
+    //   component: () => import('../views/newsfeed/NewsFeedDashboard.vue')
+    // },
     {
       path: '/members',
       name: 'members',

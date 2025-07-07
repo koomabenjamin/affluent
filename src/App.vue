@@ -14,4 +14,8 @@ import './assets/main.css';
 .center {
   @apply flex items-center justify-center
 }
+
+h1{
+  @apply text-3xl font-bold
+}
 </style>

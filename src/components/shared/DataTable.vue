@@ -1,5 +1,5 @@
 <template>
-  <table class="lg:w-full h-[1000px] mt-4 overflow-auto">
+  <table class="w-full mt-4 overflow-auto">
 
     <thead>
       <tr class="">
@@ -15,7 +15,7 @@
       </tr>
     </thead>
 
-    <tr v-for="(value, index) in rows" :key="index" class="bg-slate-50 border-b">
+    <tr v-for="(value, index) in rows" :key="index" class="border-b">
 
       <td class="text-xs">{{ getRowId(index.toString()) }}.</td>
 

@@ -36,7 +36,7 @@
           <span class="font-semibold text-sm lg:text-xl">{{ userSessionDetails?.name ?? 'No user detected' }}</span>
         </div>
       </div>
-      <div class="px-2 py-0 bg-slate-100 relative">
+      <div class="px-2 py-0 relative">
         <slot></slot>
       </div>
     </div>

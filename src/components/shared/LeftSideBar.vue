@@ -120,7 +120,7 @@ const updateActiveBoard = (route: string) => {
 
 const topNavItems: SideBarItemProps[] = [
   { name: 'Dashboard', icon: "solar:chart-2-broken", path: '' },
-  { name: 'NewsFeed', icon: "solar:earth-linear", path: 'newsfeed' },
+  // { name: 'NewsFeed', icon: "solar:earth-linear", path: 'newsfeed' },
   { name: 'Loans', icon: "solar:banknote-2-outline", path: 'loans' },
   { name: 'Collections', icon: "solar:money-bag-broken", path: 'collections' },
   { name: 'Groups', icon: "solar:shield-user-line-duotone", path: 'groups' },
