@@ -15,8 +15,8 @@
         text-lg
         ${className}
         ${(dark) ? 'text-white':''}
-        ${(size === 'sm') ? 'px-1 py-2':''}
-        ${(size === 'md') ? 'px-2 py-2':''}
+        ${(size === 'sm') ? 'px-0.5 py-1':''}
+        ${(size === 'md') ? 'px-1 py-1.5':''}
         ${(size === 'lg') ? 'px-4 py-2':''}
         ${(size === 'block') ? 'w-full py-3':''}
 
@@ -35,7 +35,7 @@
         text-lg
         ${(dark) ? 'text-white':''}
         ${(size === 'sm') ? 'text-xs':''}
-        ${(size === 'md') ? 'text-sm':''}
+        ${(size === 'md') ? 'text-xs':''}
         ${(size === 'lg') ? 'text-sm':''}
         ${(size === 'block') ? 'text-xl':''}
       `">{{ label }}</span>

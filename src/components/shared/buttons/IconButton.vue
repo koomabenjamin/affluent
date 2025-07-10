@@ -7,7 +7,6 @@
       justify-center
       rounded-md
       h-10 w-10 p-1"
-
     :class="`
         text-lg
         ${processedColor()}
