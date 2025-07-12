@@ -2,7 +2,7 @@ import axios from 'axios';
 import router from '@/router';
 
 export const customAxios = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api/',
+    baseURL: 'http://127.0.0.1:8000/api',
 });
 
 customAxios.get('http://127.0.0.1:8000/sanctum/csrf-cookie').then(response => {
