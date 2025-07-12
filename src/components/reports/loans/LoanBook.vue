@@ -3,7 +3,7 @@
     :columns="['member', 'amount', 'interest_rate', 'repayment_period', 'overdue', 'guarantor', 'collateral', 'total_loan_debt']"
     :custom-slots="['overdue', 'guarantor']"
     :rows="tempLoans">
-    <template #overdue>✅</template>
+    <template #overdue><div class="w-full text-center">✅</div></template>
     <template #guarantor>None</template>
   </DataTable>
 </template>

@@ -3,7 +3,7 @@
     class="
       hidden
       lg:block
-      w-1/5
+      w-1/6
       h-full bg-slate-50
       border-l
       shadow-inner
@@ -127,6 +127,22 @@
     </div>
 
     <!-- Another ad or announcement banner -->
+    <div class="w-full flex flex-col mt-5">
+      <div
+        class="
+          bg-black
+          h-60
+          rounded-lg
+          flex
+          items-center
+          justify-center
+          text-white
+          font-black
+        "
+      >
+        Assets
+      </div>
+    </div>
     <div class="w-full flex flex-col mt-5">
       <div
         class="
