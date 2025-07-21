@@ -21,7 +21,7 @@ export default function useAuthentication() {
 
     const authLoader = ref<boolean>(false);
 
-    const piniaBackend = ref(true);
+    const piniaBackend = ref(false);
 
     const login = (credentials: UserCredentials) => {
 
