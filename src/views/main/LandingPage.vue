@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useRoute } from 'vue-router';
 import { encrypt } from '@/composables/encrypt';
@@ -11,6 +12,7 @@ import NewsFeedPage from "./NewsFeedPage.vue";
 const router = useRouter();
 const route = useRoute();
 const appName = import.meta.env.VITE_CLIENT_GROUP_NAME;
+const showSummaries = ref(false);
 
 const navigateTo = (id: string) => {
   router.push({
@@ -97,7 +99,6 @@ const circularGraphSummaries = [
     stopThree: 'oklch(8.9% 0.154 211.53)'
   }
 ];
-
 const linearGraphSummaries = [
   {
     title: "Loan Requests",
@@ -149,12 +150,14 @@ const linearGraphSummaries = [
   }
 ];
 
+const activateSummary = () => showSummaries.value = !showSummaries.value;
+
 </script>
 
 <template>
   <Container>
-    <NewsFeedPage/>
-    <div class="h-[100vh] flex flex-col items-end justify-start pt-2 fixed top-16 right-[17%] overflow-auto">
+    <NewsFeedPage :show-summaries="showSummaries"/>
+    <div class="h-[100vh] flex flex-col items-end justify-start pt-2 fixed top-16 right-[17%] overflow-auto" v-if="showSummaries">
       <div class="grid grid-cols-3 gap-2 bg-slate-200 p-2 rounded-xl">
         <div class="col-span-3 text-black text-xl font-semibold mb-2 mt-2">
           Overview Summary
