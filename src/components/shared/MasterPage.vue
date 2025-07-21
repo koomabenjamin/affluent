@@ -409,7 +409,8 @@ function openModal() {
   isOpen.value = true
 }
 
-const appName = ref('Hfmsg');
+const appName = import.meta.env.VITE_CLIENT_GROUP_NAME;
+const appSlogan = import.meta.env.VITE_CLIENT_GROUP_SLOGAN;
 const highlight = ref('bg-slate-200');
 const primary = ref('bg-white');
 const secondary = ref('bg-yellow-400');

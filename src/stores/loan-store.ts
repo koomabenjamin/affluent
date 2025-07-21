@@ -4,6 +4,7 @@ import type { LoanPayload, LoanRequest } from "@/types";
 
 export interface IState {
   loans: any[];
+  queriedLoans: any[];
   loadingLoans: boolean;
 }
 

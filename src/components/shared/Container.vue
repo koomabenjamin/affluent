@@ -1,10 +1,10 @@
 <template>
   <MasterPage>
-    <div class="lg:mt-0 lg:ml-0 w-full lg:w-3/5 overflow-auto no-scroll-bar relative h-full flex flex-col">
+    <div class="lg:mt-0 lg:ml-0 w-full lg:w-2/3 overflow-auto no-scroll-bar relative h-full flex flex-col">
       <!-- Top with user total -->
-      <div class="w-full h-16 flex items-center justify-between border-b sticky top-0 bg-slate-50 p-4 shadow-sm">
+      <div class="w-full h-[66px] flex items-center justify-between border-b sticky top-0 bg-slate-50 p-4 shadow-sm z-10">
         <div class="flex items-center space-x-2">
-          <div class="font-sans text-lg lg:text-4xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
+          <div class="font-sans text-lg lg:text-3xl font-semibold">UGX {{ userSessionDetails?.account_balance ?? 0 }}
           </div>
           <div :class="{
             'bg-gradient-to-r from-cyan-500 to-blue-500 text-rose-100': ((userSessionDetails?.percentage_growth ?? 0) < 0),
@@ -36,7 +36,7 @@
           <span class="font-semibold text-sm lg:text-xl">{{ userSessionDetails?.name ?? 'No user detected' }}</span>
         </div>
       </div>
-      <div class="px-2 py-0 bg-slate-100 relative">
+      <div class="px-1 py-0 relative">
         <slot></slot>
       </div>
     </div>

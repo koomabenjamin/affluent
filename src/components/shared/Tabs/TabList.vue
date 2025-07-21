@@ -1,6 +1,6 @@
 <template>
   <div class="w-auto flex items-center overflow-auto divide-x mt-2 border rounded">
-    <Tab
+    <TabItem
       v-for="tab in props.tabs"
       :key="tab"
       :label="tab"
@@ -12,7 +12,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import Tab from "./Tab.vue";
+import TabItem from "./TabItem.vue";
 
 export interface TabListProps {
   tabs: string[];

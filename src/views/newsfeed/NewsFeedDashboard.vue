@@ -1,40 +1,40 @@
 <template>
-  <Container>
-    <div class="w-full flex flex-col items-center justify-between mt-5">
+  <!-- <Container> -->
+    <div class="w-full flex flex-col items-center justify-between">
       <div class="w-full py-2 -px-4 border-b">
-        <div class="px-10">
+        <div class="px-2 bg-white rounded-lg shadow p-2">
           <textarea name="" id="" rows="3" placeholder="Write out your post..." v-model="content"
-            class="border w-full shadow p-4 h-24 text-slate-600 text-sm rounded-xl ring-1 border-slate-300 focus-within:ring-slate-400"></textarea>
-          <div class="h-10 flex space-x-1 text-sm w-full items-center justify-between">
+            class="w-full p-4 h-24 text-slate-600 text-sm rounded-xl ring-transparent"></textarea>
+          <div class="h-10 flex flex-row-reverse space-x-1 text-sm w-full items-center justify-between p-1">
             <button
-              class="text-green-600 w-auto px-2 py-1 rounded bg-white shadow center space-x-2 hover:bg-blue-600 hover:text-white duration-150"
+              class="text-white text-base font-bold w-auto px-4 py-1 rounded-full bg-blue-600 shadow center space-x-2 hover:bg-blue-600 hover:text-white duration-150"
               @click="savePost()">
               <span>Post</span>
-              <PaperAirplaneIcon class="h-6" />
+              <!-- <PaperAirplaneIcon class="h-6" /> -->
             </button>
-            <div class="flex space-x-1 text-blue-500">
+            <div class="flex space-x-0.5 text-blue-500">
               <button
-                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                class="w-auto px-2 py-1 rounded center hover:bg-blue-600 hover:text-white duration-150">
                 <PaperClipIcon class="h-6" />
               </button>
               <button
-                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                class="w-auto px-2 py-1 rounded center hover:bg-blue-600 hover:text-white duration-150">
                 <CalendarDaysIcon class="h-6" />
               </button>
               <button
-                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                class="w-auto px-2 py-1 rounded center hover:bg-blue-600 hover:text-white duration-150">
                 <ChartPieIcon class="h-6" />
               </button>
               <button
-                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                class="w-auto px-2 py-1 rounded center hover:bg-blue-600 hover:text-white duration-150">
                 <FaceSmileIcon class="h-6" />
               </button>
               <button
-                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                class="w-auto px-2 py-1 rounded center hover:bg-blue-600 hover:text-white duration-150">
                 <GifIcon class="h-6" />
               </button>
               <button
-                class="w-auto px-2 py-1 rounded-full bg-white shadow center hover:bg-blue-600 hover:text-white duration-150">
+                class="w-auto px-2 py-1 rounded center hover:bg-blue-600 hover:text-white duration-150">
                 <TagIcon class="h-6" />
               </button>
             </div>
@@ -44,12 +44,12 @@
       <div class="w-full center" v-if="savingPost">
         <Icon icon="svg-spinners:180-ring-with-bg" class="text-blue-500" width="20" v-if="savingPost" />
       </div>
-      <div class="w-full space-y-2 rounded overflow-auto h-full" v-if="(posts?.length ?? 0) > 0">
-        <div class="h-full overflow-auto">
+      <div class="w-full space-y-1 rounded overflow-auto h-full" v-if="(posts?.length ?? 0) > 0">
+        <div class="h-full overflow-auto divide-y">
           <!-- ******* START OF LIST OF POSTS ****** -->
-          <div class="h-auto flex space-x-2 items-center px-20"
+          <div class="h-auto flex space-x-2 items-center bg-white"
             v-for="(feed, index) in (posts ?? []).sort((a, b) => b + a)" :key="feed">
-            <div class="flex flex-col w-full p-2 h-auto space-y-1 border hover:bg-slate-100">
+            <div class="flex flex-col w-full px-6 py-4 h-auto space-y-1 hover:bg-slate-100">
               <div class="w-full h-auto rounded-lg p-2 text-xs flex space-x-2">
                 <div class="h-12 w-12 rounded-full bg-black"></div>
                 <div class="flex flex-col text-sm">
@@ -110,7 +110,7 @@
                 <!-- <div class="space-y-1"> -->
                 <div class="py-2 px-2 border text-sm" v-for="(comment, commentIndex) in feed.comments" :key="comment">
                   <div class="w-full h-auto rounded-lg p-1 text-xs flex space-x-2">
-                    <div class="h-10 w-10 rounded-full bg-black"></div>
+                    <div class="h-10 w-10 rounded-full bg-black flex-none"></div>
                     <div class="flex flex-col text-sm">
                       <div>
                         <span class="font-bold">Benjamin Kooma</span>
@@ -160,7 +160,7 @@
         <span class="text-sm text-slate-600">No posts availble yet...</span>
       </div>
     </div>
-  </Container>
+  <!-- </Container> -->
 </template>
 
 <script setup>
@@ -198,17 +198,6 @@ const content = ref("");
 const comment = ref("");
 const activePost = ref(null);
 const savingPost = ref(false);
-
-// const content = ref("");
-// const comment = ref("");
-// const savingPost = ref(false);
-
-// const commentButtonActive = ref(false);
-
-// const addComment = () =>
-//   (commentButtonActive.value = !commentButtonActive.value);
-
-const _posts = ref([]);
 
 const savePost = () => {
   if (content.value) {

@@ -35,7 +35,7 @@
       <label 
         :class="`
           absolute 
-          text-sm
+          text-[13px]
           duration-150 
           transform 
           -translate-y-4 

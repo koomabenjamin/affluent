@@ -1,228 +1,54 @@
 <template>
-  <div class="
+  <div :class="`
       hidden
       lg:block
-      w-1/5
+      ${minimize ? 'w-16' : 'w-1/6'}
       h-full 
-      text-white
-       bg-slate-800
+      text-black
+      bg-slate-50
       border-r
       shadow
-      py-5
+      py-4
       px-2
       pb-16
       overflow-auto
       no-scroll-bar
       relative
-    ">
+    `">
     <!-- Image and company -->
     <div class="
         text-2xl
         font-bold
         flex
-        space-x-1
+        space-x-3
         items-center
         w-full
-        justify-end
+        justify-start
         flex-shrink-0
         flex-grow-0
       ">
-      <div class="h-10 w-12 -space-x-2 -space-y-6">
-        <div class="bg-blue-600 h-8 w-10 rounded-full"></div>
-        <div class="bg-yellow-400 h-8 w-10 rounded-full"></div>
+      <div class="h-12 w-12 -space-x-6 -space-y-6 flex items-center justify-center">
+        <div class="border-blue-600 border-4 h-6 w-8 rounded-full flex-none"></div>
+        <div class="border-yellow-400 border-4 h-6 w-8 rounded-full flex-none"></div>
       </div>
-      <div class="flex flex-col w-4/5">
+      <div class="flex flex-col w-4/5" v-if="!minimize">
         <h6 class="font-bold text-lg text-wrap">{{ appGroupName }}</h6>
-        <h6 class="font-normal text-xs text-wrap text-slate-400">{{ appGroupSlogan }}</h6>
+        <!-- <h6 class="font-normal text-xs text-wrap text-slate-400">{{ appGroupSlogan }}</h6> -->
       </div>
     </div>
 
+    <hr>
+
     <!-- Sidebar menu and content -->
-    <div class="my-10 flex flex-col space-y-2">
-      <button @click="updateActiveBoard('')"
-        :class="{ 'bg-blue-600 text-white' : router.currentRoute.value.name === 'home' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <Squares2X2Icon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Dashboard</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button @click="updateActiveBoard('newsfeed')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'newsfeed' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <NewspaperIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">NewsFeed</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <!-- <button @click="updateActiveBoard('profile')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'profile' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <UserCircleIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Profile</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button> -->
-      <button @click="updateActiveBoard('loans')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'loans' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <BanknotesIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Loans</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button @click="updateActiveBoard('collections')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'collections' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <WalletIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Collections</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button @click="updateActiveBoard('groups')"
-      v-if="false"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'groups' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <UserGroupIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Groups</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button @click="updateActiveBoard('members')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'members' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <UsersIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Members</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button @click="updateActiveBoard('members')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'members' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <UsersIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Groups</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <!-- <button @click="updateActiveBoard('notifications')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'notifications' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <BellIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Notifications</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button> -->
-   
-      <button @click="updateActiveBoard('reports')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'reports' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <Bars4Icon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Reports</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button
-      @click="updateActiveBoard('wallet')" 
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'wallet' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <WalletIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Wallet (I & E) / Portfolio</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
+    <div class="my-2 flex flex-col space-y-2">
+      <SideBarItem v-for="item in topNavItems" :key="item.name" :isActive="router.currentRoute.value.name === item.path"
+        :name="item.name" :icon="item.icon" :iconSize="28" :path="item.path" @updateActiveBoard="updateActiveBoard"
+        :minimize="minimize" />
     </div>
 
     <!-- Ad banner and general notifications -->
     <div class="w-full flex flex-col">
-      <div class="
+      <div v-if="!minimize" class="
           bg-yellow-400
           h-48
           rounded
@@ -234,102 +60,51 @@
         ">
         Ad Banner
       </div>
+      <div v-else class="h-48"></div>
     </div>
 
     <!-- System controls -->
     <div class="mt-5 flex flex-col space-y-2">
-      <button @click="updateActiveBoard('support')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'support' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <LifebuoyIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Help and Support</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button @click="updateActiveBoard('settings')"
-        :class="{ 'bg-blue-600 text-white': router.currentRoute.value.name === 'settings' }" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <CogIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Account Settings</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
-      <button @click="logout()" class="
-          flex
-          w-full
-          h-10
-          rounded
-          items-center
-          justify-between
-          p-2
-        ">
-        <div class="flex space-x-2 items-center">
-          <ArrowLeftOnRectangleIcon class="h-6 w-6" />
-          <div class="font-semibold text-xs">Logout</div>
-        </div>
-        <ChevronRightIcon class="h-5 w-5" />
-      </button>
+      <SideBarItem v-for="item in bottomNavItems" :key="item.name"
+        :isActive="router.currentRoute.value.name === item.path" :name="item.name" :icon="item.icon" :iconSize="28"
+        :path="item.path" @updateActiveBoard="updateActiveBoard" :minimize="minimize" />
     </div>
 
   </div>
   <!-- footer -->
-  <div class="
+  <div :class="`
       fixed
       bottom-0
       left-0
-      w-1/5
+      w-1/6
       bg-black
       h-12
       text-white
       flex
       items-center
       justify-start
-      text-xs
-      px-5
-    ">
-    &copy; Copyright 2022
+      ${minimize ? 'text-2xl' : 'text-sm'}
+      px-4
+    `">
+    <div v-if="!minimize">&copy; Copyright 2022</div>
+    <div v-else>&copy;</div>
   </div>
 </template>
 
 <script setup lang="ts" type="module">
 import { ref, inject } from 'vue';
-import {
-  NewspaperIcon,
-  Squares2X2Icon,
-  ChevronRightIcon,
-  ArrowDownIcon,
-  UserCircleIcon,
-  UserGroupIcon,
-  UsersIcon,
-  BellIcon,
-  Bars4Icon,
-  CreditCardIcon,
-  CogIcon,
-  ArrowLeftOnRectangleIcon,
-  MagnifyingGlassIcon,
-  BanknotesIcon,
-  WalletIcon,
-  LifebuoyIcon
-  // CheckBadgeIcon,
-} from '@heroicons/vue/24/outline';
 import useAuthentication from '../../composables/auth';
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
+import SideBarItem from './SideBar/NavItem.vue';
+import { Icon, type IconifyIcon } from "@iconify/vue";
+
+interface SideBarItemProps {
+  isActive?: boolean;
+  name: string;
+  path: string;
+  icon: string | IconifyIcon;
+  iconSize?: string | number | undefined;
+}
 
 const router = useRouter();
 
@@ -343,12 +118,30 @@ const updateActiveBoard = (route: string) => {
   router.push({ path: `/${route}` })
 }
 
+const topNavItems: SideBarItemProps[] = [
+  { name: 'Dashboard', icon: "solar:chart-2-broken", path: '' },
+  // { name: 'NewsFeed', icon: "solar:earth-linear", path: 'newsfeed' },
+  { name: 'Loans', icon: "solar:banknote-2-outline", path: 'loans' },
+  { name: 'Collections', icon: "solar:money-bag-broken", path: 'collections' },
+  { name: 'Groups', icon: "solar:shield-user-line-duotone", path: 'groups' },
+  { name: 'Members', icon: "solar:users-group-rounded-broken", path: 'members' },
+  { name: 'Reports', icon: "solar:clipboard-list-outline", path: 'reports' },
+  { name: 'Wallet (I & E) / Portfolio', icon: "solar:wallet-money-outline", path: 'wallet' }
+];
+
+const bottomNavItems = [
+  { name: 'Skills Path', icon: "solar:square-academic-cap-2-linear", path: 'education' },
+  { name: 'Settings', icon: "solar:settings-linear", path: 'settings' },
+  { name: 'Support', icon: "solar:help-outline", path: 'support' },
+  { name: 'Logout', icon: "solar:logout-3-outline", path: 'logout' }
+];
+
 const bgMain = ref('bg-blue-600');
 
 const { logout } = useAuthentication();
 
+const minimize = ref(false);
+
 </script>
 
-<style>
-
-</style>
+<style></style>

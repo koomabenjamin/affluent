@@ -1,6 +1,6 @@
 <template>
   <Container>
-    <div class="flex flex-col p-4 w-full">
+    <div class="flex flex-col p-1 w-full">
       <div class="flex w-full space-x-2">
         <div class="flex flex-col w-1/4 h-[90vh] space-y-1">
           <div v-for="(value, index) in items" :key="index" class="space-y-1 flex flex-col">
@@ -25,7 +25,7 @@
             </Transition>
           </div>
         </div>
-        <div class="w-3/4 bg-slate-100 h-auto p-1">
+        <div class="w-3/4 h-auto p-1">
           <div class="text-2xl font-semibold mb-2">Reports: <span class="text-xl text-blue-600">{{ activePage }}</span>
           </div>
           <div class="flex space-x-1">
