@@ -65,9 +65,24 @@
 
     <!-- System controls -->
     <div class="mt-5 flex flex-col space-y-2">
-      <SideBarItem v-for="item in bottomNavItems" :key="item.name"
-        :isActive="router.currentRoute.value.name === item.path" :name="item.name" :icon="item.icon" :iconSize="28"
-        :path="item.path" @updateActiveBoard="updateActiveBoard" :minimize="minimize" />
+
+      <SideBarItem 
+        v-for="item in bottomNavItems" 
+        :key="item.name"
+        :isActive="router.currentRoute.value.name === item.path" 
+        :name="item.name" 
+        :icon="item.icon" 
+        :iconSize="28"
+        :path="item.path" 
+        @updateActiveBoard="updateActiveBoard" 
+        :minimize="minimize" />
+
+      <SideBarItem
+        name="Logout" 
+        icon="solar:logout-3-outline" 
+        iconSize="28"
+        @updateActiveBoard="logout()" />
+        
     </div>
 
   </div>
@@ -133,7 +148,7 @@ const bottomNavItems = [
   { name: 'Skills Path', icon: "solar:square-academic-cap-2-linear", path: 'education' },
   { name: 'Settings', icon: "solar:settings-linear", path: 'settings' },
   { name: 'Support', icon: "solar:help-outline", path: 'support' },
-  { name: 'Logout', icon: "solar:logout-3-outline", path: 'logout' }
+  // { name: 'Logout', icon: "solar:logout-3-outline", path: 'logout' }
 ];
 
 const bgMain = ref('bg-blue-600');
