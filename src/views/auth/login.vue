@@ -27,12 +27,9 @@ const credentials = reactive({
     h-screen">
 
     <div class="
-      hidden 
       lg:block 
       w-2/3 
-      bg-gradient-to-r 
-      from-blue-500 
-      to-blue-600 
+      bg-gradient-to-bl from-cyan-500 to-blue-500
       text-white 
       flex 
       items-center 
@@ -40,9 +37,6 @@ const credentials = reactive({
       text-4xl
       font-bold
       text-center">
-      
-      <p>Banner</p>
-      
     </div>
 
     <form @submit.prevent="login(credentials)" class="
