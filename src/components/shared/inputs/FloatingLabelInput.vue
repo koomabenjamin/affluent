@@ -54,7 +54,7 @@
         {{props.label}}
       </label>
       <div class="absolute top-5 right-2" v-if="type !== 'date'">
-        <Icon :icon="props.icon" :width="props.iconSize"/>
+        <Icon v-if="props.icon" :icon="props.icon" :width="props.iconSize"/>
       </div>
     </div>
     <p class="help-message text-red-600 text-xs" v-show="errorMessage || meta.valid">
@@ -79,7 +79,7 @@ export interface InputProps{
   price?: string | undefined;
   accept?: string | undefined;
   hidden?: boolean | undefined;
-  icon: string | IconifyIcon;
+  icon?: string | IconifyIcon;
   iconSize?: string | number | undefined;
   type?: string | undefined;
   required?: boolean | undefined;

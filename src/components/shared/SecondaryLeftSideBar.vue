@@ -14,7 +14,7 @@
           <div @click="changeActivePage(item)"
             :class="`${(activePage == item) ? 'border-l-4 border-blue-600 bg-blue-100' : ''}`"
             class="h-8 px-2 flex items-center justify-between cursor-pointer"
-            v-for="(item, _index) in value.items" :key="_index">
+      v-for="(item, _index) in value.items" :key="_index">
             <span>{{ item }}</span>
             <ChevronRightIcon class="h-4 w-4" />
           </div>
@@ -24,24 +24,34 @@
   </div>
 </template>
 
-<script >
-import { ref } from "vue"
-import { defineComponent } from '@vue/composition-api'
+<script lang="ts">
+import { ref, defineComponent } from "vue";
+import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 
 export default defineComponent({
-  name:"SecondaryLeftSideBar",
+  name: "SecondaryLeftSideBar",
+  components: {
+    ChevronRightIcon,
+  },
   setup() {
-    const items = ref([]);
-    const activeTabs = ref([]);
-    const changeActivePage = (page) => activePage.value = page;
+    const props = defineProps<{
+      items: { name: string; items: string[] }[];
+      activePage: string;
+      activeTabs: string[];
+    }>();
+    // const items = ref([]);
+    const activePage = ref('');
+// const activeTabs = ref<string[]>(["System Audit", "Loans", "Members", "Collections", "Accounting"]);
+    const changeActivePage = (page:string) => activePage.value = page;
 
-const openTabs = (tab) => {
+const openTabs = (tab:string) => {
   console.log("logging from settings main index component ", tab, activeTabs.value, activeTabs.value.indexOf(tab));
   let indexOfTab = activeTabs.value.indexOf(tab);
   if (indexOfTab !== -1) activeTabs.value.splice(indexOfTab, 1);
   else activeTabs.value.push(tab);
 }
     return {
+      props,
       items,
       openTabs,
       changeActivePage,
