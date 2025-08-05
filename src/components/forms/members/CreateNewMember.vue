@@ -1,5 +1,5 @@
 <template>
-  <SlideInModal :isModalOpen="true" @close="close()" title="Add New Member"
+  <SlideInModal :isModalOpen="props.open" @close="close()" title="Add New Member"
     description="Use this form to input a member's loan for the specified period of time.">
     <template #body>
       <form @submit.prevent="memberStore.save(credentials)" class="flex flex-col h-[91vh] justify-between">

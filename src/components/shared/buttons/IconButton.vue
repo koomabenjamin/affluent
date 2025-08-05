@@ -5,13 +5,13 @@
       flex
       items-center
       justify-center
-      rounded-md
+      rounded-full
       h-10 w-10 p-1"
     :class="`
         text-lg
         ${processedColor()}
         ${(dark) ? 'text-white' : ''}
-        ${(loader) ? 'bg-blue-800 text-white': 'text-blue-500'}
+        ${(loader) ? 'text-blue-800': 'text-blue-500'}
       `"
     >
     <div>
@@ -55,19 +55,19 @@ const props = defineProps<ButtonProps>();
 
 const processedColor = () => {
   if (props.type === 'success') {
-    return 'hover:bg-green-500 bg-green-400 text-white';
+    return 'hover:text-green-500 text-green-400 text-white';
   }
   if (props.type === 'delete') {
-    return 'hover:bg-red-600 bg-red-400 text-white';
+    return 'hover:text-red-600 text-red-400 text-white';
   }
   if (props.type === 'info') {
-    return 'hover:bg-indigo-500 bg-indigo-400 text-white';
+    return 'hover:text-indigo-500 text-indigo-400 text-white';
   }
   if (props.type === 'edit') {
-    return 'hover:bg-yellow-400 bg-yellow-400 text-white';
+    return 'hover:text-yellow-400 text-yellow-400 text-white';
   }
   if (props.type === 'normal') {
-    return 'hover:bg-blue-500 bg-blue-400 text-white';
+    return 'hover:text-blue-500 text-blue-400 text-white';
   }
 }
 
