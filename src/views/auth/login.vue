@@ -92,7 +92,7 @@ const credentials = reactive({
       <div class="w-full py-1 text-center text-xs flex items-center justify-between">
         <div class="font-light">
           Don't have an account ?,
-          <router-link to="/register" class="text-blue-600 font-bold">
+          <router-link to="/register" class="text-purple-600 font-bold">
             Create an account.
           </router-link>
         </div>

@@ -124,7 +124,7 @@ router.beforeEach(async (to, from, next) => {
 
   if (nextPath === '/login') next();
 
-  // else if (routesNotToBeAuthenticated.includes(to.name)) next();
+  else if (routesNotToBeAuthenticated.includes(to.name)) next();
 
   else if (authenticated === null) next('/login');
 
