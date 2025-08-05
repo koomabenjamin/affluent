@@ -10,17 +10,8 @@ const appName = import.meta.env.VITE_CLIENT_GROUP_NAME;
 const { register, errorMessages, authLoader } = useAuthentication();
 
 const credentials = reactive({
-  first_name: '',
-  last_name: '',
-  name: ``,
-  phone_number: '',
-  username: '',
-  email: '',
-  password: '',
-  password_confirmation: '',
-  country: '',
-  state: '',
-  city: '',
+  first_name: '', last_name: '', name: '', phone_number: '', username: '', email: '',
+  password: '', password_confirmation: '', country: '', state: '', city: '',
 });
 </script>
 
@@ -44,44 +35,62 @@ const credentials = reactive({
           w-full 
           text-left 
           my-2">
-        Welcome back awesome user, please enter your email and
-        password.
+        Begin your journey with us.
       </span>
-      <div class="w-full flex space-x-2">
-
-        <FloatingLabelInput name="" label="First Name" icon="" />
-
-        <FloatingLabelInput type="text" :errors="errorMessages?.email" v-model="credentials.last_name" required
-          name="last_name" label="Last Name" icon="KeyIcon" />
-
-      </div>
-
-      <div class="flex w-full space-x-2">
-        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.username" required
-          name="username" label="Username" icon="UserIcon" />
-      </div>
-      <div class="w-full flex space-x-2">
-        <FloatingLabelInput type="email" :errors="errorMessages?.email" v-model="credentials.email" required
-          name="email" label="Email" icon="MailIcon" />
-
-        <FloatingLabelInput type="number" :errors="errorMessages?.password" v-model="credentials.phone_number" required
-          name="phone_number" label="Phone Number" icon="PhoneIcon" />
-      </div>
-      <div class="w-full flex space-x-2">
-        <FloatingLabelInput type="password" :errors="errorMessages?.password" v-model="credentials.password" required
-          name="password" label="Password" icon="KeyIcon" />
-        <FloatingLabelInput type="password" :errors="errorMessages?.password"
-          v-model="credentials.password_confirmation" required name="password" label="Confirm Password"
-          icon="KeyIcon" />
-      </div>
-      <div class="w-full flex space-x-2">
-        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.country" required
-          name="country" label="Country" icon="LocationMarkerIcon" />
-        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.state" required
-          name="state" label="State" icon="LocationMarkerIcon" />
-        <FloatingLabelInput type="text" :errors="errorMessages?.password" v-model="credentials.city" required
-          name="city" label="City" icon="LocationMarkerIcon" />
-      </div>
+      <div class="flex flex-col space-y-4 w-full">
+          <!-- First Name and Last Name are required fields. The rest are optional. -->
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <FloatingLabelInput name="" type="text" :error="credentials.first_name" v-model="credentials.first_name" label="First Name"
+                icon="heroicons:user" :icon-size="25" />
+            </div>
+            <div>
+              <FloatingLabelInput name="" type="text" :error="credentials.last_name" v-model="credentials.last_name" label="Last Name"
+                icon="heroicons:user" :icon-size="25" />
+            </div>
+          </div>
+          <!-- Phone Number -->
+          <div>
+            <FloatingLabelInput name="" type="number" :error="credentials.phone_number" v-model="credentials.phone_number" label="Phone Number"
+              icon="solar:phone-rounded-outline" :icon-size="25" />
+          </div>
+          <!-- Username -->
+          <div>
+            <FloatingLabelInput name="" type="text" :error="credentials.username" v-model="credentials.username" label="Username"
+              icon="mynaui:at" :icon-size="25" />
+          </div>
+          <!-- Email -->
+          <div>
+            <FloatingLabelInput name="" type="email" :error="credentials.email" v-model="credentials.email" label="Email"
+              icon="oui:email" :icon-size="25" />
+          </div>
+          <!-- Password and Password Confirmation -->
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <FloatingLabelInput name="" type="password" :error="credentials.password" v-model="credentials.password" label="Password"
+                icon="solar:password-linear" :icon-size="25" />
+            </div>
+            <div>
+              <FloatingLabelInput name="" type="password" :error="credentials.password_confirmation" v-model="credentials.password_confirmation" label="Password Confirmation"
+                icon="solar:password-linear" :icon-size="25" />
+            </div>
+          </div>
+          <!-- Country, State, and City -->
+          <div class="grid grid-cols-3 gap-2">
+            <div>
+              <FloatingLabelInput name="" type="text" :error="credentials.country" v-model="credentials.country" label="Country"
+                :icon-size="25" />
+            </div>
+            <div>
+              <FloatingLabelInput name="" type="text" :error="credentials.state" v-model="credentials.state" label="State"
+                :icon-size="25" />
+            </div>
+            <div>
+              <FloatingLabelInput name="" type="text" :error="credentials.city" v-model="credentials.city" label="City"
+                :icon-size="25" />
+            </div>
+          </div>
+        </div>
       <p class="text-slate-400 w-full text-left my-2 font-semibold text-sm">By signing up, you accept the <span
           class="text-blue-600 underline">Terms & Conditions</span></p>
       <Button label="Signup" :loader="authLoader" class="w-2/3" size="block"/>

@@ -1,14 +1,13 @@
 <template>
   <button 
     class="
-      hover:text-white
-      border-blue-500
-      hover:bg-blue-800 
+      text-white
+      bg-blue-800 
       border-2
       flex
       items-center
       justify-center
-      rounded-md
+      rounded-full
       space-x-1"
 
     :class="`
