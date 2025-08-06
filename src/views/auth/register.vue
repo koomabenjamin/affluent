@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuthentication from '@/composables/auth';
 import FloatingLabelInput from '../../components/shared/inputs/FloatingLabelInput.vue';
 import Button from '../../components/shared/Button.vue';
+import MultiSelect from '../../components/shared/MultiSelect.vue';
 
 const appName = import.meta.env.VITE_CLIENT_GROUP_NAME;
 
 const { register, errorMessages, authLoader } = useAuthentication();
+
+const selectedUserIds = ref<number[]>([]);
 
 const credentials = reactive({
   first_name: '', last_name: '', name: '', phone_number: '', username: '', email: '',
@@ -20,9 +23,9 @@ const credentials = reactive({
     flex 
     w-screen 
     h-screen">
-    <div class="h-screen w-3/5 bg-gradient-to-tr from-cyan-400 via-blue-500 bg-purple-600"></div>
+    <div class="h-full w-3/5 bg-gradient-to-tr from-cyan-400 via-blue-500 bg-purple-600"></div>
     <form @submit.prevent="register(credentials)" 
-      class="w-2/5 my-auto flex flex-col items-center space-y-3 h-auto px-5 bg-white rounded">
+      class="w-2/5 my-auto flex flex-col items-center space-y-3 h-full overflow-auto px-5 bg-white rounded">
       <p class="
           h1 
           text-left 
@@ -78,8 +81,24 @@ const credentials = reactive({
           <!-- Country, State, and City -->
           <div class="grid grid-cols-3 gap-2">
             <div>
-              <FloatingLabelInput name="" type="text" :error="credentials.country" v-model="credentials.country" label="Country"
-                :icon-size="25" />
+              <!-- <FloatingLabelInput name="" type="text" :error="credentials.country" v-model="credentials.country" label="Country"
+                :icon-size="25" /> -->
+                <MultiSelect
+                  name="users"
+                  label="Select Users"
+                  field="country"
+                  :options="[{ id: 1, country: 'USA' }, { id: 2, country: 'Canada' }, { id: 3, country: 'UK' }]"
+                  :modelValue="selectedUserIds"
+                  :multiple="false"
+                  :reduce="(opt) => opt.id"
+                  @update:modelValue="val => selectedUserIds = val"
+                >
+                  <template #icon>
+                    <span class="absolute left-3 top-6 text-gray-400">
+                      <Icon icon="mdi:account" class="w-5 h-5" />
+                    </span>
+                  </template>
+                </MultiSelect>
             </div>
             <div>
               <FloatingLabelInput name="" type="text" :error="credentials.state" v-model="credentials.state" label="State"
