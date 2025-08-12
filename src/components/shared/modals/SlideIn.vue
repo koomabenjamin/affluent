@@ -68,9 +68,15 @@
                     text-rose-600
                     h-8
                     cursor-pointer
-                    hover:text-white hover:bg-gradient-to-r
-                    from-cyan-500
-                    to-blue-500
+                    hover:text-white hover:bg-rose-600
+                    hover:shadow-lg
+                    hover:shadow-rose-500/50
+                    hover:scale-110
+                    transition-all
+                    duration-300
+                    ease-in-out
+                    rounded-full
+                    p-1
                     hover:rounded-full
                   "
                   @click="closeModal()"
