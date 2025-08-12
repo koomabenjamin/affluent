@@ -27,7 +27,7 @@ export default function useAuthentication() {
 
         if (!piniaBackend.value) {
             authLoader.value = true;
-    
+
             customAxios.post('/login', credentials)
                 .then((response) => {
                     // router.push({ path: '/' });
@@ -67,7 +67,7 @@ export default function useAuthentication() {
             }, 2000);
         }
     }
-    const twoFactorCodeConfirmation = async (opt:string) => {
+    const twoFactorCodeConfirmation = async (opt: string) => {
         authLoader.value = true;
         if (!piniaBackend.value) {
             const response = await customAxios.post('/two_factor_code/check', { opt: opt });
@@ -86,7 +86,7 @@ export default function useAuthentication() {
             return router.push({ path: '/' });
         }
     }
-    const register = (credentials:UserCredentials) => {
+    const register = (credentials: UserCredentials) => {
 
         authLoader.value = true;
 
