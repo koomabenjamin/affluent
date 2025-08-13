@@ -183,7 +183,7 @@ const props = defineProps<NewsFeedPageProps>();
 
 <template>
   <div :class="`h-screen ${!props.showSummaries ? 'w-full' : 'w-[52.5%]'} overflow-auto pb-20`">
-    <div :class="`flex flex-col items-center justify-between w-2/3 mx-auto pt-4 ${!props.showSummaries ? 'w-2/3' : 'w-full'}`">
+    <div :class="`flex flex-col items-center justify-between w-full pt-4 ${!props.showSummaries ? 'w-2/3' : 'w-full'}`">
       <div class="w-full py-2 -px-4 border-b">
         <div class="px-2 bg-white rounded-lg shadow p-2">
           <textarea name="" id="" rows="3" placeholder="Write out your post..." v-model="content"

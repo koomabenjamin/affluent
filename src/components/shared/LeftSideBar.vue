@@ -85,16 +85,16 @@
         
     </div>
 
-  </div>
-  <!-- footer -->
+      <!-- footer -->
   <div :class="`
-      fixed
+      absolute
       bottom-0
       left-0
-      w-1/6
-      bg-black
+      w-full
+      bg-slate-100
       h-12
-      text-white
+      text-black
+      font-semibold
       flex
       items-center
       justify-start
@@ -104,6 +104,9 @@
     <div v-if="!minimize">&copy; Copyright 2022</div>
     <div v-else>&copy;</div>
   </div>
+
+  </div>
+
 </template>
 
 <script setup lang="ts" type="module">

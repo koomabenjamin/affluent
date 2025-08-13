@@ -1,5 +1,5 @@
 <template>
-  <div class="lg:w-screen h-screen flex flex-col lg:flex-row p-0">
+  <div class="w-screen h-screen flex flex-col lg:flex-row p-0 center bg-gray-100">
     <LeftSideBar />
     <div :class="`${highlight} h-16 text-black items-center flex px-4 justify-between lg:hidden w-full`">
       <!-- Image and company -->
