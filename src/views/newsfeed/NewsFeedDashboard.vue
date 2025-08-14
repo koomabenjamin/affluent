@@ -61,8 +61,18 @@
               <div class="flex flex-wrap h-auto ml-16 text-sm">
                 {{ feed.content }}
               </div>
-              <div class="grid grid-cols-2 gap-0">
-                <div v-for="image in feed.images" :key="image" :class="`bg-blue-600 h-20 border border-white`">
+              <div class="flex" v-if="feed.images.length == 1">
+                <div v-for="image in feed.images" :key="image" :class="`bg-blue-600 h-80 border border-white`">
+                  {{ image }}
+                </div>
+              </div>
+              <div :class="`grid grid-cols-2 gap-0`" v-if="feed.images.length == 2">
+                <div v-for="image in feed.images" :key="image" :class="`bg-blue-600 h-80 border border-white`">
+                  {{ image }}
+                </div>
+              </div>
+              <div :class="`grid grid-cols-4 gap-0`" v-if="feed.images.length > 2">
+                <div v-for="image in feed.images" :key="image" :class="`bg-blue-600 h-80 border border-white`">
                   {{ image }}
                 </div>
               </div>
