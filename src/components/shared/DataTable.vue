@@ -1,5 +1,5 @@
 <template>
-  <table class="w-full mt-4 overflow-auto h-[50vh]">
+  <table class="w-full mt-4 overflow-auto">
     <thead>
       <tr class="border h-10">
         <th>#</th>

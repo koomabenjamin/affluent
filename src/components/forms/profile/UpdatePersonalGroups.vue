@@ -67,7 +67,7 @@ const group = reactive({
 const confirmSelectedGroups = () => console.log("function to be built");
 
 const fetchAll = async () => {
-  const response = await customAxios.get("v1/groups");
+  const response = await customAxios.get("groups");
   groups.value = response?.data?.payload;
 }
 

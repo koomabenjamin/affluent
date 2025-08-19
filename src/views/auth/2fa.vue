@@ -16,7 +16,7 @@ const opt = ref('')
 <template>
   <div class="flex w-screen h-screen bg-blue-50">
     <div class="hidden lg:block w-2/3 bg-gradient-to-r from-blue-500 to-blue-600 text-white flex items-center justify-center text-4xl font-bold text-center">
-      <p>Banner</p>
+      <!-- <p>Banner</p> -->
     </div>
     <form @submit.prevent="twoFactorCodeConfirmation(opt)"
       class="sm:w-1/3 w-full mx-auto h-full px-16 flex flex-col items-center justify-center space-y-4 p-5 bg-white rounded">

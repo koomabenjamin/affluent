@@ -118,7 +118,7 @@ const saveGroup = async () => {
   groupBeingSaved.value = true;
   try {
 
-    const response:GroupCreationResponse = await customAxios.post('/groups', groupCreationRequest.value);
+    const response:GroupCreationResponse = await customAxios.post('groups', groupCreationRequest.value);
     console.log(response);
   } catch (error) {
     const errors  = {}; //error?.response?.data?.errors;

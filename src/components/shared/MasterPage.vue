@@ -60,7 +60,7 @@
         <span class="text-xs">Settings</span>
       </div>
     </div>
-    <RightSideBar />
+    <RightSideBar v-if="isHomeRoute"/>
   </div>
 
   <TransitionRoot appear :show="isOpen" as="template">
@@ -350,7 +350,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import {
   Bars4Icon,
@@ -421,6 +421,10 @@ const updateActiveBoard = (route: string) => {
   currentRoute.value = route;
   router.push({ path: `/${route}` })
 }
+
+const isHomeRoute = computed(() => {
+  return router.currentRoute.value.name === 'home';
+});
 
 const bgMain = ref('bg-blue-600');
 

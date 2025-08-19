@@ -3,7 +3,7 @@ import type { LoanPayload, Endpoint, LoanResponse, LoanRequest } from "@/types";
 
 export class LoanService {
 
-  private defaultEndpoint: Endpoint = "/v1/loans";
+  private defaultEndpoint: Endpoint = "/loans";
 
   public async fetchAll(group: string | number): Promise<LoanPayload> {
     const response = await customAxios.get(`${this.defaultEndpoint}/?page_size=10&group=${group}`);

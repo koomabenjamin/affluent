@@ -3,7 +3,7 @@ import type { MemberPayload, Endpoint, MemberResponse, MemberRequest } from "@/t
 
 export class MemberService {
 
-  private defaultEndpoint: Endpoint = "/v1/members";
+  private defaultEndpoint: Endpoint = "/members";
 
   public async fetchAllMembers(): Promise<MemberPayload> {
     const response = await customAxios.get(`${this.defaultEndpoint}/?page_size=10`);

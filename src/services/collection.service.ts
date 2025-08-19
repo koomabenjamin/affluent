@@ -3,7 +3,7 @@ import type { CollectionPayload, Endpoint, CollectionResponse, CollectionRequest
 
 export class CollectionService {
 
-  private defaultEndpoint: Endpoint = "/v1/collections";
+  private defaultEndpoint: Endpoint = "/collections";
 
   public async fetchAll(group: string | number): Promise<CollectionPayload> {
     const response = await customAxios.get(this.defaultEndpoint);

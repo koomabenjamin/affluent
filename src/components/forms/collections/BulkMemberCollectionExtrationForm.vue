@@ -51,7 +51,7 @@ const extractMemberCollections = async () => {
   console.log(fileInput.value.files)
 
   try {
-    const response = await customAxios.post('v1/bulk/extract_collections_from_excel', formData, {
+    const response = await customAxios.post('bulk/extract_collections_from_excel', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
