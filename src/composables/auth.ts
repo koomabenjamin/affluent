@@ -1,5 +1,5 @@
 import { ref, provide } from 'vue';
-import { getActivePinia } from 'pinia';
+import { getActivePinia, storeToRefs } from 'pinia';
 import { customAxios } from '@/composables/axios';
 import router from '@/router';
 import { useUserStore } from '@/stores/user-store';
@@ -15,15 +15,7 @@ export interface UserCredentials {
 
 export default function useAuthentication() {
 
-    const pinia = getActivePinia()
-    // if (!pinia) {
-    //     throw new Error('Pinia not active. Did you call app.use(pinia)?')
-    // }
-
-    if (pinia) {
-        const userStore = useUserStore();
-        console.log(userStore, "<============ console message from auth composable");
-    }
+    const pinia = getActivePinia();
 
     const isAuthenticated = ref<boolean>(false);
 
@@ -51,6 +43,11 @@ export default function useAuthentication() {
                     isAuthenticated.value = true;
                     sessionStorage.setItem('token', response.data.token);
                     sessionStorage.setItem('user', JSON.stringify(response.data.user));
+                    if (pinia) {
+                        const userStore = useUserStore();
+                        const { user } = storeToRefs(userStore);
+                        user.value = response.data.user;
+                    }
                     authLoader.value = false;
                     // console.log(response.data, isAuthenticated.value, "<============ console message from auth composable")
                 })

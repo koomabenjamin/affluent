@@ -10,7 +10,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/main/LandingPage.vue')
+      component: () => import('../views/main/LandingPage.vue'),
+      beforeEnter: async (to, from, next) => {
+        const sessionUser: string = sessionStorage.getItem('user') ?? ''
+        const userSessionDetails = JSON.parse(sessionUser);
+        if (userSessionDetails.permissions.length === 0) next('/configuration');
+        else next();
+      },
     },
     {
       path: '/main/:id',
@@ -102,6 +108,11 @@ const router = createRouter({
       path: '/support',
       name: 'support',
       component: () => import('../views/support/SupportDashboard.vue')
+    },
+    {
+      path: '/configuration',
+      name: 'configuration',
+      component: () => import('../views/configurations/ConfigurationDashboard.vue')
     },
     // will match everything and put it under `route.params.pathMatch`
     {

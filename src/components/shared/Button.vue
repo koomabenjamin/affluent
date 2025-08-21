@@ -9,14 +9,13 @@
       justify-center
       rounded-full
       space-x-1"
-
     :class="`
         text-lg
         ${className}
         ${(dark) ? 'text-white':''}
-        ${(size === 'sm') ? 'px-0.5 py-1':''}
-        ${(size === 'md') ? 'px-1 py-1.5':''}
-        ${(size === 'lg') ? 'px-4 py-2':''}
+        ${(size === 'sm') ? 'px-2 py-2':''}
+        ${(size === 'md') ? 'px-3 py-2':''}
+        ${(size === 'lg') ? 'px-5 py-2':''}
         ${(size === 'block') ? 'w-full py-3':''}
 
         ${(loader) ? 'bg-blue-800 text-white': 'text-blue-500'}
@@ -31,11 +30,10 @@
     </div>
     <span
     :class="`
-        text-lg
         ${(dark) ? 'text-white':''}
-        ${(size === 'sm') ? 'text-xs':''}
-        ${(size === 'md') ? 'text-xs':''}
-        ${(size === 'lg') ? 'text-sm':''}
+        ${(size === 'sm') ? 'text-[0.8125rem]/6 font-semibold':''}
+        ${(size === 'md') ? 'text-[0.8125rem]/6 font-semibold':''}
+        ${(size === 'lg') ? 'text-[0.8125rem]/6 font-semibold':''}
         ${(size === 'block') ? 'text-xl':''}
       `">{{ label }}</span>
 

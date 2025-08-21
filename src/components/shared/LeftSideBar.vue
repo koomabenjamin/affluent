@@ -9,8 +9,8 @@
       border-r
       shadow
       py-4
-      px-2
-      pb-16
+      px-0.5
+      pb-0
       overflow-auto
       no-scroll-bar
       relative
@@ -87,9 +87,9 @@
 
       <!-- footer -->
   <div :class="`
-      absolute
+      sticky
       bottom-0
-      left-0
+      inset-x-0
       w-full
       bg-slate-100
       h-12
