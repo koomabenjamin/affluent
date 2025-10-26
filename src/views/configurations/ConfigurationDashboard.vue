@@ -1,7 +1,8 @@
 <template>
-  <div class="h-screen w-3/5 bg-blue-100 inset-[20%] fixed top-0 bottom-0 overflow-auto">
+  
+  <div class="h-screen w-screen inset-0 fixed top-0 bottom-0 overflow-auto">
 
-      <div class="w-full h-[66px] flex items-center justify-between border sticky top-0 bg-slate-50 p-4 shadow-sm z-10">
+      <div class="w-full h-[66px] flex items-center justify-between border fixed top-0 bg-slate-50 p-4 shadow-sm z-10">
         <div class="flex items-center space-x-2">
           <div class="font-sans text-lg lg:text-3xl font-semibold">UGX {{ userDetails?.account_balance ?? 0 }}
           </div>
@@ -37,11 +38,34 @@
         </div>
       </div>
 
-      <div class="w-full h-[50px] flex items-center justify-between border sticky top-0 bg-slate-50 p-4 shadow-sm z-10 border-b-blue-300">
-        <h1 class="text-base">Configurations</h1>
+      <div class="w-full h-[50px] flex items-center border space-x-4 fixed top-[66px] bg-slate-50 p-4 shadow-sm z-10">
+        <div class="flex items-center space-x-1">
+          <Icon :icon="'carbon:portfolio'" :width="20" />
+          <h4 class="text-base">Porfolio</h4>
+        </div>
+        <div class="flex items-center space-x-1">
+          <Icon :icon="'fluent-mdl2:group'" :width="20" />
+          <h4 class="text-base">Groups</h4>
+        </div>
+        <div class="flex items-center space-x-1">
+          <Icon :icon="'lsicon:path-outline'" :width="20" />
+          <h4 class="text-base">Skills Path</h4>
+        </div>
+        <div class="flex items-center space-x-1">
+          <Icon :icon="'solar:wallet-linear'" :width="20" />
+          <h4 class="text-base">Wallet</h4>
+        </div>
+        <div class="flex items-center space-x-1">
+          <Icon :icon="'solar:help-outline'" :width="20" />
+          <h4 class="text-base">Support</h4>
+        </div>
+        <div class="flex items-center space-x-1">
+          <Icon :icon="'solar:settings-broken'" :width="20" />
+          <h4 class="text-base">Account Setting</h4>
+        </div>
       </div>
 
-      <div class="h-[100vh] flex flex-col items-end justify-start pt-2 fixed top-28 right-[20%] overflow-auto">
+      <div class="h-[100vh] flex flex-col items-end justify-start pt-2 fixed top-28 right-0 overflow-auto">
       <div class="grid grid-cols-3 gap-2 bg-slate-200 p-2 rounded-xl">
         <div class="col-span-3 text-black text-xl font-semibold mb-2 mt-2">
           Overview Summary
