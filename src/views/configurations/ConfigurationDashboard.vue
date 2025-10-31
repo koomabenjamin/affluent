@@ -2,7 +2,7 @@
   
   <div class="h-screen w-screen inset-0 fixed top-0 bottom-0 overflow-auto">
 
-      <div class="w-full h-[66px] flex items-center justify-between border fixed top-0 bg-slate-50 p-4 shadow-sm z-10">
+      <div class="w-full text-white h-[66px] flex items-center justify-between fixed top-0 bg-black p-4 shadow-sm z-10">
         <div class="flex items-center space-x-2">
           <div class="font-sans text-lg lg:text-3xl font-semibold">UGX {{ userDetails?.account_balance ?? 0 }}
           </div>
@@ -38,30 +38,30 @@
         </div>
       </div>
 
-      <div class="w-full h-[50px] flex items-center border space-x-4 fixed top-[66px] bg-slate-50 p-4 shadow-sm z-10">
-        <div class="flex items-center space-x-1">
-          <Icon :icon="'carbon:portfolio'" :width="20" />
-          <h4 class="text-base">Porfolio</h4>
+      <div class="w-full h-[50px] flex items-center space-x-4 fixed top-[66px] bg-slate-900 text-white p-4 shadow-sm z-10">
+        <div class="flex items-center space-x-1 bg-slate-800 py-3 px-4 -rounded-full">
+          <Icon :icon="'carbon:portfolio'" :width="25" />
+          <h4 class="text-[14px] font-semibild">Porfolio</h4>
         </div>
         <div class="flex items-center space-x-1">
-          <Icon :icon="'fluent-mdl2:group'" :width="20" />
-          <h4 class="text-base">Groups</h4>
+          <Icon :icon="'fluent-mdl2:group'" :width="25" />
+          <h4 class="text-[14px] font-semibild">Groups</h4>
         </div>
         <div class="flex items-center space-x-1">
-          <Icon :icon="'lsicon:path-outline'" :width="20" />
-          <h4 class="text-base">Skills Path</h4>
+          <Icon :icon="'lsicon:path-outline'" :width="25" />
+          <h4 class="text-[14px] font-semibild">Skills Path</h4>
         </div>
         <div class="flex items-center space-x-1">
-          <Icon :icon="'solar:wallet-linear'" :width="20" />
-          <h4 class="text-base">Wallet</h4>
+          <Icon :icon="'solar:wallet-linear'" :width="25" />
+          <h4 class="text-[14px] font-semibild">Wallet</h4>
         </div>
         <div class="flex items-center space-x-1">
-          <Icon :icon="'solar:help-outline'" :width="20" />
-          <h4 class="text-base">Support</h4>
+          <Icon :icon="'solar:help-outline'" :width="25" />
+          <h4 class="text-[14px] font-semibild">Support</h4>
         </div>
         <div class="flex items-center space-x-1">
-          <Icon :icon="'solar:settings-broken'" :width="20" />
-          <h4 class="text-base">Account Setting</h4>
+          <Icon :icon="'solar:settings-broken'" :width="25" />
+          <h4 class="text-[14px] font-semibild">Account Setting</h4>
         </div>
       </div>
 
